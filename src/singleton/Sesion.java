@@ -15,7 +15,6 @@ public class Sesion  {
 		System.out.println("Imposible volver a crear una sesi�n");
 		return user;		
 	}
-	
 	public void refresh() {
 		///actualizar los datos de el usuario en sesion por si han echo modificaciones.
 	}
