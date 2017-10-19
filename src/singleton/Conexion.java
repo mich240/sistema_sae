@@ -17,8 +17,8 @@ public class Conexion {
 			conex.db.Conectar();
 		}
 		return conex;
-
 	}
+	
 	public Connection getConnection() {
 		return conex.db.getConexion();
 
