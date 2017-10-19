@@ -11,7 +11,6 @@ public class Conexion {
 	public Conexion() {
 		this.db = new databaseController();
 	}
-
 	public static Conexion getInstancia() {
 		if (conex == null) {
 			conex = new Conexion();
@@ -20,7 +19,6 @@ public class Conexion {
 		return conex;
 
 	}
-
 	public Connection getConnection() {
 		return conex.db.getConexion();
 
