@@ -3,7 +3,7 @@ package modelo.usuario;
 
 public class usuario {
 	private int Id;
-	private int Cedula;
+	private int Cedula=234239487;
 	private String Nombre;
 	private String Apellido;
 	private String Usuario;
