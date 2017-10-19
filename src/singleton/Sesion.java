@@ -6,7 +6,6 @@ public class Sesion  {
 	private usuario user;
 	private static Sesion sesion=new Sesion();
 
-	
 	public usuario SetUser(usuario user) {	
 		if (this.user==null) {
 			this.user=user;
