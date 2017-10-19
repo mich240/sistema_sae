@@ -23,7 +23,6 @@ public class Conexion {
 		return conex.db.getConexion();
 
 	}
-
 	public static void Desconectar() {
 		conex.db.Desconectar();
 		conex = null;
