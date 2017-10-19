@@ -1,5 +1,6 @@
 package vista;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +17,7 @@ import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 
 import controlador.AppController;
+import singleton.Conexion;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class vista_InicioSesion extends JFrame {
@@ -36,13 +38,13 @@ public class vista_InicioSesion extends JFrame {
 
 	private void initComponents() {
 		setLayout(new GroupLayout());
-		add(getJLabel0(), new Constraints(new Leading(139, 10, 10), new Leading(28, 10, 10)));
 		add(getJTextField0(), new Constraints(new Leading(132, 160, 10, 10), new Leading(71, 12, 12)));
 		add(getJPasswordField0(), new Constraints(new Leading(132, 160, 12, 12), new Leading(107, 12, 12)));
 		add(getJButton1(), new Constraints(new Leading(207, 12, 12), new Leading(150, 12, 12)));
 		add(getJButton0(), new Constraints(new Leading(55, 10, 10), new Leading(150, 12, 12)));
 		add(getJLabel2(), new Constraints(new Leading(49, 12, 12), new Leading(113, 12, 12)));
 		add(getJLabel1(), new Constraints(new Leading(51, 10, 10), new Leading(77, 12, 12)));
+		add(getJLabel0(), new Constraints(new Leading(130, 10, 10), new Leading(21, 10, 10)));
 		setSize(353, 240);
 	}
 
@@ -128,6 +130,7 @@ public class vista_InicioSesion extends JFrame {
 	private JLabel getJLabel0() {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
+			jLabel0.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
 			jLabel0.setText("Iniciar Sesión");
 		}
 		return jLabel0;

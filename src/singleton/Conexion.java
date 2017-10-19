@@ -21,7 +21,7 @@ public class Conexion {
 	}
 
 	public Connection getConnection() {
-		return conex.db.getConexion();
+		return db.getConexion();
 
 	}
 

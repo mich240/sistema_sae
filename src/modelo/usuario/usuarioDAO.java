@@ -12,7 +12,7 @@ public class usuarioDAO {
 	public usuario RecuperarUsuarioSesion(String Usuario,String Clave){
 		PreparedStatement pst;
 		usuario user=null;
-		String sql="Select usuario.id,cedula,nombre,apellido,usuario,clave,pregunta_s.preguntas,respuesta_secreta,tipo_usuario.rol,estatus from usuario,pregunta_s,tipo_usuario where usuario=? and clave=? and usuario.pregunta_secreta_id=pregunta_s.id and usuario.tipo_usuario_id=tipo_usuario.id and estatus=1";
+		String sql="SELECT usuario.id,cedula,nombre,apellido,usuario,clave,pregunta_s.preguntas,respuesta_secreta,tipo_usuario.rol,estatus FROM usuario,pregunta_s,tipo_usuario WHERE usuario=? and clave=? and usuario.pregunta_secreta_id=pregunta_s.id and usuario.tipo_usuario_id=tipo_usuario.id and estatus=1";
 		try {
 			pst=Conexion.getInstancia().getConnection().prepareStatement(sql);
 			pst.setString(1, Usuario);

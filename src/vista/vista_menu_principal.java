@@ -15,6 +15,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import controlador.IniciarController;
+import modelo.sesion.SesionDAO;
+import modelo.usuario.usuario;
 import singleton.Conexion;
 import singleton.Sesion;
 import vista.paneles.vista_panel_index;
@@ -50,7 +52,7 @@ public class vista_menu_principal extends JFrame {
 	private JPanel Vista_panel_actual;
 	private vista_panel_registrar_usuario RegistrarUser;
 	private vista_panel_index VistaIndex;
-	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
+	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public vista_menu_principal() {
 		initComponents();
 	}
@@ -358,7 +360,7 @@ public class vista_menu_principal extends JFrame {
 
 	private void jMenuItem0ActionActionPerformed(ActionEvent event) {
 		System.out.println(Sesion.getSesion().toString());
-		MostrarPanel(getVistaIndex());
+		MostrarPanel(getVistaIndex());	
 	}
 
 	private void jMenuItem1ActionActionPerformed(ActionEvent event) {

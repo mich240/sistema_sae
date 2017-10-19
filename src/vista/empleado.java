@@ -20,7 +20,6 @@ import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 import org.dyno.visual.swing.layouts.Trailing;
 
-import controlador.databaseController;
 import singleton.Conexion;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
@@ -33,6 +32,7 @@ public class empleado extends JFrame {
 	private JButton jButton0;
 	private JTextArea jTextArea0;
 	private JScrollPane jScrollPane0;
+	private JButton jButton1;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	public empleado() {
 		initComponents();
@@ -45,7 +45,22 @@ public class empleado extends JFrame {
 		add(getJTextField2(), new Constraints(new Leading(30, 116, 12, 12), new Leading(108, 12, 12)));
 		add(getJButton0(), new Constraints(new Trailing(12, 12, 12), new Leading(148, 10, 10)));
 		add(getJScrollPane0(), new Constraints(new Leading(160, 126, 10, 10), new Leading(53, 80, 10, 10)));
+		add(getJButton1(), new Constraints(new Leading(47, 135, 10, 10), new Leading(183, 10, 10)));
 		setSize(320, 240);
+	}
+
+	private JButton getJButton1() {
+		if (jButton1 == null) {
+			jButton1 = new JButton();
+			jButton1.setText("Sin commint");
+			jButton1.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
+					jButton1ActionActionPerformed(event);
+				}
+			});
+		}
+		return jButton1;
 	}
 
 	private JScrollPane getJScrollPane0() {
@@ -135,10 +150,11 @@ public class empleado extends JFrame {
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
-		Conexion.getInstancia();
 		PreparedStatement pst;		
 		try {
-			Conexion.getInstancia().getConnection().setAutoCommit(false);
+		
+			Conexion.getInstancia().getConnection().setAutoCommit(false);	
+			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -175,12 +191,74 @@ public class empleado extends JFrame {
 			}
 			try {
 				Conexion.getInstancia().getConnection().rollback();
+				
 				System.out.println("RollBack ejecutado.");
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+		}finally {
+		//	Conexion.Desconectar();
+			try {
+				Conexion.getInstancia().getConnection().setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
-//	Conexion.Desconectar();
+	
+	}
+
+	private void jButton1ActionActionPerformed(ActionEvent event) {
+		PreparedStatement pst;		
+//		try {
+//			Conexion.getInstancia().getConnection().setAutoCommit(false);
+//		} catch (SQLException e1) {
+//			e1.printStackTrace();
+//		}
+		
+		String sql="insert into empleado values (null,? ,? ,?)";
+		try {
+			System.out.println(Conexion.getInstancia().getConnection().getAutoCommit());
+			
+			pst=Conexion.getInstancia().getConnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1,Integer.parseInt(getCedula().getText()));
+			pst.setString(2, getJTextField1().getText());
+			pst.setString(3, getJTextField2().getText());
+			
+			pst.executeUpdate();
+			
+			System.out.println("Se creo el SQL: "+pst.toString());
+			
+			
+			ResultSet rs=pst.getGeneratedKeys();
+			if (rs.next()) {
+			//	System.out.println(rs.getInt(1));
+			pst=Conexion.getInstancia().getConnection().prepareStatement("insert into dato values(null,?,?)");
+			pst.setString(1, jTextArea0.getText());
+			pst.setInt(2, rs.getInt(1));
+			pst.executeUpdate();
+			System.out.println("Se creo el SQL: "+pst.toString());
+			}
+		//	Conexion.getInstancia().getConnection().commit();
+		//	System.out.println("Commit ejecutado.");
+		} catch (SQLException e) {
+		//	e.printStackTrace();
+			System.out.println(e.getErrorCode()+" "+e);	
+			if (e.getErrorCode()==1062) {
+				JOptionPane.showMessageDialog(null, "Este empleado ya a sido registrado.");
+			}
+//			try {
+//				Conexion.getInstancia().getConnection().rollback();
+//				System.out.println("RollBack ejecutado.");
+//			} catch (SQLException e1) {
+//				e1.printStackTrace();
+//			}
+		}finally {
+		//	Conexion.Desconectar();
+			
+		}
+	
+	
 	}
 
 }
