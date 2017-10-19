@@ -1,2 +1,5 @@
-/util/
+/controlador/
+/modelo/
 /singleton/
+/util/
+/vista/
