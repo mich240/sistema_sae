@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import singleton.Conexion;
 import vista.vista_InicioSesion;
 import vista.vista_menu_principal;
 import vista.paneles.vista_panel_index;
@@ -26,11 +25,12 @@ public class IniciarController {
 		app.setMp(menuPrincipal);
 		//// enlazar vistas con controller
 		InicioSesion.setApp(app);
+		menuPrincipal.setApp(app);
 		/// agrego los paneles al menuprincipal
 		menuPrincipal.setVistaIndex(index);
 		menuPrincipal.add(index);
 		menuPrincipal.setVista_panel_actual(index);/// coloco index como panel
-													/// principal /// actual
+													/// de inicio actual
 		/// agrego mas paneles
 		menuPrincipal.setRegistrarUser(regisUsu);
 		menuPrincipal.add(regisUsu);
@@ -55,8 +55,7 @@ public class IniciarController {
 
 	private void inicializarVistas() {
 		menuPrincipal = new vista_menu_principal();
-		InicioSesion = new vista_InicioSesion();
-		
+		InicioSesion = new vista_InicioSesion();		
 		///// iniciamos los paneles todos en false menos el de index
 		index = new vista_panel_index();
 		index.setVisible(true);

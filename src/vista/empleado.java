@@ -159,7 +159,7 @@ public class empleado extends JFrame {
 			e1.printStackTrace();
 		}
 		
-		String sql="insert into empleado values (null,? ,? ,?)";
+		String sql="insert into empleado values (null,? ,?, 0 ,?)";
 		try {
 			
 			pst=Conexion.getInstancia().getConnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
@@ -216,7 +216,7 @@ public class empleado extends JFrame {
 //			e1.printStackTrace();
 //		}
 		
-		String sql="insert into empleado values (null,? ,? ,?)";
+		String sql="insert into empleado values (null,? ,? ,0 ,?)";
 		try {
 			System.out.println(Conexion.getInstancia().getConnection().getAutoCommit());
 			

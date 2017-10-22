@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import singleton.Conexion;
 
-public class usuarioDAO {
+public class usuarioDao {
 
 	
 	public usuario RecuperarUsuarioSesion(String Usuario,String Clave){

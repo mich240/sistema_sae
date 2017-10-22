@@ -3,7 +3,8 @@ package controlador;
 import javax.swing.JOptionPane;
 
 import modelo.usuario.usuario;
-import modelo.usuario.usuarioDAO;
+import modelo.usuario.usuarioDao;
+import singleton.Conexion;
 import singleton.Sesion;
 import util.StringMD;
 import vista.vista_menu_principal;
@@ -19,9 +20,10 @@ public class AppController {
 		this.mp = mp;
 	}
 
-	public boolean IniciarSesion(String Usuario, String Clave) {
-		usuarioDAO user = new usuarioDAO();
-		usuario us = user.RecuperarUsuarioSesion(Usuario, StringMD.Encriptar(Clave));
+	public boolean iniciarSesion(String Usuario, String Clave) {
+		usuarioDao user = new usuarioDao();
+		usuario us = user.RecuperarUsuarioSesion(Usuario, StringMD.Encriptar(Clave));/**cuando se llama
+		este metodo se iniciara la conexion para poder consultar**/
 		if (us != null) {
 			Sesion.CrearSesion(us);
 			return true;
@@ -32,6 +34,11 @@ public class AppController {
 		return false;
 	}
 
+	public void cerrarSesion() {	
+		Sesion.getSesion().DestroyerSesion();
+		Conexion.Desconectar();		
+	}
+	
 	public void iniciarPrincipal() {
 		/// inicio el frame principal
 		getMp().setDefaultCloseOperation(0);
@@ -42,6 +49,8 @@ public class AppController {
 		getMp().setVisible(true);
 
 	}
+	
+	
 	
 
 }

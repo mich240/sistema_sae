@@ -17,7 +17,6 @@ import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 
 import controlador.AppController;
-import singleton.Conexion;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class vista_InicioSesion extends JFrame {
@@ -173,7 +172,7 @@ public class vista_InicioSesion extends JFrame {
 	}
 
 	public void IniciarSesion() {
-		if (getApp().IniciarSesion(getJTextField0().getText(),new String(getJPasswordField0().getPassword()))) {
+		if (getApp().iniciarSesion(getJTextField0().getText(),new String(getJPasswordField0().getPassword()))) {
 			this.dispose();
 			getApp().iniciarPrincipal();
 		}

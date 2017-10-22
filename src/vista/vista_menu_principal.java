@@ -14,11 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import controlador.AppController;
 import controlador.IniciarController;
-import modelo.sesion.SesionDAO;
-import modelo.usuario.usuario;
-import singleton.Conexion;
-import singleton.Sesion;
 import vista.paneles.vista_panel_index;
 import vista.paneles.vista_panel_registrar_usuario;
 
@@ -37,7 +34,6 @@ public class vista_menu_principal extends JFrame {
 	private JMenu jMenu2;
 	private JMenuItem jMenuItem5;
 	private JMenuItem jMenuItem6;
-	private JMenuItem jMenuItem7;
 	private JMenu jMenu3;
 	private JMenuItem jMenuItem8;
 	private JMenuItem jMenuItem9;
@@ -52,6 +48,7 @@ public class vista_menu_principal extends JFrame {
 	private JPanel Vista_panel_actual;
 	private vista_panel_registrar_usuario RegistrarUser;
 	private vista_panel_index VistaIndex;
+	private AppController app;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public vista_menu_principal() {
 		initComponents();
@@ -67,6 +64,17 @@ public class vista_menu_principal extends JFrame {
 		});
 		setJMenuBar(getJMenuBar0());
 		setSize(1020, 570);
+	}
+	
+	
+	
+	
+	public AppController getApp() {
+		return app;
+	}
+
+	public void setApp(AppController app) {
+		this.app = app;
 	}
 
 	public JPanel getVista_panel_actual() {
@@ -344,29 +352,29 @@ public class vista_menu_principal extends JFrame {
 		});
 	}
 	
-	public void MostrarPanel(JPanel NuevaVista) {
+	private void MostrarPanel(JPanel NuevaVista) {
 		if (getVista_panel_actual()!=null) {
 			getVista_panel_actual().setVisible(false);
 			setVista_panel_actual(NuevaVista);
 			NuevaVista.setVisible(true);
 		}
 	}
-	private void TerminarSesion() {	
-		///auditoria cerro sesion
-		Conexion.Desconectar();
-		Sesion.getSesion().DestroyerSesion();
-		this.dispose();
-	}
+	
 
 	private void jMenuItem0ActionActionPerformed(ActionEvent event) {
-		System.out.println(Sesion.getSesion().toString());
-		MostrarPanel(getVistaIndex());	
+	
+	getApp().cerrarSesion();
+	//	System.out.println(Sesion.getSesion().toString());
+	//	MostrarPanel(getVistaIndex());	
+		
+		
 	}
 
 	private void jMenuItem1ActionActionPerformed(ActionEvent event) {
 	int res=JOptionPane.showConfirmDialog(this,"¿Desea cerrar sesión?", "Cerrar sesión", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 	if (res==JOptionPane.YES_OPTION) {
-		TerminarSesion();
+		getApp().cerrarSesion();
+		this.dispose();
 		new IniciarController();
 	}
 	}
@@ -378,7 +386,7 @@ public class vista_menu_principal extends JFrame {
 	private void windowWindowClosing(WindowEvent event) {
 		int res=JOptionPane.showConfirmDialog(this,"¿Desea salir del sistema?", "Salir del sistema", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 	if (res==JOptionPane.YES_OPTION) {
-		TerminarSesion();
+		getApp().cerrarSesion();
 		System.exit(0);
 	}
 	}
