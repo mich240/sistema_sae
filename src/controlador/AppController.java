@@ -2,7 +2,7 @@ package controlador;
 
 import javax.swing.JOptionPane;
 
-import modelo.usuario.Usuario;
+import modelo.usuario.UsuarioModel;
 import modelo.usuario.UsuarioDao;
 import singleton.Conexion;
 import singleton.Sesion;
@@ -22,8 +22,11 @@ public class AppController {
 
 	public boolean iniciarSesion(String Usuario, String Clave) {
 		UsuarioDao user = new UsuarioDao();
-		Usuario us = user.RecuperarUsuarioSesion(Usuario, StringMD.Encriptar(Clave));/**cuando se llama
-		este metodo se iniciara la conexion para poder consultar**/
+		UsuarioModel us = user.RecuperarUsuarioSesion(Usuario, StringMD
+				.Encriptar(Clave));/**
+									 * cuando se llama este metodo se iniciara
+									 * la conexion para poder consultar
+									 **/
 		if (us != null) {
 			Sesion.CrearSesion(us);
 			return true;
@@ -34,11 +37,11 @@ public class AppController {
 		return false;
 	}
 
-	public void cerrarSesion() {	
+	public void cerrarSesion() {
 		Sesion.getSesion().DestroyerSesion();
-		Conexion.Desconectar();		
+		Conexion.Desconectar();
 	}
-	
+
 	public void iniciarPrincipal() {
 		/// inicio el frame principal
 		getMp().setDefaultCloseOperation(0);
@@ -49,8 +52,13 @@ public class AppController {
 		getMp().setVisible(true);
 
 	}
-	
-	
-	
+
+	public boolean registrarUsuario(UsuarioModel newUser) {
+		UsuarioDao useD = new UsuarioDao();
+		if (useD.registrarUsuario(newUser))
+			return true;
+		else
+			return false;
+	}
 
 }

@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,7 +19,12 @@ import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 
-import modelo.pregunta.Pregunta;
+import controlador.AppController;
+import modelo.pregunta.PreguntaDao;
+import modelo.pregunta.PreguntaModel;
+import modelo.tipousuario.tipoUsuarioDao;
+import modelo.tipousuario.tipoUsuarioModel;
+import modelo.usuario.UsuarioModel;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class Vista_panel_registrar_usuario extends JPanel {
@@ -44,13 +48,16 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JButton jButton1;
 	private JButton jButton0;
 	private JTextField jTextField3;
-	private JComboBox<Pregunta> jComboBox0;
+	private JComboBox<Object> jComboBox0;
 	private JPasswordField jPasswordField0;
 	private JPasswordField jPasswordField1;
-	private JComboBox jComboBox1;
+	private JComboBox<Object> jComboBox1;
 	private JPasswordField jPasswordField2;
 	private JPanel jPanel2;
+	private AppController app;
+	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
+
 	public Vista_panel_registrar_usuario() {
 		initComponents();
 	}
@@ -64,6 +71,14 @@ public class Vista_panel_registrar_usuario extends JPanel {
 		add(getJPanel1(), new Constraints(new Leading(242, 517, 12, 12), new Leading(244, 244, 12, 12)));
 		add(getJPanel2(), new Constraints(new Leading(32, 957, 10, 10), new Leading(20, 529, 10, 10)));
 		setSize(1020, 570);
+	}
+
+	public AppController getApp() {
+		return app;
+	}
+
+	public void setApp(AppController app) {
+		this.app = app;
 	}
 
 	private JLabel getJLabel0() {
@@ -97,12 +112,11 @@ public class Vista_panel_registrar_usuario extends JPanel {
 		return jPasswordField2;
 	}
 
-	private JComboBox getJComboBox1() {
+	private JComboBox<Object> getJComboBox1() {
 		if (jComboBox1 == null) {
-			jComboBox1 = new JComboBox();
-			jComboBox1.setModel(new DefaultComboBoxModel(new Object[] { "item0", "item1", "item2", "item3" }));
-			jComboBox1.setDoubleBuffered(false);
-			jComboBox1.setBorder(null);
+			jComboBox1 = new JComboBox<Object>();
+			jComboBox1.setModel(new PreguntaDao().cargarComboBox(new PreguntaModel()));
+
 		}
 		return jComboBox1;
 	}
@@ -123,33 +137,13 @@ public class Vista_panel_registrar_usuario extends JPanel {
 		return jPasswordField0;
 	}
 
-	private JComboBox<Pregunta> getJComboBox0() {
+	private JComboBox<Object> getJComboBox0() {
 		if (jComboBox0 == null) {
-			jComboBox0 = new JComboBox<Pregunta>();
-		
-			
-			Pregunta p=new Pregunta();
-			p.setId(4);
-			p.setPregunta("mi pregunta");
-			
-
-			Pregunta p2=new Pregunta();
-			p2.setId(3);
-			p2.setPregunta("pregunta secreta");
-			
-			Pregunta p3=new Pregunta();
-			p3.setId(8);
-			p3.setPregunta("mi pregunta sahsdjfhg");
-			
-		
-			jComboBox0.addItem(p);
-			jComboBox0.addItem(p2);
-			jComboBox0.addItem(p3);
-			
+			jComboBox0 = new JComboBox<Object>();
+			jComboBox0.setModel(new tipoUsuarioDao().cargarComboBox(new tipoUsuarioModel()));
 		}
 		return jComboBox0;
 	}
-	
 
 	private JTextField getJTextField3() {
 		if (jTextField3 == null) {
@@ -163,7 +157,7 @@ public class Vista_panel_registrar_usuario extends JPanel {
 			jButton0 = new JButton();
 			jButton0.setText("Crear Usuario");
 			jButton0.addActionListener(new ActionListener() {
-	
+
 				public void actionPerformed(ActionEvent event) {
 					jButton0ActionActionPerformed(event);
 				}
@@ -177,7 +171,7 @@ public class Vista_panel_registrar_usuario extends JPanel {
 			jButton1 = new JButton();
 			jButton1.setText("Limpiar");
 			jButton1.addActionListener(new ActionListener() {
-	
+
 				public void actionPerformed(ActionEvent event) {
 					jButton1ActionActionPerformed(event);
 				}
@@ -237,8 +231,8 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JPanel getJPanel1() {
 		if (jPanel1 == null) {
 			jPanel1 = new JPanel();
-			jPanel1.setBorder(BorderFactory.createTitledBorder(null, "Datos del usuario", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
-					new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
+			jPanel1.setBorder(BorderFactory.createTitledBorder(null, "Datos del usuario", TitledBorder.LEADING,
+					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			jPanel1.setLayout(new GroupLayout());
 			jPanel1.add(getJTextField3(), new Constraints(new Leading(137, 241, 10, 10), new Leading(-2, 10, 10)));
 			jPanel1.add(getJLabel4(), new Constraints(new Leading(9, 12, 12), new Leading(4, 12, 12)));
@@ -304,8 +298,8 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JPanel getJPanel0() {
 		if (jPanel0 == null) {
 			jPanel0 = new JPanel();
-			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Datos personales", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
-					new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
+			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Datos personales", TitledBorder.LEADING,
+					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			jPanel0.setLayout(new GroupLayout());
 			jPanel0.add(getJTextField0(), new Constraints(new Leading(135, 241, 10, 10), new Leading(15, 10, 10)));
 			jPanel0.add(getJTextField1(), new Constraints(new Leading(135, 241, 10, 10), new Leading(50, 12, 12)));
@@ -318,19 +312,23 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	}
 
 	private void jButton1ActionActionPerformed(ActionEvent event) {
-		Pregunta p=new Pregunta();
+		PreguntaModel p = new PreguntaModel();
 		p.setId(44);
 		p.setPregunta("mi pregunta");
-	
-		int index=0;
+
 		jComboBox0.getModel().setSelectedItem(p);
-		
-	
+
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
-	
-	System.out.println(((Pregunta) jComboBox0.getSelectedItem()).getId());
+		UsuarioModel newUser=new UsuarioModel();
+	//	newUser.setCedula(Integer.parseInt(get.getText()));
+		newUser.setNombre(getJTextField1().getText());
+		newUser.setApellido(getJTextField2().getText());
+		newUser.setUsuario(getJTextField3().getText());
+		newUser.setTipoUsuario(getJComboBox0().getSelectedItem().toString());
+		System.out.println(((tipoUsuarioModel)getJComboBox0().getSelectedItem()).getId());
+//		getApp().
 	}
 
 }

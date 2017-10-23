@@ -4,10 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import modelo.sesion.SesionDao;
 import modelo.sesion.SesionModel;
-import modelo.usuario.Usuario;
+import modelo.usuario.UsuarioModel;
 
 public class Sesion {
-	private static Usuario user;
+	private static UsuarioModel user;
 	private static boolean is_Sesion;
 	private static SesionModel ses;
 	private static SesionDao ssDao;
@@ -24,7 +24,7 @@ public class Sesion {
 		return is_Sesion;
 	}
 
-	public static void CrearSesion(Usuario us) {
+	public static void CrearSesion(UsuarioModel us) {
 		// registro ahora la Sesion en base al usuario.
 		if (user == null) {
 			/// establesco los datos de la Sesion
@@ -45,7 +45,7 @@ public class Sesion {
 													 */
 			user = us;// guardo el usuario aqui para acceder a sus datos
 			System.out.println("Sesión creada.");
-			Auditoria.evento("inicio de Sesión.");
+			Auditoria.evento("inicio de sesión.");
 			is_Sesion = true;// la Sesion ya existe por lo tanto es una Sesion
 		} else// error si intentan volver a crear una Sesion para cambiar datos del usuario
 			System.out.println("Imposible volver a crear una Sesión");
@@ -53,15 +53,15 @@ public class Sesion {
 
 	public void DestroyerSesion() {
 		if (user != null) {
-			Auditoria.evento("cerro Sesión.");
+			Auditoria.evento("cerro sesión.");
 			///establesco los datos para finalizar sesion
 			date = new Date();
 			ses.setFechaSalida(fecha.format(date));
 			ses.setHoraSalida(hora.format(date));		
 			ssDao.SesionLogOutRegistro(ses);
-			user = null;
+			user = null;//elimino al usuario y a la sesion activas
 			ses = null;
-			is_Sesion = false;
+			is_Sesion = false;//ya no tengo sesion
 			System.out.println("Sesión terminada.");
 		} else
 			System.out.println("No se ha iniciado una Sesión");

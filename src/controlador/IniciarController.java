@@ -26,6 +26,7 @@ public class IniciarController {
 		//// enlazar vistas con controller
 		InicioSesion.setApp(app);
 		menuPrincipal.setApp(app);
+		regisUsu.setApp(app);
 		/// agrego los paneles al menuprincipal
 		menuPrincipal.setVistaIndex(index);
 		menuPrincipal.add(index);

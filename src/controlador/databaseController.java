@@ -10,8 +10,8 @@ public class databaseController {
 	private String bd="sae";
 	private String url="jdbc:mysql://127.0.0.1/"+bd+"?useServerPrepStmts=true";
 	private String user="root";
-//	private String password="iutllado2013";
-	private String password="";
+	private String password="iutllado2013";
+//	private String password="";
 	
 	
 	public Connection getConexion() {

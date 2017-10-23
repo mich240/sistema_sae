@@ -9,9 +9,9 @@ import singleton.Conexion;
 public class UsuarioDao {
 
 	
-	public Usuario RecuperarUsuarioSesion(String Usuario,String Clave){
+	public UsuarioModel RecuperarUsuarioSesion(String Usuario,String Clave){
 		PreparedStatement pst;
-		Usuario user=null;
+		UsuarioModel user=null;
 		String sql="SELECT usuario.id,cedula,nombre,apellido,usuario,clave,pregunta_s.preguntas,respuesta_secreta,tipo_usuario.rol,estatus FROM usuario,pregunta_s,tipo_usuario WHERE usuario=? and clave=? and usuario.pregunta_secreta_id=pregunta_s.id and usuario.tipo_usuario_id=tipo_usuario.id and estatus=1";
 		try {
 			pst=Conexion.getInstancia().getConnection().prepareStatement(sql);
@@ -20,7 +20,7 @@ public class UsuarioDao {
 			ResultSet rs=pst.executeQuery();
 			
 			while (rs.next()) {
-				user=new Usuario();
+				user=new UsuarioModel();
 				user.setId(rs.getInt(1));
 				user.setCedula(rs.getInt(2));
 				user.setNombre(rs.getString(3));
@@ -40,6 +40,12 @@ public class UsuarioDao {
 		return user;		
 	}
 	
+	public boolean registrarUsuario(UsuarioModel newUser){
+		
+		
+		return false;
+		
+	}
 	
 	
 	
