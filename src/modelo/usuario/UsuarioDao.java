@@ -6,12 +6,12 @@ import java.sql.SQLException;
 
 import singleton.Conexion;
 
-public class usuarioDao {
+public class UsuarioDao {
 
 	
-	public usuario RecuperarUsuarioSesion(String Usuario,String Clave){
+	public Usuario RecuperarUsuarioSesion(String Usuario,String Clave){
 		PreparedStatement pst;
-		usuario user=null;
+		Usuario user=null;
 		String sql="SELECT usuario.id,cedula,nombre,apellido,usuario,clave,pregunta_s.preguntas,respuesta_secreta,tipo_usuario.rol,estatus FROM usuario,pregunta_s,tipo_usuario WHERE usuario=? and clave=? and usuario.pregunta_secreta_id=pregunta_s.id and usuario.tipo_usuario_id=tipo_usuario.id and estatus=1";
 		try {
 			pst=Conexion.getInstancia().getConnection().prepareStatement(sql);
@@ -20,7 +20,7 @@ public class usuarioDao {
 			ResultSet rs=pst.executeQuery();
 			
 			while (rs.next()) {
-				user=new usuario();
+				user=new Usuario();
 				user.setId(rs.getInt(1));
 				user.setCedula(rs.getInt(2));
 				user.setNombre(rs.getString(3));

@@ -1,7 +1,7 @@
 package modelo.usuario;
 
 
-public class usuario {
+public class Usuario {
 	private int Id;
 	private int Cedula;
 	private String Nombre;

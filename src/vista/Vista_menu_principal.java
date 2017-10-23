@@ -16,11 +16,11 @@ import javax.swing.UIManager;
 
 import controlador.AppController;
 import controlador.IniciarController;
-import vista.paneles.vista_panel_index;
-import vista.paneles.vista_panel_registrar_usuario;
+import vista.paneles.Vista_panel_index;
+import vista.paneles.Vista_panel_registrar_usuario;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
-public class vista_menu_principal extends JFrame {
+public class Vista_menu_principal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JMenuItem jMenuItem0;
@@ -46,11 +46,11 @@ public class vista_menu_principal extends JFrame {
 	private JMenuItem jMenuItem13;
 	private JMenu jMenu7;
 	private JPanel Vista_panel_actual;
-	private vista_panel_registrar_usuario RegistrarUser;
-	private vista_panel_index VistaIndex;
+	private Vista_panel_registrar_usuario RegistrarUser;
+	private Vista_panel_index VistaIndex;
 	private AppController app;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-	public vista_menu_principal() {
+	public Vista_menu_principal() {
 		initComponents();
 	}
 
@@ -85,19 +85,19 @@ public class vista_menu_principal extends JFrame {
 		Vista_panel_actual = vista_panel_actual;
 	}
 
-	public vista_panel_registrar_usuario getRegistrarUser() {
+	public Vista_panel_registrar_usuario getRegistrarUser() {
 		return RegistrarUser;
 	}
 
-	public void setRegistrarUser(vista_panel_registrar_usuario registrarUser) {
+	public void setRegistrarUser(Vista_panel_registrar_usuario registrarUser) {
 		RegistrarUser = registrarUser;
 	}
 	
-	public vista_panel_index getVistaIndex() {
+	public Vista_panel_index getVistaIndex() {
 		return VistaIndex;
 	}
 
-	public void setVistaIndex(vista_panel_index vistaIndex) {
+	public void setVistaIndex(Vista_panel_index vistaIndex) {
 		VistaIndex = vistaIndex;
 	}
 
@@ -341,8 +341,8 @@ public class vista_menu_principal extends JFrame {
 		installLnF();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				vista_menu_principal frame = new vista_menu_principal();
-				frame.setDefaultCloseOperation(vista_menu_principal.EXIT_ON_CLOSE);
+				Vista_menu_principal frame = new Vista_menu_principal();
+				frame.setDefaultCloseOperation(Vista_menu_principal.EXIT_ON_CLOSE);
 				frame.setTitle("vista_menu_principal");
 				frame.getContentPane().setPreferredSize(frame.getSize());
 				frame.pack();

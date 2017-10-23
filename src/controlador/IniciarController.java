@@ -4,17 +4,17 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import vista.vista_InicioSesion;
-import vista.vista_menu_principal;
-import vista.paneles.vista_panel_index;
-import vista.paneles.vista_panel_registrar_usuario;
+import vista.Vista_InicioSesion;
+import vista.Vista_menu_principal;
+import vista.paneles.Vista_panel_index;
+import vista.paneles.Vista_panel_registrar_usuario;
 
 public class IniciarController {
 	private AppController app;
-	private vista_InicioSesion InicioSesion;
-	private vista_menu_principal menuPrincipal;
-	private vista_panel_registrar_usuario regisUsu;
-	private vista_panel_index index;
+	private Vista_InicioSesion InicioSesion;
+	private Vista_menu_principal menuPrincipal;
+	private Vista_panel_registrar_usuario regisUsu;
+	private Vista_panel_index index;
 	/// constructor
 	public IniciarController() {
 		//////////////// iniciarlisar controladores y
@@ -54,12 +54,12 @@ public class IniciarController {
 	}
 
 	private void inicializarVistas() {
-		menuPrincipal = new vista_menu_principal();
-		InicioSesion = new vista_InicioSesion();		
+		menuPrincipal = new Vista_menu_principal();
+		InicioSesion = new Vista_InicioSesion();		
 		///// iniciamos los paneles todos en false menos el de index
-		index = new vista_panel_index();
+		index = new Vista_panel_index();
 		index.setVisible(true);
-		regisUsu = new vista_panel_registrar_usuario();
+		regisUsu = new Vista_panel_registrar_usuario();
 		regisUsu.setVisible(false);
 	}
 

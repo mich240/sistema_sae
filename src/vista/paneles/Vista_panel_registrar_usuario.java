@@ -2,6 +2,8 @@ package vista.paneles;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -18,8 +20,10 @@ import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 
+import modelo.pregunta.Pregunta;
+
 //VS4E -- DO NOT REMOVE THIS LINE!
-public class vista_panel_registrar_usuario extends JPanel {
+public class Vista_panel_registrar_usuario extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jPanel0;
@@ -40,14 +44,14 @@ public class vista_panel_registrar_usuario extends JPanel {
 	private JButton jButton1;
 	private JButton jButton0;
 	private JTextField jTextField3;
-	private JComboBox jComboBox0;
+	private JComboBox<Pregunta> jComboBox0;
 	private JPasswordField jPasswordField0;
 	private JPasswordField jPasswordField1;
 	private JComboBox jComboBox1;
 	private JPasswordField jPasswordField2;
 	private JPanel jPanel2;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-	public vista_panel_registrar_usuario() {
+	public Vista_panel_registrar_usuario() {
 		initComponents();
 	}
 
@@ -119,15 +123,33 @@ public class vista_panel_registrar_usuario extends JPanel {
 		return jPasswordField0;
 	}
 
-	private JComboBox getJComboBox0() {
+	private JComboBox<Pregunta> getJComboBox0() {
 		if (jComboBox0 == null) {
-			jComboBox0 = new JComboBox();
-			jComboBox0.setModel(new DefaultComboBoxModel(new Object[] { "item0", "item1", "item2", "item3" }));
-			jComboBox0.setDoubleBuffered(false);
-			jComboBox0.setBorder(null);
+			jComboBox0 = new JComboBox<Pregunta>();
+		
+			
+			Pregunta p=new Pregunta();
+			p.setId(4);
+			p.setPregunta("mi pregunta");
+			
+
+			Pregunta p2=new Pregunta();
+			p2.setId(3);
+			p2.setPregunta("pregunta secreta");
+			
+			Pregunta p3=new Pregunta();
+			p3.setId(8);
+			p3.setPregunta("mi pregunta sahsdjfhg");
+			
+		
+			jComboBox0.addItem(p);
+			jComboBox0.addItem(p2);
+			jComboBox0.addItem(p3);
+			
 		}
 		return jComboBox0;
 	}
+	
 
 	private JTextField getJTextField3() {
 		if (jTextField3 == null) {
@@ -140,6 +162,12 @@ public class vista_panel_registrar_usuario extends JPanel {
 		if (jButton0 == null) {
 			jButton0 = new JButton();
 			jButton0.setText("Crear Usuario");
+			jButton0.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
+					jButton0ActionActionPerformed(event);
+				}
+			});
 		}
 		return jButton0;
 	}
@@ -148,6 +176,12 @@ public class vista_panel_registrar_usuario extends JPanel {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
 			jButton1.setText("Limpiar");
+			jButton1.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
+					jButton1ActionActionPerformed(event);
+				}
+			});
 		}
 		return jButton1;
 	}
@@ -281,6 +315,22 @@ public class vista_panel_registrar_usuario extends JPanel {
 			jPanel0.add(getJLabel2(), new Constraints(new Leading(15, 12, 12), new Leading(56, 12, 12)));
 		}
 		return jPanel0;
+	}
+
+	private void jButton1ActionActionPerformed(ActionEvent event) {
+		Pregunta p=new Pregunta();
+		p.setId(44);
+		p.setPregunta("mi pregunta");
+	
+		int index=0;
+		jComboBox0.getModel().setSelectedItem(p);
+		
+	
+	}
+
+	private void jButton0ActionActionPerformed(ActionEvent event) {
+	
+	System.out.println(((Pregunta) jComboBox0.getSelectedItem()).getId());
 	}
 
 }

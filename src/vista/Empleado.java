@@ -23,7 +23,7 @@ import org.dyno.visual.swing.layouts.Trailing;
 import singleton.Conexion;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
-public class empleado extends JFrame {
+public class Empleado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField cedula;
@@ -34,7 +34,7 @@ public class empleado extends JFrame {
 	private JScrollPane jScrollPane0;
 	private JButton jButton1;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
-	public empleado() {
+	public Empleado() {
 		initComponents();
 	}
 
@@ -138,8 +138,8 @@ public class empleado extends JFrame {
 		installLnF();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				empleado frame = new empleado();
-				frame.setDefaultCloseOperation(empleado.EXIT_ON_CLOSE);
+				Empleado frame = new Empleado();
+				frame.setDefaultCloseOperation(Empleado.EXIT_ON_CLOSE);
 				frame.setTitle("empleado");
 				frame.getContentPane().setPreferredSize(frame.getSize());
 				frame.pack();

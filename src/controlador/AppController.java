@@ -2,27 +2,27 @@ package controlador;
 
 import javax.swing.JOptionPane;
 
-import modelo.usuario.usuario;
-import modelo.usuario.usuarioDao;
+import modelo.usuario.Usuario;
+import modelo.usuario.UsuarioDao;
 import singleton.Conexion;
 import singleton.Sesion;
 import util.StringMD;
-import vista.vista_menu_principal;
+import vista.Vista_menu_principal;
 
 public class AppController {
-	private vista_menu_principal mp;
+	private Vista_menu_principal mp;
 
-	public vista_menu_principal getMp() {
+	public Vista_menu_principal getMp() {
 		return mp;
 	}
 
-	public void setMp(vista_menu_principal mp) {
+	public void setMp(Vista_menu_principal mp) {
 		this.mp = mp;
 	}
 
 	public boolean iniciarSesion(String Usuario, String Clave) {
-		usuarioDao user = new usuarioDao();
-		usuario us = user.RecuperarUsuarioSesion(Usuario, StringMD.Encriptar(Clave));/**cuando se llama
+		UsuarioDao user = new UsuarioDao();
+		Usuario us = user.RecuperarUsuarioSesion(Usuario, StringMD.Encriptar(Clave));/**cuando se llama
 		este metodo se iniciara la conexion para poder consultar**/
 		if (us != null) {
 			Sesion.CrearSesion(us);

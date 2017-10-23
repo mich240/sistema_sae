@@ -19,7 +19,7 @@ import org.dyno.visual.swing.layouts.Leading;
 import controlador.AppController;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
-public class vista_InicioSesion extends JFrame {
+public class Vista_InicioSesion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel jLabel0;
@@ -31,7 +31,7 @@ public class vista_InicioSesion extends JFrame {
 	private JButton jButton1;
 	private AppController App;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-	public vista_InicioSesion() {
+	public Vista_InicioSesion() {
 		initComponents();
 	}
 
@@ -86,6 +86,8 @@ public class vista_InicioSesion extends JFrame {
 	private JPasswordField getJPasswordField0() {
 		if (jPasswordField0 == null) {
 			jPasswordField0 = new JPasswordField();
+			jPasswordField0.setText("root");
+			jPasswordField0.setAutoscrolls(true);
 			jPasswordField0.setEchoChar('•');
 			jPasswordField0.addActionListener(new ActionListener() {
 	
@@ -108,6 +110,8 @@ public class vista_InicioSesion extends JFrame {
 	private JTextField getJTextField0() {
 		if (jTextField0 == null) {
 			jTextField0 = new JTextField();
+			jTextField0.setText("root");
+			jTextField0.setAutoscrolls(true);
 			jTextField0.addActionListener(new ActionListener() {
 	
 				public void actionPerformed(ActionEvent event) {
@@ -159,8 +163,8 @@ public class vista_InicioSesion extends JFrame {
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				vista_InicioSesion frame = new vista_InicioSesion();
-				frame.setDefaultCloseOperation(vista_InicioSesion.EXIT_ON_CLOSE);
+				Vista_InicioSesion frame = new Vista_InicioSesion();
+				frame.setDefaultCloseOperation(Vista_InicioSesion.EXIT_ON_CLOSE);
 				frame.setTitle("vista_InicioSesion");
 				frame.getContentPane().setPreferredSize(frame.getSize());
 				frame.pack();

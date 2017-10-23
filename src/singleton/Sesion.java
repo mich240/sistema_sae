@@ -4,10 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import modelo.sesion.SesionDao;
 import modelo.sesion.SesionModel;
-import modelo.usuario.usuario;
+import modelo.usuario.Usuario;
 
 public class Sesion {
-	private static usuario user;
+	private static Usuario user;
 	private static boolean is_Sesion;
 	private static SesionModel ses;
 	private static SesionDao ssDao;
@@ -24,7 +24,7 @@ public class Sesion {
 		return is_Sesion;
 	}
 
-	public static void CrearSesion(usuario us) {
+	public static void CrearSesion(Usuario us) {
 		// registro ahora la Sesion en base al usuario.
 		if (user == null) {
 			/// establesco los datos de la Sesion
