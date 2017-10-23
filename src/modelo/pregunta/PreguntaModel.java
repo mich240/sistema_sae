@@ -1,8 +1,6 @@
 package modelo.pregunta;
 
-import interfaces.itemComboModel;
-
-public class PreguntaModel implements itemComboModel{
+public class PreguntaModel {
 
 	private int id;
 	private String pregunta;
@@ -22,16 +20,6 @@ public class PreguntaModel implements itemComboModel{
 	@Override
 	public String toString() {
 		return pregunta;
-	}
-	////////////
-	@Override
-	public String getItem() {
-		return getPregunta();
-	}
-	@Override
-	public void setItem(String Item) {
-		setPregunta(Item);
-	}
-	
+	}	
 	
 }

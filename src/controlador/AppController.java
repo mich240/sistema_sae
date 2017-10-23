@@ -2,11 +2,10 @@ package controlador;
 
 import javax.swing.JOptionPane;
 
-import modelo.usuario.UsuarioModel;
 import modelo.usuario.UsuarioDao;
+import modelo.usuario.UsuarioModel;
 import singleton.Conexion;
 import singleton.Sesion;
-import util.StringMD;
 import vista.Vista_menu_principal;
 
 public class AppController {
@@ -22,11 +21,10 @@ public class AppController {
 
 	public boolean iniciarSesion(String Usuario, String Clave) {
 		UsuarioDao user = new UsuarioDao();
-		UsuarioModel us = user.RecuperarUsuarioSesion(Usuario, StringMD
-				.Encriptar(Clave));/**
-									 * cuando se llama este metodo se iniciara
-									 * la conexion para poder consultar
-									 **/
+		UsuarioModel us = user.RecuperarUsuarioSesion(Usuario,
+				Clave);/**
+						 * cuando se llama este metodo se iniciara la conexion para poder consultar
+						 **/
 		if (us != null) {
 			Sesion.CrearSesion(us);
 			return true;

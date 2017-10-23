@@ -115,7 +115,7 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JComboBox<Object> getJComboBox1() {
 		if (jComboBox1 == null) {
 			jComboBox1 = new JComboBox<Object>();
-			jComboBox1.setModel(new PreguntaDao().cargarComboBox(new PreguntaModel()));
+			jComboBox1.setModel(new PreguntaDao().cargarPreguntas());
 
 		}
 		return jComboBox1;
@@ -140,7 +140,7 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JComboBox<Object> getJComboBox0() {
 		if (jComboBox0 == null) {
 			jComboBox0 = new JComboBox<Object>();
-			jComboBox0.setModel(new tipoUsuarioDao().cargarComboBox(new tipoUsuarioModel()));
+			jComboBox0.setModel(new tipoUsuarioDao().cargarTipoUsuarios());
 		}
 		return jComboBox0;
 	}
@@ -312,23 +312,25 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	}
 
 	private void jButton1ActionActionPerformed(ActionEvent event) {
-		PreguntaModel p = new PreguntaModel();
+		tipoUsuarioModel p = new tipoUsuarioModel();
 		p.setId(44);
-		p.setPregunta("mi pregunta");
+		p.setRol("mi pregunta");
 
 		jComboBox0.getModel().setSelectedItem(p);
 
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
-		UsuarioModel newUser=new UsuarioModel();
-	//	newUser.setCedula(Integer.parseInt(get.getText()));
+		UsuarioModel newUser = new UsuarioModel();
+		newUser.setCedula(Integer.parseInt(getJTextField0().getText()));
 		newUser.setNombre(getJTextField1().getText());
 		newUser.setApellido(getJTextField2().getText());
 		newUser.setUsuario(getJTextField3().getText());
-		newUser.setTipoUsuario(getJComboBox0().getSelectedItem().toString());
-		System.out.println(((tipoUsuarioModel)getJComboBox0().getSelectedItem()).getId());
-//		getApp().
+		newUser.setTipoUsuario(((tipoUsuarioModel) getJComboBox0().getSelectedItem()).getId());
+		newUser.setClave(new String(getJPasswordField0().getPassword()));
+		newUser.setPregunta(((PreguntaModel) getJComboBox1().getSelectedItem()).getId());
+		newUser.setRespusta(new String(getJPasswordField2().getPassword()));
+		getApp().registrarUsuario(newUser);
 	}
 
 }

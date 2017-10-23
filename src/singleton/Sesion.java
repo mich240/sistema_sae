@@ -101,7 +101,7 @@ public class Sesion {
 		return user.getClave();
 	}
 
-	public String getPregunta() {
+	public int getPregunta() {
 		return user.getPregunta();
 	}
 
@@ -109,7 +109,7 @@ public class Sesion {
 		return user.getRespusta();
 	}
 
-	public String getTipoUsuario() {
+	public int getTipoUsuario() {
 		return user.getTipoUsuario();
 	}
 

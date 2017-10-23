@@ -16,6 +16,7 @@ import javax.swing.UIManager;
 
 import controlador.AppController;
 import controlador.IniciarController;
+import singleton.Sesion;
 import vista.paneles.Vista_panel_index;
 import vista.paneles.Vista_panel_registrar_usuario;
 
@@ -363,9 +364,9 @@ public class Vista_menu_principal extends JFrame {
 
 	private void jMenuItem0ActionActionPerformed(ActionEvent event) {
 	
-	getApp().cerrarSesion();
-	//	System.out.println(Sesion.getSesion().toString());
-	//	MostrarPanel(getVistaIndex());	
+	//getApp().cerrarSesion();
+		System.out.println(Sesion.getSesion().toString());
+		MostrarPanel(getVistaIndex());	
 		
 		
 	}

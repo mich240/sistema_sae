@@ -1,8 +1,6 @@
 package modelo.tipousuario;
 
-import interfaces.itemComboModel;
-
-public class tipoUsuarioModel implements itemComboModel {
+public class tipoUsuarioModel {
 
 	private int id;
 	private String rol;
@@ -28,16 +26,4 @@ public class tipoUsuarioModel implements itemComboModel {
 		return rol;
 	}
 
-	@Override
-	public String getItem() {
-		return getRol();
-	}
-
-	@Override
-	public void setItem(String Item) {
-		setRol(Item);
-		
-	}
-	
-	
 }
