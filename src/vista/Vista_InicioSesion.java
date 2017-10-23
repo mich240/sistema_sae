@@ -17,6 +17,7 @@ import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 
 import controlador.AppController;
+import util.StringMD;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class Vista_InicioSesion extends JFrame {
@@ -176,7 +177,7 @@ public class Vista_InicioSesion extends JFrame {
 	}
 
 	public void IniciarSesion() {
-		if (getApp().iniciarSesion(getJTextField0().getText(),new String(getJPasswordField0().getPassword()))) {
+		if (getApp().iniciarSesion(getJTextField0().getText(),StringMD.Encriptar(new String(getJPasswordField0().getPassword())))) {
 			this.dispose();
 			getApp().iniciarPrincipal();
 		}
