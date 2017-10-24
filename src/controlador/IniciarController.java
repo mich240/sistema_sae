@@ -20,9 +20,8 @@ public class IniciarController {
 	/// constructor
 	public IniciarController() {
 		/*
-		 * iniciar instancia de la conexion, tambien puede ser que se haga un
-		 * metodo para inicializar varias cosas que necesiten conexion a base de
-		 * datos
+		 * iniciar instancia de la conexion, tambien puede ser que se haga un metodo
+		 * para inicializar varias cosas que necesiten conexion a base de datos
 		 */
 		Conexion.getInstancia();
 		// iniciarlisar controladores y vistas

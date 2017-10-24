@@ -34,6 +34,7 @@ public class Empleado extends JFrame {
 	private JScrollPane jScrollPane0;
 	private JButton jButton1;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
+
 	public Empleado() {
 		initComponents();
 	}
@@ -54,7 +55,7 @@ public class Empleado extends JFrame {
 			jButton1 = new JButton();
 			jButton1.setText("Sin commint");
 			jButton1.addActionListener(new ActionListener() {
-	
+
 				public void actionPerformed(ActionEvent event) {
 					jButton1ActionActionPerformed(event);
 				}
@@ -84,7 +85,7 @@ public class Empleado extends JFrame {
 			jButton0 = new JButton();
 			jButton0.setText("Aceptar");
 			jButton0.addActionListener(new ActionListener() {
-	
+
 				public void actionPerformed(ActionEvent event) {
 					jButton0ActionActionPerformed(event);
 				}
@@ -129,11 +130,10 @@ public class Empleado extends JFrame {
 	}
 
 	/**
-	* Main entry of the class.
-	* Note: This class is only created so that you can easily preview the result at runtime.
-	* It is not expected to be managed by the designer.
-	* You can modify it as you like.
-	*/
+	 * Main entry of the class. Note: This class is only created so that you can
+	 * easily preview the result at runtime. It is not expected to be managed by the
+	 * designer. You can modify it as you like.
+	 */
 	public static void main(String[] args) {
 		installLnF();
 		SwingUtilities.invokeLater(new Runnable() {
@@ -150,115 +150,114 @@ public class Empleado extends JFrame {
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
-		PreparedStatement pst;		
+		PreparedStatement pst;
 		try {
-		
-			Conexion.getInstancia().getConnection().setAutoCommit(false);	
-			
+
+			Conexion.getInstancia().getConnection().setAutoCommit(false);
+
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		
-		String sql="insert into empleado values (null,? ,?, 0 ,?)";
+
+		String sql = "insert into empleado values (null,? ,?, 0 ,?)";
 		try {
-			
-			pst=Conexion.getInstancia().getConnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-			pst.setInt(1,Integer.parseInt(getCedula().getText()));
+
+			pst = Conexion.getInstancia().getConnection().prepareStatement(sql,
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, Integer.parseInt(getCedula().getText()));
 			pst.setString(2, getJTextField1().getText());
 			pst.setString(3, getJTextField2().getText());
-			
+
 			pst.executeUpdate();
-			
-			System.out.println("Se creo el SQL: "+pst.toString());
-			
-			
-			ResultSet rs=pst.getGeneratedKeys();
+
+			System.out.println("Se creo el SQL: " + pst.toString());
+
+			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-			//	System.out.println(rs.getInt(1));
-			pst=Conexion.getInstancia().getConnection().prepareStatement("insert into dato values(null,?,?)");
-			pst.setString(1, jTextArea0.getText());
-			pst.setInt(2, rs.getInt(1));
-			pst.executeUpdate();
-			System.out.println("Se creo el SQL: "+pst.toString());
+				// System.out.println(rs.getInt(1));
+				pst = Conexion.getInstancia().getConnection().prepareStatement("insert into dato values(null,?,?)");
+				pst.setString(1, jTextArea0.getText());
+				pst.setInt(2, rs.getInt(1));
+				pst.executeUpdate();
+				System.out.println("Se creo el SQL: " + pst.toString());
 			}
 			Conexion.getInstancia().getConnection().commit();
 			System.out.println("Commit ejecutado.");
 		} catch (SQLException e) {
-		//	e.printStackTrace();
-			System.out.println(e.getErrorCode()+" "+e);	
-			if (e.getErrorCode()==1062) {
+			// e.printStackTrace();
+			System.out.println(e.getErrorCode() + " " + e);
+			if (e.getErrorCode() == 1062) {
 				JOptionPane.showMessageDialog(null, "Este empleado ya a sido registrado.");
 			}
 			try {
 				Conexion.getInstancia().getConnection().rollback();
-				
+
 				System.out.println("RollBack ejecutado.");
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-		}finally {
-		//	Conexion.Desconectar();
+		} finally {
+			// Conexion.Desconectar();
 			try {
 				Conexion.getInstancia().getConnection().setAutoCommit(true);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
-	
+
 	}
 
 	private void jButton1ActionActionPerformed(ActionEvent event) {
-		PreparedStatement pst;		
-//		try {
-//			Conexion.getInstancia().getConnection().setAutoCommit(false);
-//		} catch (SQLException e1) {
-//			e1.printStackTrace();
-//		}
-		
-		String sql="insert into empleado values (null,? ,? ,0 ,?)";
+		PreparedStatement pst;
+		// try {
+		// Conexion.getInstancia().getConnection().setAutoCommit(false);
+		// } catch (SQLException e1) {
+		// e1.printStackTrace();
+		// }
+
+		String sql = "insert into empleado values (null,? ,? ,0 ,?)";
 		try {
 			System.out.println(Conexion.getInstancia().getConnection().getAutoCommit());
-			
-			pst=Conexion.getInstancia().getConnection().prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-			pst.setInt(1,Integer.parseInt(getCedula().getText()));
+
+			pst = Conexion.getInstancia().getConnection().prepareStatement(sql,
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, Integer.parseInt(getCedula().getText()));
 			pst.setString(2, getJTextField1().getText());
 			pst.setString(3, getJTextField2().getText());
-			
+
 			pst.executeUpdate();
-			
-			System.out.println("Se creo el SQL: "+pst.toString());
-			
-			
-			ResultSet rs=pst.getGeneratedKeys();
+
+			System.out.println("Se creo el SQL: " + pst.toString());
+
+			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-			//	System.out.println(rs.getInt(1));
-			pst=Conexion.getInstancia().getConnection().prepareStatement("insert into dato values(null,?,?)");
-			pst.setString(1, jTextArea0.getText());
-			pst.setInt(2, rs.getInt(1));
-			pst.executeUpdate();
-			System.out.println("Se creo el SQL: "+pst.toString());
+				// System.out.println(rs.getInt(1));
+				pst = Conexion.getInstancia().getConnection().prepareStatement("insert into dato values(null,?,?)");
+				pst.setString(1, jTextArea0.getText());
+				pst.setInt(2, rs.getInt(1));
+				pst.executeUpdate();
+				System.out.println("Se creo el SQL: " + pst.toString());
 			}
-		//	Conexion.getInstancia().getConnection().commit();
-		//	System.out.println("Commit ejecutado.");
+			// Conexion.getInstancia().getConnection().commit();
+			// System.out.println("Commit ejecutado.");
 		} catch (SQLException e) {
-		//	e.printStackTrace();
-			System.out.println(e.getErrorCode()+" "+e);	
-			if (e.getErrorCode()==1062) {
+			// e.printStackTrace();
+			System.out.println(e.getErrorCode() + " " + e);
+			if (e.getErrorCode() == 1062) {
 				JOptionPane.showMessageDialog(null, "Este empleado ya a sido registrado.");
 			}
-//			try {
-//				Conexion.getInstancia().getConnection().rollback();
-//				System.out.println("RollBack ejecutado.");
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-		}finally {
-		//	Conexion.Desconectar();
-			
+			// try {
+			// Conexion.getInstancia().getConnection().rollback();
+			// System.out.println("RollBack ejecutado.");
+			// } catch (SQLException e1) {
+			// e1.printStackTrace();
+			// }
+		} finally {
+			// Conexion.Desconectar();
+
 		}
-	
-	
+
 	}
 
 }
