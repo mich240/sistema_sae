@@ -29,7 +29,7 @@ import util.StringMD;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class Vista_panel_registrar_usuario extends JPanel {
-
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel jPanel0;
 	private JLabel jLabel0;
