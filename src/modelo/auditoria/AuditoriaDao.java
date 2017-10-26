@@ -15,8 +15,8 @@ public class AuditoriaDao {
 		try {
 			pst=Conexion.getInstancia().getConnection().prepareStatement(sql);
 			pst.setString(1, auditor.getEvento());
-			pst.setString(2, auditor.getFechaEvento());
-			pst.setString(3, auditor.getHoraEvento());
+			pst.setDate(2, auditor.getFechaEvento());
+			pst.setTime(3, auditor.getHoraEvento());
 			pst.setInt(4, auditor.getSesionId());
 			pst.executeUpdate();
 				System.out.println(auditor.getEvento());

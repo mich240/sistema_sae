@@ -1,7 +1,8 @@
 package singleton;
 
-import java.text.SimpleDateFormat;
+import java.sql.Time;
 import java.util.Date;
+
 import modelo.sesion.SesionDao;
 import modelo.sesion.SesionModel;
 import modelo.usuario.UsuarioModel;
@@ -12,8 +13,6 @@ public class Sesion {
 	private static SesionModel ses;
 	private static SesionDao ssDao;
 	private static Date date;
-	private static SimpleDateFormat fecha = new SimpleDateFormat("yyy-MM-dd");
-	private static SimpleDateFormat hora = new SimpleDateFormat("HH:mm:ss");
 	private static Sesion Sesion = new Sesion();
 
 	public static Sesion getSesion() {
@@ -31,10 +30,10 @@ public class Sesion {
 			date = new Date();
 			ses = new SesionModel();
 			ssDao = new SesionDao();
-			ses.setFechaInicio(fecha.format(date));
-			ses.setHoraInicio(hora.format(date));
-			ses.setFechaSalida(fecha.format(date));
-			ses.setHoraSalida(hora.format(date));
+			ses.setFechaInicio(new java.sql.Date(date.getTime()));
+			ses.setHoraInicio(new Time(date.getTime()));
+			ses.setFechaSalida(new java.sql.Date(date.getTime()));
+			ses.setHoraSalida(new Time(date.getTime()));
 			ses.setUsuario_id(us.getId());
 			/***
 			 * registro la Sesion en la db y recupero el id creado para tenerlo en la Sesion
@@ -56,8 +55,8 @@ public class Sesion {
 			Auditoria.evento("cerro sesión.");
 			///establesco los datos para finalizar sesion
 			date = new Date();
-			ses.setFechaSalida(fecha.format(date));
-			ses.setHoraSalida(hora.format(date));		
+			ses.setFechaSalida(new java.sql.Date(date.getTime()));
+			ses.setHoraSalida(new Time(date.getTime()));		
 			ssDao.SesionLogOutRegistro(ses);
 			user = null;//elimino al usuario y a la sesion activas
 			ses = null;

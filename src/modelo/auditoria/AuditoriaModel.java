@@ -1,11 +1,14 @@
 package modelo.auditoria;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class AuditoriaModel {
 
 	private int id;
 	private String evento;
-	private String fechaEvento;
-	private String horaEvento;
+	private Date fechaEvento;
+	private Time horaEvento;
 	private int sesionId;
 	
 	public int getId() {
@@ -20,23 +23,24 @@ public class AuditoriaModel {
 	public void setEvento(String evento) {
 		this.evento = evento;
 	}
-	public String getFechaEvento() {
-		return fechaEvento;
-	}
-	public void setFechaEvento(String fechaEvento) {
-		this.fechaEvento = fechaEvento;
-	}
-	public String getHoraEvento() {
-		return horaEvento;
-	}
-	public void setHoraEvento(String horaEvento) {
-		this.horaEvento = horaEvento;
-	}
 	public int getSesionId() {
 		return sesionId;
 	}
 	public void setSesionId(int sesionId) {
 		this.sesionId = sesionId;
+	}
+	public Date getFechaEvento() {
+		return fechaEvento;
+	}
+	public void setFechaEvento(Date fechaEvento) {
+		this.fechaEvento = fechaEvento;
+	}
+	public Time getHoraEvento() {
+		return horaEvento;
+	}
+	public void setHoraEvento(Time horaEvento) {
+		this.horaEvento = horaEvento;
 	}		
+	
 	
 }
