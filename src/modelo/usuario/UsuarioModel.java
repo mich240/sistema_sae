@@ -10,7 +10,7 @@ public class UsuarioModel {
 	private int Pregunta;
 	private String Respusta;
 	private int TipoUsuario;
-	private int Status = 1;/// activo es 1 inactivo es 0 por eso po pongo en 1 por defecto.
+	private int Status = 1;/// activo es 1 inactivo es 0 por eso pongo en 1 por defecto.
 
 	public int getId() {
 		return Id;

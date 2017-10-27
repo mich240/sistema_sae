@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -26,10 +27,11 @@ import modelo.tipousuario.tipoUsuarioDao;
 import modelo.tipousuario.tipoUsuarioModel;
 import modelo.usuario.UsuarioModel;
 import util.StringMD;
+import util.validacion;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class Vista_panel_registrar_usuario extends JPanel {
-	
+
 	private static final long serialVersionUID = 1L;
 	private JPanel jPanel0;
 	private JLabel jLabel0;
@@ -58,8 +60,17 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private AppController app;
 	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
+
 	public Vista_panel_registrar_usuario() {
 		initComponents();
+		validacion.isNumber(getJTextField0(), 8);
+		validacion.isLetter(getJTextField1(), 30);
+		validacion.isLetter(getJTextField2(), 30);
+		validacion.isAll(getJTextField3(), 15);
+		validacion.isAll(getJPasswordField0(), 20);
+		validacion.isAll(getJPasswordField1(), 20);
+		validacion.isAll(getJPasswordField2(), 20);
+
 	}
 
 	private void initComponents() {
@@ -231,8 +242,8 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JPanel getJPanel1() {
 		if (jPanel1 == null) {
 			jPanel1 = new JPanel();
-			jPanel1.setBorder(BorderFactory.createTitledBorder(null, "Datos del usuario", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
-					new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
+			jPanel1.setBorder(BorderFactory.createTitledBorder(null, "Datos del usuario", TitledBorder.LEADING,
+					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			jPanel1.setLayout(new GroupLayout());
 			jPanel1.add(getJTextField3(), new Constraints(new Leading(137, 241, 10, 10), new Leading(-2, 10, 10)));
 			jPanel1.add(getJLabel4(), new Constraints(new Leading(9, 12, 12), new Leading(4, 12, 12)));
@@ -243,9 +254,9 @@ public class Vista_panel_registrar_usuario extends JPanel {
 			jPanel1.add(getJLabel6(), new Constraints(new Leading(9, 12, 12), new Leading(74, 12, 12)));
 			jPanel1.add(getJLabel7(), new Constraints(new Leading(9, 138, 12, 12), new Leading(107, 12, 12)));
 			jPanel1.add(getJComboBox1(), new Constraints(new Leading(138, 240, 12, 12), new Leading(138, 10, 10)));
-			jPanel1.add(getJPasswordField2(), new Constraints(new Leading(140, 240, 12, 12), new Leading(171, 10, 10)));
 			jPanel1.add(getJLabel8(), new Constraints(new Leading(9, 158, 12, 12), new Leading(143, 12, 12)));
 			jPanel1.add(getJLabel9(), new Constraints(new Leading(5, 147, 12, 12), new Leading(179, 10, 10)));
+			jPanel1.add(getJPasswordField2(), new Constraints(new Leading(136, 244, 12, 12), new Leading(171, 12, 12)));
 		}
 		return jPanel1;
 	}
@@ -321,16 +332,31 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
-		UsuarioModel newUser = new UsuarioModel();
-		newUser.setCedula(Integer.parseInt(getJTextField0().getText()));
-		newUser.setNombre(getJTextField1().getText());
-		newUser.setApellido(getJTextField2().getText());
-		newUser.setUsuario(getJTextField3().getText());
-		newUser.setTipoUsuario(((tipoUsuarioModel) getJComboBox0().getSelectedItem()).getId());
-		newUser.setClave(StringMD.Encriptar(new String(getJPasswordField0().getPassword())));
-		newUser.setPregunta(((PreguntaModel) getJComboBox1().getSelectedItem()).getId());
-		newUser.setRespusta(StringMD.Encriptar(new String(getJPasswordField2().getPassword())));
-		getApp().registrarUsuario(newUser);
+
+		if (validacion.field(jTextField0, jTextField1, jTextField2, jTextField3, jComboBox0, jComboBox1,
+				jPasswordField0, jPasswordField1, jPasswordField2)) {
+
+			if (new String(jPasswordField0.getPassword()).equals(new String(jPasswordField1.getPassword()))) {
+				UsuarioModel newUser = new UsuarioModel();
+				newUser.setCedula(Integer.parseInt(getJTextField0().getText()));
+				newUser.setNombre(getJTextField1().getText());
+				newUser.setApellido(getJTextField2().getText());
+				newUser.setUsuario(getJTextField3().getText());
+				newUser.setTipoUsuario(((tipoUsuarioModel) getJComboBox0().getSelectedItem()).getId());
+				newUser.setClave(StringMD.Encriptar(new String(getJPasswordField0().getPassword())));
+				newUser.setPregunta(((PreguntaModel) getJComboBox1().getSelectedItem()).getId());
+				newUser.setRespusta(StringMD.Encriptar(new String(getJPasswordField2().getPassword())));
+				
+				if (getApp().registrarUsuario(newUser)) {
+					JOptionPane.showMessageDialog(this, "Registroad");
+				}
+				
+			} else
+				JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "No coinciden",
+						JOptionPane.ERROR_MESSAGE);
+
+		}
+
 	}
 
 }

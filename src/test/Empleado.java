@@ -1,4 +1,4 @@
-package vista;
+package test;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -149,8 +149,10 @@ public class Empleado extends JFrame {
 		});
 	}
 
+	@SuppressWarnings("resource")
 	private void jButton0ActionActionPerformed(ActionEvent event) {
-		PreparedStatement pst;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
 		try {
 
 			Conexion.getInstancia().getConnection().setAutoCommit(false);
@@ -172,7 +174,7 @@ public class Empleado extends JFrame {
 
 			System.out.println("Se creo el SQL: " + pst.toString());
 
-			ResultSet rs = pst.getGeneratedKeys();
+			rs = pst.getGeneratedKeys();
 			if (rs.next()) {
 				// System.out.println(rs.getInt(1));
 				pst = Conexion.getInstancia().getConnection().prepareStatement("insert into dato values(null,?,?)");
@@ -200,10 +202,16 @@ public class Empleado extends JFrame {
 			// Conexion.Desconectar();
 			try {
 				Conexion.getInstancia().getConnection().setAutoCommit(true);
+				if (rs!= null) 				
+					rs.close();				
+
+				if (pst!= null) 				
+					pst.close();				
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
+			
 		}
 
 	}

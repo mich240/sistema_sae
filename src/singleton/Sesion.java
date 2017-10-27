@@ -36,12 +36,11 @@ public class Sesion {
 			ses.setHoraSalida(new Time(date.getTime()));
 			ses.setUsuario_id(us.getId());
 			/***
-			 * registro la Sesion en la db y recupero el id creado para tenerlo en la Sesion
+			 * registro la Sesion en la db y recupero el id creado para tenerlo en la Sesion		
+			 * guardo la clave primaria q retorna el metodo SesionLoginRegistro
 			 */
-			ses.setId(
-					ssDao.SesionLoginRegistro(ses));/**
-													 * guardo la clave primaria q retorna el metodo SesionLoginRegistro
-													 */
+			ses.setId(ssDao.SesionLoginRegistro(ses));
+			
 			user = us;// guardo el usuario aqui para acceder a sus datos
 			System.out.println("Sesión creada.");
 			Auditoria.evento("inicio de sesión.");
@@ -53,14 +52,14 @@ public class Sesion {
 	public void DestroyerSesion() {
 		if (user != null) {
 			Auditoria.evento("cerro sesión.");
-			///establesco los datos para finalizar sesion
+			/// establesco los datos para finalizar sesion
 			date = new Date();
 			ses.setFechaSalida(new java.sql.Date(date.getTime()));
-			ses.setHoraSalida(new Time(date.getTime()));		
+			ses.setHoraSalida(new Time(date.getTime()));
 			ssDao.SesionLogOutRegistro(ses);
-			user = null;//elimino al usuario y a la sesion activas
+			user = null;// elimino al usuario y a la sesion activas
 			ses = null;
-			is_Sesion = false;//ya no tengo sesion
+			is_Sesion = false;// ya no tengo sesion
 			System.out.println("Sesión terminada.");
 		} else
 			System.out.println("No se ha iniciado una Sesión");

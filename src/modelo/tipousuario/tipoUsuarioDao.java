@@ -8,7 +8,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import singleton.Conexion;
 
-public class tipoUsuarioDao  {
+public class tipoUsuarioDao {
 
 	public DefaultComboBoxModel<Object> cargarTipoUsuarios() {
 
@@ -16,10 +16,12 @@ public class tipoUsuarioDao  {
 		preg = new DefaultComboBoxModel<>();
 		preg.removeAllElements();
 		preg.addElement("Seleccione");
+		Statement st = null;
+		ResultSet rs = null;
 
 		try {
-			Statement st = Conexion.getInstancia().getConnection().createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM tipo_usuario");
+			st = Conexion.getInstancia().getConnection().createStatement();
+			rs = st.executeQuery("SELECT * FROM tipo_usuario");
 
 			while (rs.next()) {
 				tipoUsuarioModel it = new tipoUsuarioModel();
@@ -33,6 +35,17 @@ public class tipoUsuarioDao  {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+
+			try {
+				if (rs != null)
+					rs.close();
+				if (st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return preg;

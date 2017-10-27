@@ -3,6 +3,8 @@ package vista;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +19,7 @@ import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 
 import controlador.AppController;
+import singleton.Conexion;
 import util.StringMD;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
@@ -45,6 +48,12 @@ public class Vista_InicioSesion extends JFrame {
 		add(getJLabel2(), new Constraints(new Leading(49, 12, 12), new Leading(113, 12, 12)));
 		add(getJLabel1(), new Constraints(new Leading(51, 10, 10), new Leading(77, 12, 12)));
 		add(getJLabel0(), new Constraints(new Leading(130, 10, 10), new Leading(21, 10, 10)));
+		addWindowListener(new WindowAdapter() {
+	
+			public void windowClosing(WindowEvent event) {
+				windowWindowClosing(event);
+			}
+		});
 		setSize(353, 240);
 	}
 
@@ -183,6 +192,7 @@ public class Vista_InicioSesion extends JFrame {
 		}
 	}
 	private void jButton1ActionActionPerformed(ActionEvent event) {
+	Conexion.Desconectar();
 	System.exit(0);
 	}
 
@@ -196,6 +206,11 @@ public class Vista_InicioSesion extends JFrame {
 
 	private void jPasswordField0ActionActionPerformed(ActionEvent event) {
 		IniciarSesion();
+	}
+
+	private void windowWindowClosing(WindowEvent event) {
+		Conexion.Desconectar();
+		System.exit(0);
 	}
 
 }

@@ -1,10 +1,10 @@
-package controlador;
+package modelo.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class databaseController {
+public class databaseModel {
 
 	private static Connection con = null;
 	private String bd="sae";

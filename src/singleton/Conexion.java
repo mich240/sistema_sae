@@ -2,14 +2,14 @@ package singleton;
 
 import java.sql.Connection;
 
-import controlador.databaseController;
+import modelo.database.databaseModel;
 
 public class Conexion {
-	private databaseController db;
+	private databaseModel db;
 	private static Conexion conex = null;
 
 	public Conexion() {
-		this.db = new databaseController();
+		this.db = new databaseModel();
 	}
 
 	public static Conexion getInstancia() {
@@ -26,9 +26,12 @@ public class Conexion {
 	}
 
 	public static void Desconectar() {
+		if (conex!=null) {
 		conex.db.Desconectar();
 		conex = null;
 		System.out.println("Conexion cerrada.");
+		}else
+			System.out.println("La conexion ya esta cerrada.");
 	}
 
 }

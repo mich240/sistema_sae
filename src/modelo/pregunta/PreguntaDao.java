@@ -11,15 +11,16 @@ import singleton.Conexion;
 public class PreguntaDao {
 
 	public DefaultComboBoxModel<Object> cargarPreguntas() {
-
+		Statement st = null;
+		ResultSet rs = null;
 		DefaultComboBoxModel<Object> preg = null;
 		preg = new DefaultComboBoxModel<>();
 		preg.removeAllElements();
 		preg.addElement("Seleccione");
 
 		try {
-			Statement st = Conexion.getInstancia().getConnection().createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM pregunta_s");
+			st = Conexion.getInstancia().getConnection().createStatement();
+			rs = st.executeQuery("SELECT * FROM pregunta_s");
 
 			while (rs.next()) {
 				PreguntaModel it = new PreguntaModel();
@@ -33,6 +34,20 @@ public class PreguntaDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (st != null) {
+					st.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
 		}
 
 		return preg;

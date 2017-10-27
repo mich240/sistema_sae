@@ -10,7 +10,7 @@ public class AuditoriaDao {
 	
 	public void registrarEvento(AuditoriaModel auditor) {
 		
-		PreparedStatement pst;
+		PreparedStatement pst = null;
 		String sql ="INSERT INTO auditoria VALUES(null,? ,? ,? ,?)";
 		try {
 			pst=Conexion.getInstancia().getConnection().prepareStatement(sql);
@@ -22,6 +22,15 @@ public class AuditoriaDao {
 				System.out.println(auditor.getEvento());
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+				try {
+				if (pst!=null) {	
+					pst.close();
+				}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				
+			}
 		}
 	}
 	
