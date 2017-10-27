@@ -26,8 +26,9 @@ import modelo.pregunta.PreguntaModel;
 import modelo.tipousuario.tipoUsuarioDao;
 import modelo.tipousuario.tipoUsuarioModel;
 import modelo.usuario.UsuarioModel;
+import singleton.Sesion;
 import util.StringMD;
-import util.validacion;
+import util.validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class Vista_panel_registrar_usuario extends JPanel {
@@ -63,13 +64,13 @@ public class Vista_panel_registrar_usuario extends JPanel {
 
 	public Vista_panel_registrar_usuario() {
 		initComponents();
-		validacion.isNumber(getJTextField0(), 8);
-		validacion.isLetter(getJTextField1(), 30);
-		validacion.isLetter(getJTextField2(), 30);
-		validacion.isAll(getJTextField3(), 15);
-		validacion.isAll(getJPasswordField0(), 20);
-		validacion.isAll(getJPasswordField1(), 20);
-		validacion.isAll(getJPasswordField2(), 20);
+		validation.isNumber(getJTextField0(), 8);
+		validation.isLetter(getJTextField1(), 30);
+		validation.isLetter(getJTextField2(), 30);
+		validation.isAll(getJTextField3(), 15);
+		validation.isAll(getJPasswordField0(), 20);
+		validation.isAll(getJPasswordField1(), 20);
+		validation.isAll(getJPasswordField2(), 20);
 
 	}
 
@@ -323,34 +324,50 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	}
 
 	private void jButton1ActionActionPerformed(ActionEvent event) {
-		tipoUsuarioModel p = new tipoUsuarioModel();
-		p.setId(44);
-		p.setRol("mi pregunta");
 
-		jComboBox0.getModel().setSelectedItem(p);
+		validation.restoreField(jTextField0, jTextField1, jTextField2, jTextField3, jPasswordField0, jPasswordField1,
+				jPasswordField2, jComboBox0, jComboBox1);
 
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
+		// jComboBox0.getModel().setSelectedItem(p);
 
-		if (validacion.field(jTextField0, jTextField1, jTextField2, jTextField3, jComboBox0, jComboBox1,
+		if (validation.field(jTextField0, jTextField1, jTextField2, jTextField3, jComboBox0, jComboBox1,
 				jPasswordField0, jPasswordField1, jPasswordField2)) {
 
 			if (new String(jPasswordField0.getPassword()).equals(new String(jPasswordField1.getPassword()))) {
-				UsuarioModel newUser = new UsuarioModel();
-				newUser.setCedula(Integer.parseInt(getJTextField0().getText()));
-				newUser.setNombre(getJTextField1().getText());
-				newUser.setApellido(getJTextField2().getText());
-				newUser.setUsuario(getJTextField3().getText());
-				newUser.setTipoUsuario(((tipoUsuarioModel) getJComboBox0().getSelectedItem()).getId());
-				newUser.setClave(StringMD.Encriptar(new String(getJPasswordField0().getPassword())));
-				newUser.setPregunta(((PreguntaModel) getJComboBox1().getSelectedItem()).getId());
-				newUser.setRespusta(StringMD.Encriptar(new String(getJPasswordField2().getPassword())));
+
+				JPasswordField selfpass = new JPasswordField();
+				Object confirm[] = { "Confirme su contraseña de usuario.", selfpass };
 				
-				if (getApp().registrarUsuario(newUser)) {
-					JOptionPane.showMessageDialog(this, "Registroad");
+				if (JOptionPane.showConfirmDialog(this, confirm, "Confirmar contraseña", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					
+					if (StringMD.Encriptar(new String(selfpass.getPassword())).equals(Sesion.getSesion().getClave())) {
+							/**agrega este metodo a sesion**/
+						UsuarioModel newUser = new UsuarioModel();
+						newUser.setCedula(Integer.parseInt(getJTextField0().getText()));
+						newUser.setNombre(getJTextField1().getText());
+						newUser.setApellido(getJTextField2().getText());
+						newUser.setUsuario(getJTextField3().getText());
+						newUser.setTipoUsuario(((tipoUsuarioModel) getJComboBox0().getSelectedItem()).getId());
+						newUser.setClave(StringMD.Encriptar(new String(getJPasswordField0().getPassword())));
+						newUser.setPregunta(((PreguntaModel) getJComboBox1().getSelectedItem()).getId());
+						newUser.setRespusta(StringMD.Encriptar(new String(getJPasswordField2().getPassword())));
+
+						if (getApp().registrarUsuario(newUser)) {
+							JOptionPane.showMessageDialog(this, "usuario registrado correctamente.",
+									"Registro exitoso.", JOptionPane.INFORMATION_MESSAGE);
+							validation.restoreField(jTextField0, jTextField1, jTextField2, jTextField3, jPasswordField0,
+									jPasswordField1, jPasswordField2, jComboBox0, jComboBox1);
+						}
+
+					} else
+						JOptionPane.showMessageDialog(this, "Contraseña incorrecta.", "Incorrecto",
+								JOptionPane.ERROR_MESSAGE);
 				}
-				
+
 			} else
 				JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "No coinciden",
 						JOptionPane.ERROR_MESSAGE);
