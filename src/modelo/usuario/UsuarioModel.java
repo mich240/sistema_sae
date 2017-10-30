@@ -8,7 +8,7 @@ public class UsuarioModel {
 	private String Usuario;
 	private String Clave;
 	private int Pregunta;
-	private String Respusta;
+	private String Respuesta;
 	private int TipoUsuario;
 	private int Status = 1;/// activo es 1 inactivo es 0 por eso pongo en 1 por defecto.
 
@@ -18,6 +18,14 @@ public class UsuarioModel {
 
 	public void setId(int id) {
 		Id = id;
+	}
+
+	public String getRespuesta() {
+		return Respuesta;
+	}
+
+	public void setRespuesta(String respuesta) {
+		Respuesta = respuesta;
 	}
 
 	public int getCedula() {
@@ -60,13 +68,6 @@ public class UsuarioModel {
 		Clave = clave;
 	}
 
-	public String getRespusta() {
-		return Respusta;
-	}
-
-	public void setRespusta(String respusta) {
-		Respusta = respusta;
-	}
 
 	public int getStatus() {
 		return Status;
@@ -95,7 +96,7 @@ public class UsuarioModel {
 	@Override
 	public String toString() {
 		return "usuario [Id=" + Id + ", Cedula=" + Cedula + ", Nombre=" + Nombre + ", Apellido=" + Apellido
-				+ ", Usuario=" + Usuario + ", Clave=" + Clave + ", Pregunta=" + Pregunta + ", Respusta=" + Respusta
+				+ ", Usuario=" + Usuario + ", Clave=" + Clave + ", Pregunta=" + Pregunta + ", Respuesta=" + Respuesta
 				+ ", TipoUsuario=" + TipoUsuario + ", Status=" + Status + "]";
 	}
 

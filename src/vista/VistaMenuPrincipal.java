@@ -17,11 +17,15 @@ import javax.swing.UIManager;
 import controlador.AppController;
 import controlador.IniciarController;
 import singleton.Sesion;
-import vista.paneles.Vista_panel_index;
-import vista.paneles.Vista_panel_registrar_usuario;
+import vista.paneles.VistaDatosAccesoUsuario;
+import vista.paneles.VistaDatosUsuario;
+import vista.paneles.VistaEliminarUsuario;
+import vista.paneles.VistaListarUsuarios;
+import vista.paneles.VistaPanelIndex;
+import vista.paneles.VistaPanelRegistrarUsuario;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
-public class Vista_menu_principal extends JFrame {
+public class VistaMenuPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JMenuItem jMenuItem0;
@@ -34,7 +38,6 @@ public class Vista_menu_principal extends JFrame {
 	private JMenuItem jMenuItem4;
 	private JMenu jMenu2;
 	private JMenuItem jMenuItem5;
-	private JMenuItem jMenuItem6;
 	private JMenu jMenu3;
 	private JMenuItem jMenuItem8;
 	private JMenuItem jMenuItem9;
@@ -47,18 +50,24 @@ public class Vista_menu_principal extends JFrame {
 	private JMenuItem jMenuItem13;
 	private JMenu jMenu7;
 	private JPanel Vista_panel_actual;
-	private Vista_panel_registrar_usuario RegistrarUser;
-	private Vista_panel_index VistaIndex;
+	private VistaPanelRegistrarUsuario RegistrarUser;
+	private VistaPanelIndex VistaIndex;
 	private AppController app;
+	private VistaDatosUsuario datosUser;
+	private VistaEliminarUsuario eliminarUser;
+	private JMenuItem jMenuItem7;
+	private VistaDatosAccesoUsuario datosAccesoUsuario;
+	private VistaListarUsuarios listaUsuario;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-	public Vista_menu_principal() {
+
+	public VistaMenuPrincipal() {
 		initComponents();
 	}
 
 	private void initComponents() {
 		setLayout(null);
 		addWindowListener(new WindowAdapter() {
-	
+
 			public void windowClosing(WindowEvent event) {
 				windowWindowClosing(event);
 			}
@@ -66,12 +75,58 @@ public class Vista_menu_principal extends JFrame {
 		setJMenuBar(getJMenuBar0());
 		setSize(1020, 570);
 	}
-	
-	
-	
-	
+
+	private JMenuItem getJMenuItem7() {
+		if (jMenuItem7 == null) {
+			jMenuItem7 = new JMenuItem();
+			jMenuItem7.setText("Listar usuarios");
+			jMenuItem7.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jMenuItem7ActionActionPerformed(event);
+				}
+			});
+		}
+		return jMenuItem7;
+	}
+
 	public AppController getApp() {
 		return app;
+	}
+
+	public VistaListarUsuarios getListaUsuario() {
+		listaUsuario.cargarTablaUsuarios();
+		return listaUsuario;
+	}
+
+	public void setListaUsuario(VistaListarUsuarios listaUsuario) {
+		this.listaUsuario = listaUsuario;
+	}
+
+	public VistaDatosAccesoUsuario getDatosAccesoUsuario() {
+		datosAccesoUsuario.cargarDatosAccesoActivo();
+		return datosAccesoUsuario;
+	}
+
+	public void setDatosAccesoUsuario(VistaDatosAccesoUsuario datosAccesoUsuario) {
+		this.datosAccesoUsuario = datosAccesoUsuario;
+	}
+
+	public VistaDatosUsuario getDatosUser() {
+		datosUser.cargarDatosActivo();
+		return datosUser;
+	}
+
+	public void setDatosUser(VistaDatosUsuario datosUser) {
+		this.datosUser = datosUser;
+	}
+
+	public VistaEliminarUsuario getEliminarUser() {
+		return eliminarUser;
+	}
+
+	public void setEliminarUser(VistaEliminarUsuario eliminarUser) {
+		this.eliminarUser = eliminarUser;
 	}
 
 	public void setApp(AppController app) {
@@ -86,19 +141,19 @@ public class Vista_menu_principal extends JFrame {
 		Vista_panel_actual = vista_panel_actual;
 	}
 
-	public Vista_panel_registrar_usuario getRegistrarUser() {
+	public VistaPanelRegistrarUsuario getRegistrarUser() {
 		return RegistrarUser;
 	}
 
-	public void setRegistrarUser(Vista_panel_registrar_usuario registrarUser) {
+	public void setRegistrarUser(VistaPanelRegistrarUsuario registrarUser) {
 		RegistrarUser = registrarUser;
 	}
-	
-	public Vista_panel_index getVistaIndex() {
+
+	public VistaPanelIndex getVistaIndex() {
 		return VistaIndex;
 	}
 
-	public void setVistaIndex(Vista_panel_index vistaIndex) {
+	public void setVistaIndex(VistaPanelIndex vistaIndex) {
 		VistaIndex = vistaIndex;
 	}
 
@@ -185,6 +240,12 @@ public class Vista_menu_principal extends JFrame {
 		if (jMenuItem8 == null) {
 			jMenuItem8 = new JMenuItem();
 			jMenuItem8.setText("Eliminar Usuario");
+			jMenuItem8.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jMenuItem8ActionActionPerformed(event);
+				}
+			});
 		}
 		return jMenuItem8;
 	}
@@ -193,27 +254,22 @@ public class Vista_menu_principal extends JFrame {
 		if (jMenu3 == null) {
 			jMenu3 = new JMenu();
 			jMenu3.setText("Actualizar");
-			jMenu3.setOpaque(false);
 			jMenu3.add(getJMenuItem3());
 			jMenu3.add(getJMenuItem5());
-			jMenu3.add(getJMenuItem6());
-			
 		}
 		return jMenu3;
-	}
-
-	private JMenuItem getJMenuItem6() {
-		if (jMenuItem6 == null) {
-			jMenuItem6 = new JMenuItem();
-			jMenuItem6.setText("Estatus de usuario");
-		}
-		return jMenuItem6;
 	}
 
 	private JMenuItem getJMenuItem5() {
 		if (jMenuItem5 == null) {
 			jMenuItem5 = new JMenuItem();
 			jMenuItem5.setText("Datos de acceso");
+			jMenuItem5.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jMenuItem5ActionActionPerformed(event);
+				}
+			});
 		}
 		return jMenuItem5;
 	}
@@ -239,6 +295,12 @@ public class Vista_menu_principal extends JFrame {
 		if (jMenuItem3 == null) {
 			jMenuItem3 = new JMenuItem();
 			jMenuItem3.setText("Datos de usuario");
+			jMenuItem3.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jMenuItem3ActionActionPerformed(event);
+				}
+			});
 		}
 		return jMenuItem3;
 	}
@@ -250,7 +312,7 @@ public class Vista_menu_principal extends JFrame {
 			jMenu1.add(getJMenuItem2());
 			jMenu1.add(getJMenu3());
 			jMenu1.add(getJMenuItem8());
-			
+			jMenu1.add(getJMenuItem7());
 		}
 		return jMenu1;
 	}
@@ -260,7 +322,7 @@ public class Vista_menu_principal extends JFrame {
 			jMenuItem2 = new JMenuItem();
 			jMenuItem2.setText("Crear usuario");
 			jMenuItem2.addActionListener(new ActionListener() {
-	
+
 				public void actionPerformed(ActionEvent event) {
 					jMenuItem2ActionActionPerformed(event);
 				}
@@ -274,7 +336,7 @@ public class Vista_menu_principal extends JFrame {
 			jMenuItem1 = new JMenuItem();
 			jMenuItem1.setText("Cerrar sesión");
 			jMenuItem1.addActionListener(new ActionListener() {
-	
+
 				public void actionPerformed(ActionEvent event) {
 					jMenuItem1ActionActionPerformed(event);
 				}
@@ -312,7 +374,7 @@ public class Vista_menu_principal extends JFrame {
 			jMenuItem0 = new JMenuItem();
 			jMenuItem0.setText("Inicio");
 			jMenuItem0.addActionListener(new ActionListener() {
-	
+
 				public void actionPerformed(ActionEvent event) {
 					jMenuItem0ActionActionPerformed(event);
 				}
@@ -333,17 +395,16 @@ public class Vista_menu_principal extends JFrame {
 	}
 
 	/**
-	* Main entry of the class.
-	* Note: This class is only created so that you can easily preview the result at runtime.
-	* It is not expected to be managed by the designer.
-	* You can modify it as you like.
-	*/
+	 * Main entry of the class. Note: This class is only created so that you can
+	 * easily preview the result at runtime. It is not expected to be managed by the
+	 * designer. You can modify it as you like.
+	 */
 	public static void main(String[] args) {
 		installLnF();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				Vista_menu_principal frame = new Vista_menu_principal();
-				frame.setDefaultCloseOperation(Vista_menu_principal.EXIT_ON_CLOSE);
+				VistaMenuPrincipal frame = new VistaMenuPrincipal();
+				frame.setDefaultCloseOperation(VistaMenuPrincipal.EXIT_ON_CLOSE);
 				frame.setTitle("vista_menu_principal");
 				frame.getContentPane().setPreferredSize(frame.getSize());
 				frame.pack();
@@ -352,32 +413,31 @@ public class Vista_menu_principal extends JFrame {
 			}
 		});
 	}
-	
+
 	private void MostrarPanel(JPanel NuevaVista) {
-		if (getVista_panel_actual()!=null) {
+		if (getVista_panel_actual() != null) {
 			getVista_panel_actual().setVisible(false);
 			setVista_panel_actual(NuevaVista);
 			NuevaVista.setVisible(true);
 		}
 	}
-	
 
 	private void jMenuItem0ActionActionPerformed(ActionEvent event) {
-	
-	//getApp().cerrarSesion();
+
+		// getApp().cerrarSesion();
 		System.out.println(Sesion.getSesion().toString());
-		MostrarPanel(getVistaIndex());	
-		
-		
+		MostrarPanel(getVistaIndex());
+
 	}
 
 	private void jMenuItem1ActionActionPerformed(ActionEvent event) {
-	int res=JOptionPane.showConfirmDialog(this,"¿Desea cerrar sesión?", "Cerrar sesión", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-	if (res==JOptionPane.YES_OPTION) {
-		getApp().cerrarSesion();
-		this.dispose();
-		new IniciarController();
-	}
+		int res = JOptionPane.showConfirmDialog(this, "¿Desea cerrar sesión?", "Cerrar sesión",
+				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		if (res == JOptionPane.YES_OPTION) {
+			getApp().cerrarSesion();
+			this.dispose();
+			new IniciarController();
+		}
 	}
 
 	private void jMenuItem2ActionActionPerformed(ActionEvent event) {
@@ -385,11 +445,28 @@ public class Vista_menu_principal extends JFrame {
 	}
 
 	private void windowWindowClosing(WindowEvent event) {
-		int res=JOptionPane.showConfirmDialog(this,"¿Desea salir del sistema?", "Salir del sistema", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-	if (res==JOptionPane.YES_OPTION) {
-		getApp().cerrarSesion();
-		System.exit(0);
+		int res = JOptionPane.showConfirmDialog(this, "¿Desea salir del sistema?", "Salir del sistema",
+				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		if (res == JOptionPane.YES_OPTION) {
+			getApp().cerrarSesion();
+			System.exit(0);
+		}
 	}
+
+	private void jMenuItem8ActionActionPerformed(ActionEvent event) {
+		MostrarPanel(getEliminarUser());
+	}
+
+	private void jMenuItem3ActionActionPerformed(ActionEvent event) {
+		MostrarPanel(getDatosUser());
+	}
+
+	private void jMenuItem5ActionActionPerformed(ActionEvent event) {
+		MostrarPanel(getDatosAccesoUsuario());
+	}
+
+	private void jMenuItem7ActionActionPerformed(ActionEvent event) {
+		MostrarPanel(getListaUsuario());
 	}
 
 }

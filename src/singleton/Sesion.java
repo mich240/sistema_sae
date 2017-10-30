@@ -1,11 +1,17 @@
 package singleton;
 
+import java.awt.Component;
 import java.sql.Time;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+
 import modelo.sesion.SesionDao;
 import modelo.sesion.SesionModel;
+import modelo.usuario.UsuarioDao;
 import modelo.usuario.UsuarioModel;
+import util.StringMD;
 
 public class Sesion {
 	private static UsuarioModel user;
@@ -36,11 +42,11 @@ public class Sesion {
 			ses.setHoraSalida(new Time(date.getTime()));
 			ses.setUsuario_id(us.getId());
 			/***
-			 * registro la Sesion en la db y recupero el id creado para tenerlo en la Sesion		
+			 * registro la Sesion en la db y recupero el id creado para tenerlo en la Sesion
 			 * guardo la clave primaria q retorna el metodo SesionLoginRegistro
 			 */
 			ses.setId(ssDao.SesionLoginRegistro(ses));
-			
+
 			user = us;// guardo el usuario aqui para acceder a sus datos
 			System.out.println("Sesión creada.");
 			Auditoria.evento("inicio de sesión.");
@@ -67,8 +73,8 @@ public class Sesion {
 	}
 
 	public void refresh() {
-		/// actualizar los datos de el usuario en Sesion por si han echo
-		/// modificaciones.
+		UsuarioDao us = new UsuarioDao();
+		user = us.recuperarUsuarioRefresh(getSesion().getIdUser());
 	}
 
 	public int getIdSesion() {
@@ -104,7 +110,7 @@ public class Sesion {
 	}
 
 	public String getRespusta() {
-		return user.getRespusta();
+		return user.getRespuesta();
 	}
 
 	public int getTipoUsuario() {
@@ -117,6 +123,51 @@ public class Sesion {
 
 	public String toString() {
 		return "[ID_Sesion]=" + ses.getId() + " " + user.toString();
+	}
+
+	public static boolean confirmarClave(Component parent) {
+		JPasswordField selfpass = new JPasswordField();
+		Object confirm[] = { "Confirme su contraseña de usuario.", selfpass };
+		if (JOptionPane.showConfirmDialog(parent, confirm, "Confirmar contraseña", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+
+			if (StringMD.Encriptar(new String(selfpass.getPassword())).equals(getSesion().getClave())) {
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(parent, "Contraseña incorrecta.", "Incorrecto",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean confirmarClaveOtroUsuario(Component parent, String userName) {
+		if (getSesion().getUsuario().trim().equals(userName.trim())) {
+			if (confirmarClave(parent)) {
+				return true;
+			} else
+				return false;
+		} else if (confirmarClave(parent)) {
+			JPasswordField selfpass = new JPasswordField();
+
+			Object confirm[] = { "Confirme la contraseña del usuario \"" + userName + "\"", selfpass };
+			if (JOptionPane.showConfirmDialog(parent, confirm, "Usuario " + userName + " confirma tu contraseña.",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+				UsuarioDao useD = new UsuarioDao();
+
+				if (StringMD.Encriptar(new String(selfpass.getPassword()))
+						.equals(useD.recuperarClaveOtroUsuario(userName))) {
+					return true;
+				} else {
+					JOptionPane.showMessageDialog(parent, "Contraseña incorrecta.", "Incorrecto",
+							JOptionPane.ERROR_MESSAGE);
+					return false;
+				}
+			}
+		}
+		return false;
 	}
 
 }

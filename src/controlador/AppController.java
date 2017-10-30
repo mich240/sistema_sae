@@ -6,25 +6,22 @@ import modelo.usuario.UsuarioDao;
 import modelo.usuario.UsuarioModel;
 import singleton.Conexion;
 import singleton.Sesion;
-import vista.Vista_menu_principal;
+import vista.VistaMenuPrincipal;
 
 public class AppController {
-	private Vista_menu_principal mp;
+	private VistaMenuPrincipal mp;
+	private UsuarioDao useD = new UsuarioDao();
 
-	public Vista_menu_principal getMp() {
+	public VistaMenuPrincipal getMp() {
 		return mp;
 	}
 
-	public void setMp(Vista_menu_principal mp) {
+	public void setMp(VistaMenuPrincipal mp) {
 		this.mp = mp;
 	}
 
 	public boolean iniciarSesion(String Usuario, String Clave) {
-		UsuarioDao user = new UsuarioDao();
-		UsuarioModel us = user.RecuperarUsuarioSesion(Usuario,
-				Clave);/**
-						 * cuando se llama este metodo se iniciara la conexion para poder consultar
-						 **/
+		UsuarioModel us = useD.RecuperarUsuarioSesion(Usuario, Clave);
 		if (us != null) {
 			Sesion.CrearSesion(us);
 			return true;
@@ -41,7 +38,6 @@ public class AppController {
 	}
 
 	public void iniciarPrincipal() {
-		/// inicio el frame principal
 		getMp().setDefaultCloseOperation(0);
 		getMp().setTitle("Menú principal");
 		getMp().getContentPane().setPreferredSize(getMp().getSize());
@@ -52,11 +48,84 @@ public class AppController {
 	}
 
 	public boolean registrarUsuario(UsuarioModel newUser) {
-		UsuarioDao useD = new UsuarioDao();
 		if (useD.registrarUsuario(newUser))
 			return true;
 		else
 			return false;
+	}
+
+	public boolean eliminarUsuario(String username) {
+		int error = useD.eliminarUsuario(username);
+		if (error == 1451) {
+			JOptionPane.showMessageDialog(null,
+					"Este usuario no se puede eliminar porque ya tiene eventos vinculados a su registro, solo se puede desincorporar el usuario.",
+					"Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if (error == 0) {
+			JOptionPane.showMessageDialog(null, "Este usuario no existe.", "Incorrecto.", JOptionPane.ERROR_MESSAGE);
+			return false;
+		} else
+			return true;
+	}
+
+	public boolean actualizarUsuario(UsuarioModel user) {
+		if (useD.actualizarUsuario(user))
+			return true;
+		else
+			return false;
+	}
+
+	public boolean actualizarDatosAccesoUsuario(UsuarioModel user) {
+		if (useD.actualizarDatosAccesoUsuario(user)) {
+			return true;
+		} else
+			return false;
+	}
+
+	public boolean desincorporarUsuario(String username) {
+		if (useD.compruebaExisteAdmin()) {
+			if (useD.desincorporarUsuario(username)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"No se puede desincorporar, debe haber almenos un usuario ADMINISTRADOR.", "Cuidado",
+					JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+
+	}
+
+	public boolean reIncorporarUsuario(String username) {
+		if (useD.reIncorporarUsuario(username)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean actualizaTipoUsuario(String username, int tipoUser_id) {
+		if (tipoUser_id == 1) {
+			if (useD.actualizaTipoUsuario(username, tipoUser_id)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if (useD.compruebaExisteAdmin()) {
+			if (useD.actualizaTipoUsuario(username, tipoUser_id)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"No se puede cambiar los provilegios para este usuario, debe haber almenos un usuario ADMINISTRADOR.",
+					"Cuidado", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+
 	}
 
 }

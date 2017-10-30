@@ -19,6 +19,7 @@ import javax.swing.border.TitledBorder;
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
+import org.dyno.visual.swing.layouts.Trailing;
 
 import controlador.AppController;
 import modelo.pregunta.PreguntaDao;
@@ -31,7 +32,7 @@ import util.StringMD;
 import util.validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
-public class Vista_panel_registrar_usuario extends JPanel {
+public class VistaPanelRegistrarUsuario extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jPanel0;
@@ -61,8 +62,7 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private AppController app;
 	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-
-	public Vista_panel_registrar_usuario() {
+	public VistaPanelRegistrarUsuario() {
 		initComponents();
 		validation.isNumber(getJTextField0(), 8);
 		validation.isLetter(getJTextField1(), 30);
@@ -81,7 +81,7 @@ public class Vista_panel_registrar_usuario extends JPanel {
 		add(getJButton0(), new Constraints(new Leading(247, 10, 10), new Leading(502, 10, 10)));
 		add(getJButton1(), new Constraints(new Leading(642, 117, 10, 10), new Leading(506, 12, 12)));
 		add(getJPanel1(), new Constraints(new Leading(242, 517, 12, 12), new Leading(244, 244, 12, 12)));
-		add(getJPanel2(), new Constraints(new Leading(32, 957, 10, 10), new Leading(20, 529, 10, 10)));
+		add(getJPanel2(), new Constraints(new Leading(20, 980, 10, 10), new Leading(20, 530, 10, 10)));
 		setSize(1020, 570);
 	}
 
@@ -107,11 +107,11 @@ public class Vista_panel_registrar_usuario extends JPanel {
 			jPanel2 = new JPanel();
 			jPanel2.setBorder(new LineBorder(new Color(196, 196, 255), 1, false));
 			jPanel2.setLayout(new GroupLayout());
-			jPanel2.add(getJPanel1(), new Constraints(new Leading(213, 517, 10, 10), new Leading(224, 244, 10, 10)));
-			jPanel2.add(getJButton1(), new Constraints(new Leading(611, 117, 10, 10), new Leading(480, 12, 12)));
-			jPanel2.add(getJButton0(), new Constraints(new Leading(216, 10, 10), new Leading(480, 12, 12)));
-			jPanel2.add(getJPanel0(), new Constraints(new Leading(213, 517, 12, 12), new Leading(41, 171, 12, 12)));
-			jPanel2.add(getJLabel0(), new Constraints(new Leading(361, 10, 10), new Leading(11, 12, 12)));
+			jPanel2.add(getJPanel1(), new Constraints(new Leading(210, 560, 10, 10), new Leading(224, 244, 10, 10)));
+			jPanel2.add(getJPanel0(), new Constraints(new Leading(210, 560, 12, 12), new Leading(41, 171, 12, 12)));
+			jPanel2.add(getJButton0(), new Constraints(new Leading(210, 10, 10), new Leading(480, 33, 10, 10)));
+			jPanel2.add(getJButton1(), new Constraints(new Leading(653, 117, 12, 12), new Leading(480, 33, 12, 12)));
+			jPanel2.add(getJLabel0(), new Constraints(new Leading(400, 10, 10), new Leading(5, 10, 10)));
 		}
 		return jPanel2;
 	}
@@ -211,7 +211,7 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JLabel getJLabel7() {
 		if (jLabel7 == null) {
 			jLabel7 = new JLabel();
-			jLabel7.setText("Repetir contraseña:");
+			jLabel7.setText("Confirmar contraseña:");
 		}
 		return jLabel7;
 	}
@@ -219,7 +219,7 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JLabel getJLabel6() {
 		if (jLabel6 == null) {
 			jLabel6 = new JLabel();
-			jLabel6.setText("Contraseña:");
+			jLabel6.setText("Nueva contraseña:");
 		}
 		return jLabel6;
 	}
@@ -243,21 +243,21 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JPanel getJPanel1() {
 		if (jPanel1 == null) {
 			jPanel1 = new JPanel();
-			jPanel1.setBorder(BorderFactory.createTitledBorder(null, "Datos del usuario", TitledBorder.LEADING,
-					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
+			jPanel1.setBorder(BorderFactory.createTitledBorder(null, "Datos del usuario", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
+					new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			jPanel1.setLayout(new GroupLayout());
-			jPanel1.add(getJTextField3(), new Constraints(new Leading(137, 241, 10, 10), new Leading(-2, 10, 10)));
-			jPanel1.add(getJLabel4(), new Constraints(new Leading(9, 12, 12), new Leading(4, 12, 12)));
-			jPanel1.add(getJComboBox0(), new Constraints(new Leading(137, 240, 12, 12), new Leading(33, 10, 10)));
-			jPanel1.add(getJLabel5(), new Constraints(new Leading(9, 12, 12), new Leading(37, 12, 12)));
-			jPanel1.add(getJPasswordField0(), new Constraints(new Leading(137, 240, 12, 12), new Leading(68, 10, 10)));
-			jPanel1.add(getJPasswordField1(), new Constraints(new Leading(137, 240, 12, 12), new Leading(101, 12, 12)));
-			jPanel1.add(getJLabel6(), new Constraints(new Leading(9, 12, 12), new Leading(74, 12, 12)));
-			jPanel1.add(getJLabel7(), new Constraints(new Leading(9, 138, 12, 12), new Leading(107, 12, 12)));
-			jPanel1.add(getJComboBox1(), new Constraints(new Leading(138, 240, 12, 12), new Leading(138, 10, 10)));
-			jPanel1.add(getJLabel8(), new Constraints(new Leading(9, 158, 12, 12), new Leading(143, 12, 12)));
-			jPanel1.add(getJLabel9(), new Constraints(new Leading(5, 147, 12, 12), new Leading(179, 10, 10)));
-			jPanel1.add(getJPasswordField2(), new Constraints(new Leading(136, 244, 12, 12), new Leading(171, 12, 12)));
+			jPanel1.add(getJTextField3(), new Constraints(new Leading(180, 240, 10, 10), new Leading(-2, 10, 10)));
+			jPanel1.add(getJLabel4(), new Constraints(new Leading(54, 10, 10), new Leading(4, 16, 10, 182)));
+			jPanel1.add(getJLabel5(), new Constraints(new Leading(54, 10, 10), new Leading(37, 16, 10, 149)));
+			jPanel1.add(getJPasswordField0(), new Constraints(new Leading(180, 240, 10, 10), new Leading(68, 10, 10)));
+			jPanel1.add(getJPasswordField1(), new Constraints(new Leading(180, 240, 10, 10), new Leading(102, 12, 12)));
+			jPanel1.add(getJLabel6(), new Constraints(new Leading(54, 10, 10), new Leading(74, 16, 10, 112)));
+			jPanel1.add(getJLabel8(), new Constraints(new Leading(54, 158, 10, 10), new Leading(143, 16, 10, 43)));
+			jPanel1.add(getJLabel9(), new Constraints(new Leading(54, 147, 10, 10), new Leading(179, 16, 10, 7)));
+			jPanel1.add(getJPasswordField2(), new Constraints(new Leading(180, 240, 12, 12), new Leading(173, 12, 12)));
+			jPanel1.add(getJLabel7(), new Constraints(new Leading(54, 138, 12, 12), new Leading(108, 16, 10, 78)));
+			jPanel1.add(getJComboBox1(), new Constraints(new Leading(180, 240, 12, 12), new Leading(136, 31, 12, 12)));
+			jPanel1.add(getJComboBox0(), new Constraints(new Leading(180, 240, 12, 12), new Leading(30, 30, 12, 12)));
 		}
 		return jPanel1;
 	}
@@ -310,15 +310,15 @@ public class Vista_panel_registrar_usuario extends JPanel {
 	private JPanel getJPanel0() {
 		if (jPanel0 == null) {
 			jPanel0 = new JPanel();
-			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Datos personales", TitledBorder.LEADING,
-					TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
+			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Datos personales", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
+					new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			jPanel0.setLayout(new GroupLayout());
-			jPanel0.add(getJTextField0(), new Constraints(new Leading(135, 241, 10, 10), new Leading(15, 10, 10)));
-			jPanel0.add(getJTextField1(), new Constraints(new Leading(135, 241, 10, 10), new Leading(50, 12, 12)));
-			jPanel0.add(getJTextField2(), new Constraints(new Leading(135, 241, 10, 10), new Leading(88, 12, 12)));
-			jPanel0.add(getJLabel3(), new Constraints(new Leading(15, 12, 12), new Leading(95, 12, 12)));
-			jPanel0.add(getJLabel1(), new Constraints(new Leading(12, 12, 12), new Leading(23, 12, 12)));
-			jPanel0.add(getJLabel2(), new Constraints(new Leading(15, 12, 12), new Leading(56, 12, 12)));
+			jPanel0.add(getJTextField0(), new Constraints(new Leading(180, 241, 10, 10), new Leading(16, 10, 10)));
+			jPanel0.add(getJTextField1(), new Constraints(new Leading(180, 241, 10, 10), new Leading(51, 10, 10)));
+			jPanel0.add(getJTextField2(), new Constraints(new Leading(180, 241, 10, 10), new Trailing(12, 91, 91)));
+			jPanel0.add(getJLabel3(), new Constraints(new Leading(60, 12, 12), new Leading(95, 10, 10)));
+			jPanel0.add(getJLabel2(), new Constraints(new Leading(59, 12, 12), new Leading(57, 12, 12)));
+			jPanel0.add(getJLabel1(), new Constraints(new Leading(57, 10, 10), new Leading(23, 12, 12)));
 		}
 		return jPanel0;
 	}
@@ -338,34 +338,24 @@ public class Vista_panel_registrar_usuario extends JPanel {
 
 			if (new String(jPasswordField0.getPassword()).equals(new String(jPasswordField1.getPassword()))) {
 
-				JPasswordField selfpass = new JPasswordField();
-				Object confirm[] = { "Confirme su contraseña de usuario.", selfpass };
-				
-				if (JOptionPane.showConfirmDialog(this, confirm, "Confirmar contraseña", JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-					
-					if (StringMD.Encriptar(new String(selfpass.getPassword())).equals(Sesion.getSesion().getClave())) {
-							/**agrega este metodo a sesion**/
-						UsuarioModel newUser = new UsuarioModel();
-						newUser.setCedula(Integer.parseInt(getJTextField0().getText()));
-						newUser.setNombre(getJTextField1().getText());
-						newUser.setApellido(getJTextField2().getText());
-						newUser.setUsuario(getJTextField3().getText());
-						newUser.setTipoUsuario(((tipoUsuarioModel) getJComboBox0().getSelectedItem()).getId());
-						newUser.setClave(StringMD.Encriptar(new String(getJPasswordField0().getPassword())));
-						newUser.setPregunta(((PreguntaModel) getJComboBox1().getSelectedItem()).getId());
-						newUser.setRespusta(StringMD.Encriptar(new String(getJPasswordField2().getPassword())));
+				if (Sesion.confirmarClave(this)) {
+					UsuarioModel newUser = new UsuarioModel();
+					newUser.setCedula(Integer.parseInt(getJTextField0().getText()));
+					newUser.setNombre(getJTextField1().getText());
+					newUser.setApellido(getJTextField2().getText());
+					newUser.setUsuario(getJTextField3().getText());
+					newUser.setTipoUsuario(((tipoUsuarioModel) getJComboBox0().getSelectedItem()).getId());
+					newUser.setClave(StringMD.Encriptar(new String(getJPasswordField0().getPassword())));
+					newUser.setPregunta(((PreguntaModel) getJComboBox1().getSelectedItem()).getId());
+					newUser.setRespuesta(StringMD.Encriptar(new String(getJPasswordField2().getPassword())));
 
-						if (getApp().registrarUsuario(newUser)) {
-							JOptionPane.showMessageDialog(this, "usuario registrado correctamente.",
-									"Registro exitoso.", JOptionPane.INFORMATION_MESSAGE);
-							validation.restoreField(jTextField0, jTextField1, jTextField2, jTextField3, jPasswordField0,
-									jPasswordField1, jPasswordField2, jComboBox0, jComboBox1);
-						}
+					if (getApp().registrarUsuario(newUser)) {
+						JOptionPane.showMessageDialog(this, "usuario registrado correctamente.", "Registro exitoso.",
+								JOptionPane.INFORMATION_MESSAGE);
+						validation.restoreField(jTextField0, jTextField1, jTextField2, jTextField3, jPasswordField0,
+								jPasswordField1, jPasswordField2, jComboBox0, jComboBox1);
+					}
 
-					} else
-						JOptionPane.showMessageDialog(this, "Contraseña incorrecta.", "Incorrecto",
-								JOptionPane.ERROR_MESSAGE);
 				}
 
 			} else

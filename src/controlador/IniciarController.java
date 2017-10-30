@@ -5,18 +5,25 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import singleton.Conexion;
-import vista.Vista_InicioSesion;
-import vista.Vista_menu_principal;
-import vista.paneles.Vista_panel_index;
-import vista.paneles.Vista_panel_registrar_usuario;
+import vista.VistaInicioSesion;
+import vista.VistaMenuPrincipal;
+import vista.paneles.VistaDatosAccesoUsuario;
+import vista.paneles.VistaDatosUsuario;
+import vista.paneles.VistaEliminarUsuario;
+import vista.paneles.VistaListarUsuarios;
+import vista.paneles.VistaPanelIndex;
+import vista.paneles.VistaPanelRegistrarUsuario;
 
 public class IniciarController {
 	private AppController app;
-	private Vista_InicioSesion InicioSesion;
-	private Vista_menu_principal menuPrincipal;
-	private Vista_panel_registrar_usuario regisUsu;
-	private Vista_panel_index index;
-
+	private VistaInicioSesion InicioSesion;
+	private VistaMenuPrincipal menuPrincipal;
+	private VistaPanelRegistrarUsuario regisUsu;
+	private VistaPanelIndex index;
+	private VistaEliminarUsuario eliminarUser;
+	private VistaDatosUsuario datosUser;
+	private VistaDatosAccesoUsuario datosAccesoUsuario;
+	private VistaListarUsuarios listaUsuarios;
 	/// constructor
 	public IniciarController() {
 		/*
@@ -33,14 +40,27 @@ public class IniciarController {
 		InicioSesion.setApp(app);
 		menuPrincipal.setApp(app);
 		regisUsu.setApp(app);
+		eliminarUser.setApp(app);
+		datosUser.setApp(app);
+		datosAccesoUsuario.setApp(app);
+		listaUsuarios.setApp(app);
+		
 		// agrego los paneles al menuprincipal
 		menuPrincipal.setVistaIndex(index);
 		menuPrincipal.add(index);
 		menuPrincipal.setVista_panel_actual(index);/// coloco index como panel
-													/// de inicio actual
+
 		// agrego mas paneles
 		menuPrincipal.setRegistrarUser(regisUsu);
 		menuPrincipal.add(regisUsu);
+		menuPrincipal.setEliminarUser(eliminarUser);
+		menuPrincipal.add(eliminarUser);
+		menuPrincipal.setDatosUser(datosUser);
+		menuPrincipal.add(datosUser);
+		menuPrincipal.setDatosAccesoUsuario(datosAccesoUsuario);									/// de inicio actual
+		menuPrincipal.add(datosAccesoUsuario);
+		menuPrincipal.setListaUsuario(listaUsuarios);
+		menuPrincipal.add(listaUsuarios);
 		// iniciar sistema por el inicio de sesion
 		InicioSesion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		InicioSesion.setTitle("Inicio de Sesión");
@@ -60,13 +80,21 @@ public class IniciarController {
 	}
 
 	private void inicializarVistas() {
-		menuPrincipal = new Vista_menu_principal();
-		InicioSesion = new Vista_InicioSesion();
+		menuPrincipal = new VistaMenuPrincipal();
+		InicioSesion = new VistaInicioSesion();
 		// iniciamos los paneles todos en false menos el de index
-		index = new Vista_panel_index();
+		index = new VistaPanelIndex();
 		index.setVisible(true);
-		regisUsu = new Vista_panel_registrar_usuario();
+		regisUsu = new VistaPanelRegistrarUsuario();
 		regisUsu.setVisible(false);
+		eliminarUser = new VistaEliminarUsuario();
+		eliminarUser.setVisible(false);
+		datosUser = new VistaDatosUsuario();
+		datosUser.setVisible(false);
+		datosAccesoUsuario=new VistaDatosAccesoUsuario();
+		datosAccesoUsuario.setVisible(false);
+		listaUsuarios= new VistaListarUsuarios();
+		listaUsuarios.setVisible(false);
 	}
 
 	private static void installLnF(String LnF) {

@@ -10,12 +10,12 @@ import javax.swing.JPanel;
 import org.dyno.visual.swing.layouts.GroupLayout;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
-public class Vista_panel_index extends JPanel {
+public class VistaPanelIndex extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private Image index_panel;
 
-	public Vista_panel_index() {
+	public VistaPanelIndex() {
 		initComponents();	
 		setIndex_panel(getClass().getResource("/img/index.jpg"));
 	}

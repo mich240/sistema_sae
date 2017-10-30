@@ -26,8 +26,7 @@ public class tipoUsuarioDao {
 				it.setId(rs.getInt(1));// creo un modelo por cada rol
 				it.setRol(rs.getString(2));
 				preg.addElement(it);/***
-									 * agrego el modelo a los item pero el
-									 * muestra el toString mediante una
+									 * agrego el modelo a los item pero el muestra el toString mediante una
 									 * conversion interna. (eso es de java)
 									 **/
 			}

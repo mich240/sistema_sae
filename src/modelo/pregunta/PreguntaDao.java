@@ -54,4 +54,37 @@ public class PreguntaDao {
 
 	}
 
+	public PreguntaModel recuperarPreguntaUsuario(int pregunta) {
+		Statement st = null;
+		PreguntaModel pgm = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM pregunta_s WHERE id='" + pregunta + "'";
+		try {
+			st = Conexion.getInstancia().getConnection().createStatement();
+			rs = st.executeQuery(sql);
+		
+			if (rs.next()) {
+				pgm = new PreguntaModel();	
+				pgm.setId(rs.getInt(1));
+				pgm.setPregunta(rs.getString(2));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (st != null) {
+					st.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return pgm;
+	}
+
 }
