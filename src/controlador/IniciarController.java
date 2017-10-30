@@ -10,6 +10,7 @@ import vista.VistaMenuPrincipal;
 import vista.paneles.VistaDatosAccesoUsuario;
 import vista.paneles.VistaDatosUsuario;
 import vista.paneles.VistaEliminarUsuario;
+import vista.paneles.VistaListaRubros;
 import vista.paneles.VistaListarUsuarios;
 import vista.paneles.VistaPanelIndex;
 import vista.paneles.VistaPanelRegistrarUsuario;
@@ -24,6 +25,7 @@ public class IniciarController {
 	private VistaDatosUsuario datosUser;
 	private VistaDatosAccesoUsuario datosAccesoUsuario;
 	private VistaListarUsuarios listaUsuarios;
+	private VistaListaRubros listaRubro;
 	/// constructor
 	public IniciarController() {
 		/*
@@ -44,6 +46,8 @@ public class IniciarController {
 		datosUser.setApp(app);
 		datosAccesoUsuario.setApp(app);
 		listaUsuarios.setApp(app);
+		listaRubro.setApp(app);
+		
 		
 		// agrego los paneles al menuprincipal
 		menuPrincipal.setVistaIndex(index);
@@ -61,6 +65,8 @@ public class IniciarController {
 		menuPrincipal.add(datosAccesoUsuario);
 		menuPrincipal.setListaUsuario(listaUsuarios);
 		menuPrincipal.add(listaUsuarios);
+		menuPrincipal.setListaRubro(listaRubro);
+		menuPrincipal.add(listaRubro);
 		// iniciar sistema por el inicio de sesion
 		InicioSesion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		InicioSesion.setTitle("Inicio de Sesión");
@@ -95,6 +101,8 @@ public class IniciarController {
 		datosAccesoUsuario.setVisible(false);
 		listaUsuarios= new VistaListarUsuarios();
 		listaUsuarios.setVisible(false);
+		listaRubro=new VistaListaRubros();
+		listaRubro.setVisible(false);
 	}
 
 	private static void installLnF(String LnF) {

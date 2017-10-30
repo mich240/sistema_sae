@@ -2,14 +2,14 @@ package singleton;
 
 import java.sql.Connection;
 
-import modelo.database.databaseModel;
+import modelo.database.DatabaseModel;
 
 public class Conexion {
-	private databaseModel db;
+	private DatabaseModel db;
 	private static Conexion conex = null;
 
 	public Conexion() {
-		this.db = new databaseModel();
+		this.db = new DatabaseModel();
 	}
 
 	public static Conexion getInstancia() {

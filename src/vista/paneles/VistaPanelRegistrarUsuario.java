@@ -24,12 +24,12 @@ import org.dyno.visual.swing.layouts.Trailing;
 import controlador.AppController;
 import modelo.pregunta.PreguntaDao;
 import modelo.pregunta.PreguntaModel;
-import modelo.tipousuario.tipoUsuarioDao;
-import modelo.tipousuario.tipoUsuarioModel;
+import modelo.tipousuario.TipoUsuarioDao;
+import modelo.tipousuario.TipoUsuarioModel;
 import modelo.usuario.UsuarioModel;
 import singleton.Sesion;
 import util.StringMD;
-import util.validation;
+import util.Validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class VistaPanelRegistrarUsuario extends JPanel {
@@ -64,13 +64,13 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public VistaPanelRegistrarUsuario() {
 		initComponents();
-		validation.isNumber(getJTextField0(), 8);
-		validation.isLetter(getJTextField1(), 30);
-		validation.isLetter(getJTextField2(), 30);
-		validation.isAll(getJTextField3(), 15);
-		validation.isAll(getJPasswordField0(), 20);
-		validation.isAll(getJPasswordField1(), 20);
-		validation.isAll(getJPasswordField2(), 20);
+		Validation.isNumber(getJTextField0(), 8);
+		Validation.isLetter(getJTextField1(), 30);
+		Validation.isLetter(getJTextField2(), 30);
+		Validation.isAll(getJTextField3(), 15);
+		Validation.isAll(getJPasswordField0(), 20);
+		Validation.isAll(getJPasswordField1(), 20);
+		Validation.isAll(getJPasswordField2(), 20);
 
 	}
 
@@ -152,7 +152,7 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 	private JComboBox<Object> getJComboBox0() {
 		if (jComboBox0 == null) {
 			jComboBox0 = new JComboBox<Object>();
-			jComboBox0.setModel(new tipoUsuarioDao().cargarTipoUsuarios());
+			jComboBox0.setModel(new TipoUsuarioDao().cargarTipoUsuarios());
 		}
 		return jComboBox0;
 	}
@@ -219,7 +219,7 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 	private JLabel getJLabel6() {
 		if (jLabel6 == null) {
 			jLabel6 = new JLabel();
-			jLabel6.setText("Nueva contraseña:");
+			jLabel6.setText("Contraseña:");
 		}
 		return jLabel6;
 	}
@@ -247,17 +247,17 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 					new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			jPanel1.setLayout(new GroupLayout());
 			jPanel1.add(getJTextField3(), new Constraints(new Leading(180, 240, 10, 10), new Leading(-2, 10, 10)));
-			jPanel1.add(getJLabel4(), new Constraints(new Leading(54, 10, 10), new Leading(4, 16, 10, 182)));
-			jPanel1.add(getJLabel5(), new Constraints(new Leading(54, 10, 10), new Leading(37, 16, 10, 149)));
-			jPanel1.add(getJPasswordField0(), new Constraints(new Leading(180, 240, 10, 10), new Leading(68, 10, 10)));
-			jPanel1.add(getJPasswordField1(), new Constraints(new Leading(180, 240, 10, 10), new Leading(102, 12, 12)));
-			jPanel1.add(getJLabel6(), new Constraints(new Leading(54, 10, 10), new Leading(74, 16, 10, 112)));
-			jPanel1.add(getJLabel8(), new Constraints(new Leading(54, 158, 10, 10), new Leading(143, 16, 10, 43)));
-			jPanel1.add(getJLabel9(), new Constraints(new Leading(54, 147, 10, 10), new Leading(179, 16, 10, 7)));
+			jPanel1.add(getJPasswordField0(), new Constraints(new Leading(180, 240, 10, 10), new Leading(69, 27, 10, 108)));
+			jPanel1.add(getJPasswordField1(), new Constraints(new Leading(180, 240, 10, 10), new Leading(103, 10, 74)));
 			jPanel1.add(getJPasswordField2(), new Constraints(new Leading(180, 240, 12, 12), new Leading(173, 12, 12)));
-			jPanel1.add(getJLabel7(), new Constraints(new Leading(54, 138, 12, 12), new Leading(108, 16, 10, 78)));
 			jPanel1.add(getJComboBox1(), new Constraints(new Leading(180, 240, 12, 12), new Leading(136, 31, 12, 12)));
 			jPanel1.add(getJComboBox0(), new Constraints(new Leading(180, 240, 12, 12), new Leading(30, 30, 12, 12)));
+			jPanel1.add(getJLabel4(), new Constraints(new Leading(35, 10, 10), new Leading(3, 16, 10, 184)));
+			jPanel1.add(getJLabel5(), new Constraints(new Leading(35, 10, 10), new Leading(37, 16, 10, 150)));
+			jPanel1.add(getJLabel6(), new Constraints(new Leading(35, 10, 10), new Leading(74, 16, 12, 12)));
+			jPanel1.add(getJLabel8(), new Constraints(new Leading(35, 158, 12, 12), new Leading(144, 16, 12, 12)));
+			jPanel1.add(getJLabel9(), new Constraints(new Leading(35, 147, 10, 10), new Leading(178, 16, 10, 9)));
+			jPanel1.add(getJLabel7(), new Constraints(new Leading(35, 147, 10, 10), new Leading(108, 16, 10, 79)));
 		}
 		return jPanel1;
 	}
@@ -316,16 +316,16 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 			jPanel0.add(getJTextField0(), new Constraints(new Leading(180, 241, 10, 10), new Leading(16, 10, 10)));
 			jPanel0.add(getJTextField1(), new Constraints(new Leading(180, 241, 10, 10), new Leading(51, 10, 10)));
 			jPanel0.add(getJTextField2(), new Constraints(new Leading(180, 241, 10, 10), new Trailing(12, 91, 91)));
-			jPanel0.add(getJLabel3(), new Constraints(new Leading(60, 12, 12), new Leading(95, 10, 10)));
-			jPanel0.add(getJLabel2(), new Constraints(new Leading(59, 12, 12), new Leading(57, 12, 12)));
-			jPanel0.add(getJLabel1(), new Constraints(new Leading(57, 10, 10), new Leading(23, 12, 12)));
+			jPanel0.add(getJLabel3(), new Constraints(new Leading(40, 10, 10), new Trailing(19, 15, 10, 97)));
+			jPanel0.add(getJLabel2(), new Constraints(new Leading(39, 10, 10), new Trailing(57, 12, 12)));
+			jPanel0.add(getJLabel1(), new Constraints(new Leading(37, 10, 10), new Leading(22, 15, 10, 95)));
 		}
 		return jPanel0;
 	}
 
 	private void jButton1ActionActionPerformed(ActionEvent event) {
 
-		validation.restoreField(jTextField0, jTextField1, jTextField2, jTextField3, jPasswordField0, jPasswordField1,
+		Validation.restoreField(jTextField0, jTextField1, jTextField2, jTextField3, jPasswordField0, jPasswordField1,
 				jPasswordField2, jComboBox0, jComboBox1);
 
 	}
@@ -333,7 +333,7 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 	private void jButton0ActionActionPerformed(ActionEvent event) {
 		// jComboBox0.getModel().setSelectedItem(p);
 
-		if (validation.field(jTextField0, jTextField1, jTextField2, jTextField3, jComboBox0, jComboBox1,
+		if (Validation.field(jTextField0, jTextField1, jTextField2, jTextField3, jComboBox0, jComboBox1,
 				jPasswordField0, jPasswordField1, jPasswordField2)) {
 
 			if (new String(jPasswordField0.getPassword()).equals(new String(jPasswordField1.getPassword()))) {
@@ -344,7 +344,7 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 					newUser.setNombre(getJTextField1().getText());
 					newUser.setApellido(getJTextField2().getText());
 					newUser.setUsuario(getJTextField3().getText());
-					newUser.setTipoUsuario(((tipoUsuarioModel) getJComboBox0().getSelectedItem()).getId());
+					newUser.setTipoUsuario(((TipoUsuarioModel) getJComboBox0().getSelectedItem()).getId());
 					newUser.setClave(StringMD.Encriptar(new String(getJPasswordField0().getPassword())));
 					newUser.setPregunta(((PreguntaModel) getJComboBox1().getSelectedItem()).getId());
 					newUser.setRespuesta(StringMD.Encriptar(new String(getJPasswordField2().getPassword())));
@@ -352,7 +352,7 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 					if (getApp().registrarUsuario(newUser)) {
 						JOptionPane.showMessageDialog(this, "usuario registrado correctamente.", "Registro exitoso.",
 								JOptionPane.INFORMATION_MESSAGE);
-						validation.restoreField(jTextField0, jTextField1, jTextField2, jTextField3, jPasswordField0,
+						Validation.restoreField(jTextField0, jTextField1, jTextField2, jTextField3, jPasswordField0,
 								jPasswordField1, jPasswordField2, jComboBox0, jComboBox1);
 					}
 

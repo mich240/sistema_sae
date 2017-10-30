@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class databaseModel {
+public class DatabaseModel {
 
 	private static Connection con = null;
 	private String bd="sae";
 	private String url="jdbc:mysql://127.0.0.1/"+bd+"?useServerPrepStmts=true";
 	private String user="root";
-//	private String password="iutllado2013";
-	private String password="";
+	private String password="iutllado2013";
+//	private String password="";
 	
 	
 	public Connection getConexion() {

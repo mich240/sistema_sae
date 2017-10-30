@@ -1,6 +1,6 @@
 package modelo.tipousuario;
 
-public class tipoUsuarioModel {
+public class TipoUsuarioModel {
 
 	private int id;
 	private String rol;

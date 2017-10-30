@@ -26,12 +26,12 @@ import org.dyno.visual.swing.layouts.Leading;
 
 import controlador.AppController;
 import controlador.IniciarController;
-import modelo.tipousuario.tipoUsuarioDao;
-import modelo.tipousuario.tipoUsuarioModel;
+import modelo.tipousuario.TipoUsuarioDao;
+import modelo.tipousuario.TipoUsuarioModel;
 import modelo.usuario.UsuarioDao;
 import singleton.Sesion;
-import util.restruc;
-import util.validation;
+import util.RestrucTable;
+import util.Validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class VistaListarUsuarios extends JPanel {
@@ -56,10 +56,8 @@ public class VistaListarUsuarios extends JPanel {
 	private JSeparator jSeparator0;
 	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-
 	public VistaListarUsuarios() {
 		initComponents();
-		cargarTablaUsuarios();
 	}
 
 	private void initComponents() {
@@ -107,7 +105,7 @@ public class VistaListarUsuarios extends JPanel {
 			jLabel5 = new JLabel();
 			jLabel5.setFont(new Font("SansSerif", Font.BOLD, 12));
 			jLabel5.setHorizontalAlignment(SwingConstants.CENTER);
-			jLabel5.setText("Status");
+			jLabel5.setText("Status:");
 		}
 		return jLabel5;
 	}
@@ -115,7 +113,7 @@ public class VistaListarUsuarios extends JPanel {
 	private JComboBox<Object> getJComboBox0() {
 		if (jComboBox0 == null) {
 			jComboBox0 = new JComboBox<Object>();
-			jComboBox0.setModel(new tipoUsuarioDao().cargarTipoUsuarios());
+			jComboBox0.setModel(new TipoUsuarioDao().cargarTipoUsuarios());
 		}
 		return jComboBox0;
 	}
@@ -124,6 +122,7 @@ public class VistaListarUsuarios extends JPanel {
 		if (jLabel4 == null) {
 			jLabel4 = new JLabel();
 			jLabel4.setFont(new Font("SansSerif", Font.BOLD, 12));
+			jLabel4.setHorizontalAlignment(SwingConstants.CENTER);
 			jLabel4.setText("Tipo de usuario:");
 		}
 		return jLabel4;
@@ -230,13 +229,11 @@ public class VistaListarUsuarios extends JPanel {
 	private JPanel getJPanel0() {
 		if (jPanel0 == null) {
 			jPanel0 = new JPanel();
-			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Tabla de usuarios registrados en el sistema.",
-					TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION, new Font("SansSerif", Font.BOLD, 12),
-					new Color(59, 59, 59)));
+			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Tabla de usuarios registrados en el sistema.", TitledBorder.LEADING,
+					TitledBorder.DEFAULT_POSITION, new Font("SansSerif", Font.BOLD, 12), new Color(59, 59, 59)));
 			jPanel0.setLayout(new GroupLayout());
 			jPanel0.add(getJLabel3(), new Constraints(new Leading(501, 127, 10, 10), new Leading(68, 10, 238)));
 			jPanel0.add(getJLabel2(), new Constraints(new Leading(501, 127, 10, 10), new Leading(44, 10, 262)));
-			jPanel0.add(getJLabel4(), new Constraints(new Leading(686, 97, 12, 12), new Leading(44, 12, 12)));
 			jPanel0.add(getJLabel5(), new Constraints(new Leading(501, 127, 12, 12), new Leading(130, 10, 10)));
 			jPanel0.add(getJLabel6(), new Constraints(new Leading(501, 127, 12, 12), new Leading(154, 10, 10)));
 			jPanel0.add(getJButton2(), new Constraints(new Leading(751, 81, 12, 12), new Leading(108, 12, 12)));
@@ -244,8 +241,9 @@ public class VistaListarUsuarios extends JPanel {
 			jPanel0.add(getJScrollPane0(), new Constraints(new Leading(7, 478, 12, 12), new Leading(25, 277, 12, 12)));
 			jPanel0.add(getJLabel1(), new Constraints(new Leading(586, 10, 10), new Leading(-3, 12, 12)));
 			jPanel0.add(getJSeparator0(), new Constraints(new Leading(632, 17, 12, 12), new Leading(25, 236, 12, 12)));
-			jPanel0.add(getJButton1(), new Constraints(new Leading(514, 108, 12, 12), new Leading(200, 28, 10, 10)));
-			jPanel0.add(getJButton0(), new Constraints(new Leading(514, 10, 10), new Leading(230, 10, 10)));
+			jPanel0.add(getJButton1(), new Constraints(new Leading(503, 120, 12, 12), new Leading(200, 28, 10, 10)));
+			jPanel0.add(getJButton0(), new Constraints(new Leading(503, 12, 12), new Leading(229, 10, 10)));
+			jPanel0.add(getJLabel4(), new Constraints(new Leading(632, 208, 12, 12), new Leading(44, 12, 12)));
 		}
 		return jPanel0;
 	}
@@ -262,7 +260,7 @@ public class VistaListarUsuarios extends JPanel {
 	public void cargarTablaUsuarios() {
 		getJTable0().setModel(new UsuarioDao().recuperarTodosUsuariosTable());
 		getJTable0().getColumnModel().getColumn(4).setPreferredWidth(130);
-		restruc.estilizarTabla(getJTable0());
+		RestrucTable.estilizarTabla(getJTable0());
 		restablecerTodo();
 	}
 
@@ -286,7 +284,7 @@ public class VistaListarUsuarios extends JPanel {
 
 		getJLabel3().setText(getJTable0().getValueAt(jTable0.getSelectedRow(), 0).toString());
 		getJComboBox0().getModel()
-				.setSelectedItem(((tipoUsuarioModel) jTable0.getValueAt(jTable0.getSelectedRow(), 4)));
+				.setSelectedItem(((TipoUsuarioModel) jTable0.getValueAt(jTable0.getSelectedRow(), 4)));
 		getJLabel6().setText(getJTable0().getValueAt(jTable0.getSelectedRow(), 5).toString());
 
 		getJLabel6().setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -348,7 +346,7 @@ public class VistaListarUsuarios extends JPanel {
 	private void jButton2ActionActionPerformed(ActionEvent event) {
 		if (jTable0.getSelectedRowCount() > 0) {
 			String privilegoActual = jTable0.getValueAt(jTable0.getSelectedRow(), 4).toString();
-			if (validation.field(jComboBox0)) {
+			if (Validation.field(jComboBox0)) {
 				if (jTable0.getValueAt(jTable0.getSelectedRow(), 5).toString().trim().equals("Activo")) {
 					if (privilegoActual.equals(jComboBox0.getSelectedItem().toString())) {
 						JOptionPane.showMessageDialog(this, "No puede actualizar al mismo tipo de usuario.",
@@ -364,7 +362,7 @@ public class VistaListarUsuarios extends JPanel {
 								
 									if(Sesion.confirmarClaveOtroUsuario(this, usuarioSeleccionado)) {							
 								if (getApp().actualizaTipoUsuario(usuarioSeleccionado,
-										((tipoUsuarioModel) jComboBox0.getSelectedItem()).getId())) {
+										((TipoUsuarioModel) jComboBox0.getSelectedItem()).getId())) {
 
 									if (Sesion.getSesion().getUsuario().trim().equals(usuarioSeleccionado)) {
 										JOptionPane.showMessageDialog(this,

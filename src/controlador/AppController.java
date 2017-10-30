@@ -20,8 +20,8 @@ public class AppController {
 		this.mp = mp;
 	}
 
-	public boolean iniciarSesion(String Usuario, String Clave) {
-		UsuarioModel us = useD.RecuperarUsuarioSesion(Usuario, Clave);
+	public boolean iniciarSesion(String Usuario, String clave) {	
+		UsuarioModel us = useD.RecuperarUsuarioSesion(Usuario, clave);
 		if (us != null) {
 			Sesion.CrearSesion(us);
 			return true;

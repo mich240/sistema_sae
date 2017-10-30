@@ -21,12 +21,12 @@ import org.dyno.visual.swing.layouts.Leading;
 import singleton.Conexion;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
-public class test extends JFrame {
+public class Test extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JButton jButton0;
 
-	public test() {
+	public Test() {
 		initComponents();
 	}
 
@@ -51,7 +51,7 @@ public class test extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		test t=new test();
+		Test t=new Test();
 		t.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		t.setTitle("test");	
 		t.pack();

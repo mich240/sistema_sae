@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
@@ -24,7 +26,7 @@ import modelo.pregunta.PreguntaModel;
 import modelo.usuario.UsuarioModel;
 import singleton.Sesion;
 import util.StringMD;
-import util.validation;
+import util.Validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class VistaDatosAccesoUsuario extends JPanel {
@@ -45,14 +47,12 @@ public class VistaDatosAccesoUsuario extends JPanel {
 	private JPasswordField jPasswordField1;
 	private JPasswordField jPasswordField2;
 	private JSeparator jSeparator0;
-	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-
 	public VistaDatosAccesoUsuario() {
 		initComponents();
-		validation.isAll(jPasswordField0, 20);
-		validation.isAll(jPasswordField1, 20);
-		validation.isAll(jPasswordField2, 20);
+		Validation.isAll(jPasswordField0, 20);
+		Validation.isAll(jPasswordField1, 20);
+		Validation.isAll(jPasswordField2, 20);
 	}
 
 	private void initComponents() {
@@ -154,9 +154,9 @@ public class VistaDatosAccesoUsuario extends JPanel {
 			jPanel1.setBorder(new LineBorder(new Color(196, 196, 255), 1, false));
 			jPanel1.setLayout(new GroupLayout());
 			jPanel1.add(getJPanel0(), new Constraints(new Leading(210, 560, 10, 10), new Leading(100, 283, 10, 10)));
-			jPanel1.add(getJButton0(), new Constraints(new Leading(210, 85, 10, 10), new Leading(393, 36, 10, 10)));
 			jPanel1.add(getJButton1(), new Constraints(new Leading(685, 85, 12, 12), new Leading(393, 36, 10, 10)));
 			jPanel1.add(getJLabel0(), new Constraints(new Leading(358, 10, 10), new Leading(17, 10, 10)));
+			jPanel1.add(getJButton0(), new Constraints(new Leading(210, 95, 10, 10), new Leading(393, 36, 10, 10)));
 		}
 		return jPanel1;
 	}
@@ -186,22 +186,18 @@ public class VistaDatosAccesoUsuario extends JPanel {
 	private JPanel getJPanel0() {
 		if (jPanel0 == null) {
 			jPanel0 = new JPanel();
-			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Actualice sus datos de acceso:",
-					TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION, new Font("SansSerif", Font.BOLD, 12),
-					new Color(59, 59, 59)));
+			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Actualice sus datos de acceso:", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
+					new Font("SansSerif", Font.BOLD, 12), new Color(59, 59, 59)));
 			jPanel0.setLayout(new GroupLayout());
-			jPanel0.add(getJLabel1(), new Constraints(new Leading(23, 12, 12), new Leading(45, 10, 10)));
-			jPanel0.add(getJLabel2(), new Constraints(new Leading(23, 122, 10, 10), new Leading(94, 12, 12)));
-			jPanel0.add(getJLabel4(), new Constraints(new Leading(23, 135, 12, 12), new Leading(186, 12, 12)));
 			jPanel0.add(getJComboBox0(), new Constraints(new Leading(152, 272, 12, 12), new Leading(35, 36, 10, 170)));
-			jPanel0.add(getJPasswordField0(),
-					new Constraints(new Leading(152, 272, 12, 12), new Leading(88, 28, 10, 125)));
-			jPanel0.add(getJPasswordField2(),
-					new Constraints(new Leading(152, 272, 10, 10), new Leading(180, 28, 10, 33)));
-			jPanel0.add(getJLabel3(), new Constraints(new Leading(23, 100, 12, 12), new Leading(146, 12, 12)));
-			jPanel0.add(getJPasswordField1(),
-					new Constraints(new Leading(152, 272, 12, 12), new Leading(140, 28, 10, 73)));
+			jPanel0.add(getJPasswordField0(), new Constraints(new Leading(152, 272, 12, 12), new Leading(88, 28, 10, 125)));
+			jPanel0.add(getJPasswordField2(), new Constraints(new Leading(152, 272, 10, 10), new Leading(180, 28, 10, 33)));
+			jPanel0.add(getJPasswordField1(), new Constraints(new Leading(152, 272, 12, 12), new Leading(140, 28, 10, 73)));
 			jPanel0.add(getJSeparator0(), new Constraints(new Leading(21, 489, 10, 10), new Leading(132, 10, 10, 10)));
+			jPanel0.add(getJLabel1(), new Constraints(new Leading(12, 12, 12), new Leading(46, 15, 10, 182)));
+			jPanel0.add(getJLabel3(), new Constraints(new Leading(12, 100, 12, 12), new Leading(147, 15, 10, 81)));
+			jPanel0.add(getJLabel2(), new Constraints(new Leading(12, 134, 12, 12), new Leading(95, 15, 10, 133)));
+			jPanel0.add(getJLabel4(), new Constraints(new Leading(12, 152, 12, 12), new Leading(187, 15, 10, 41)));
 		}
 		return jPanel0;
 	}
@@ -222,7 +218,7 @@ public class VistaDatosAccesoUsuario extends JPanel {
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
 
-		if (validation.field(jComboBox0, jPasswordField0, jPasswordField1, jPasswordField2)) {
+		if (Validation.field(jComboBox0, jPasswordField0, jPasswordField1, jPasswordField2)) {
 
 			if (new String(jPasswordField1.getPassword()).equals(new String(jPasswordField2.getPassword()))) {
 
@@ -245,7 +241,7 @@ public class VistaDatosAccesoUsuario extends JPanel {
 							JOptionPane.showMessageDialog(this, "Datos actualizados correctamente.",
 									"Datos actualizados", JOptionPane.INFORMATION_MESSAGE);
 							Sesion.getSesion().refresh();
-							validation.restoreField(jPasswordField1,jPasswordField2);
+							Validation.restoreField(jPasswordField1,jPasswordField2);
 						}
 					}
 				}
@@ -257,7 +253,7 @@ public class VistaDatosAccesoUsuario extends JPanel {
 	}
 
 	private void jButton1ActionActionPerformed(ActionEvent event) {
-		validation.restoreField(jPasswordField1,jPasswordField2);
+		Validation.restoreField(jPasswordField1,jPasswordField2);
 	}
 
 }

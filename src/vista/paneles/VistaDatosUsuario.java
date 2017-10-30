@@ -21,7 +21,7 @@ import org.dyno.visual.swing.layouts.Leading;
 import controlador.AppController;
 import modelo.usuario.UsuarioModel;
 import singleton.Sesion;
-import util.validation;
+import util.Validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class VistaDatosUsuario extends JPanel {
@@ -44,9 +44,9 @@ public class VistaDatosUsuario extends JPanel {
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public VistaDatosUsuario() {
 		initComponents();
-		validation.isNumber(jTextField1, 8);
-		validation.isLetter(jTextField2, 30);
-		validation.isLetter(jTextField3, 30);
+		Validation.isNumber(jTextField1, 8);
+		Validation.isLetter(jTextField2, 30);
+		Validation.isLetter(jTextField3, 30);
 
 	}
 
@@ -134,9 +134,9 @@ public class VistaDatosUsuario extends JPanel {
 			jPanel1.setBorder(new LineBorder(new Color(196, 196, 255), 1, false));
 			jPanel1.setLayout(new GroupLayout());
 			jPanel1.add(getJPanel0(), new Constraints(new Leading(210, 560, 10, 10), new Leading(100, 283, 10, 10)));
-			jPanel1.add(getJButton0(), new Constraints(new Leading(210, 85, 10, 10), new Leading(393, 36, 10, 10)));
 			jPanel1.add(getJButton1(), new Constraints(new Leading(685, 85, 12, 12), new Leading(393, 36, 10, 10)));
 			jPanel1.add(getJLabel0(), new Constraints(new Leading(399, 10, 10), new Leading(20, 10, 10)));
+			jPanel1.add(getJButton0(), new Constraints(new Leading(210, 95, 10, 10), new Leading(393, 36, 10, 10)));
 		}
 		return jPanel1;
 	}
@@ -210,7 +210,7 @@ public class VistaDatosUsuario extends JPanel {
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
 
-		if (validation.field(jTextField0, jTextField1, jTextField2, jTextField3)) {
+		if (Validation.field(jTextField0, jTextField1, jTextField2, jTextField3)) {
 			
 			if (JOptionPane.showConfirmDialog(this, "¿Esta seguro que los datos son correctos?", "Actualiza",
 					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
@@ -234,7 +234,7 @@ public class VistaDatosUsuario extends JPanel {
 	}
 
 	private void jButton1ActionActionPerformed(ActionEvent event) {
-		validation.restoreField(jTextField1, jTextField2, jTextField3);
+		Validation.restoreField(jTextField1, jTextField2, jTextField3);
 	}
 
 }

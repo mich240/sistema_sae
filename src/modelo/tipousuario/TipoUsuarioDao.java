@@ -6,7 +6,7 @@ import java.sql.Statement;
 import javax.swing.DefaultComboBoxModel;
 import singleton.Conexion;
 
-public class tipoUsuarioDao {
+public class TipoUsuarioDao {
 
 	public DefaultComboBoxModel<Object> cargarTipoUsuarios() {
 
@@ -22,7 +22,7 @@ public class tipoUsuarioDao {
 			rs = st.executeQuery("SELECT * FROM tipo_usuario");
 
 			while (rs.next()) {
-				tipoUsuarioModel it = new tipoUsuarioModel();
+				TipoUsuarioModel it = new TipoUsuarioModel();
 				it.setId(rs.getInt(1));// creo un modelo por cada rol
 				it.setRol(rs.getString(2));
 				preg.addElement(it);/***

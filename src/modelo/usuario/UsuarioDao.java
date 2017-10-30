@@ -9,7 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import modelo.tipousuario.tipoUsuarioModel;
+import modelo.tableModel.MiDefaultTableModel;
+import modelo.tipousuario.TipoUsuarioModel;
 import singleton.Conexion;
 
 public class UsuarioDao {
@@ -263,15 +264,10 @@ public class UsuarioDao {
 	public TableModel recuperarTodosUsuariosTable() {
 		Statement st = null;
 		ResultSet rs = null;
-		tipoUsuarioModel tusm = null;
+		TipoUsuarioModel tusm = null;
 
-		@SuppressWarnings("serial")
-		DefaultTableModel modelTabla = new DefaultTableModel() {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
+		DefaultTableModel modelTabla = new MiDefaultTableModel();
+		
 		String sql = "SELECT usuario,cedula,nombre,apellido,rol,estatus,tipo_usuario.id FROM usuario,tipo_usuario WHERE usuario.tipo_usuario_id=tipo_usuario.id";
 		modelTabla.setColumnIdentifiers(
 				new String[] { "Username", "Cedula", "Nombre", "Apellido", "Privilegio", "Status" });
@@ -282,7 +278,7 @@ public class UsuarioDao {
 			rs = st.executeQuery(sql);
 
 			while (rs.next()) {
-				tusm = new tipoUsuarioModel();
+				tusm = new TipoUsuarioModel();
 				tusm.setId(rs.getInt(7));
 				tusm.setRol(rs.getString(5));
 

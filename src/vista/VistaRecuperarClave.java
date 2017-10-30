@@ -26,7 +26,7 @@ import org.dyno.visual.swing.layouts.Leading;
 
 import modelo.usuario.UsuarioDao;
 import util.StringMD;
-import util.validation;
+import util.Validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class VistaRecuperarClave extends JDialog {
@@ -326,7 +326,7 @@ public class VistaRecuperarClave extends JDialog {
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
-		if (validation.field(jTextField0)) {
+		if (Validation.field(jTextField0)) {
 			UsuarioDao useD = new UsuarioDao();
 			String respuesta = useD.recuperarPregunta(jTextField0.getText());
 			if (respuesta == null) {
@@ -345,7 +345,7 @@ public class VistaRecuperarClave extends JDialog {
 
 	private void jButton1ActionActionPerformed(ActionEvent event) {
 
-		if (validation.field(jPasswordField0)) {
+		if (Validation.field(jPasswordField0)) {
 			UsuarioDao useD = new UsuarioDao();
 			if (useD.comprobarRespuesta(jTextField0.getText(),
 					StringMD.Encriptar(new String(jPasswordField0.getPassword())))) {
@@ -362,7 +362,7 @@ public class VistaRecuperarClave extends JDialog {
 	}
 
 	private void jButton2ActionActionPerformed(ActionEvent event) {
-		if (validation.field(jPasswordField1, jPasswordField2)) {
+		if (Validation.field(jPasswordField1, jPasswordField2)) {
 			if (new String(jPasswordField1.getPassword()).equals(new String(jPasswordField2.getPassword()))) {
 				UsuarioDao useD = new UsuarioDao();
 				if (useD.cambiarClave(jTextField0.getText(),

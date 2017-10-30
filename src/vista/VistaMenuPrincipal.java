@@ -20,6 +20,7 @@ import singleton.Sesion;
 import vista.paneles.VistaDatosAccesoUsuario;
 import vista.paneles.VistaDatosUsuario;
 import vista.paneles.VistaEliminarUsuario;
+import vista.paneles.VistaListaRubros;
 import vista.paneles.VistaListarUsuarios;
 import vista.paneles.VistaPanelIndex;
 import vista.paneles.VistaPanelRegistrarUsuario;
@@ -58,8 +59,8 @@ public class VistaMenuPrincipal extends JFrame {
 	private JMenuItem jMenuItem7;
 	private VistaDatosAccesoUsuario datosAccesoUsuario;
 	private VistaListarUsuarios listaUsuario;
+	private VistaListaRubros listaRubro;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-
 	public VistaMenuPrincipal() {
 		initComponents();
 	}
@@ -106,6 +107,17 @@ public class VistaMenuPrincipal extends JFrame {
 	public VistaDatosAccesoUsuario getDatosAccesoUsuario() {
 		datosAccesoUsuario.cargarDatosAccesoActivo();
 		return datosAccesoUsuario;
+	}
+
+	
+	
+	public VistaListaRubros getListaRubro() {
+		listaRubro.cargarTablaRubro();
+		return listaRubro;
+	}
+
+	public void setListaRubro(VistaListaRubros listaRubro) {
+		this.listaRubro = listaRubro;
 	}
 
 	public void setDatosAccesoUsuario(VistaDatosAccesoUsuario datosAccesoUsuario) {
@@ -221,7 +233,7 @@ public class VistaMenuPrincipal extends JFrame {
 	private JMenu getJMenu4() {
 		if (jMenu4 == null) {
 			jMenu4 = new JMenu();
-			jMenu4.setText("Registrar");
+			jMenu4.setText("Gestionar");
 			jMenu4.add(getJMenuItem9());
 			jMenu4.add(getJMenuItem10());
 		}
@@ -232,6 +244,12 @@ public class VistaMenuPrincipal extends JFrame {
 		if (jMenuItem9 == null) {
 			jMenuItem9 = new JMenuItem();
 			jMenuItem9.setText("Rubros");
+			jMenuItem9.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
+					jMenuItem9ActionActionPerformed(event);
+				}
+			});
 		}
 		return jMenuItem9;
 	}
@@ -467,6 +485,10 @@ public class VistaMenuPrincipal extends JFrame {
 
 	private void jMenuItem7ActionActionPerformed(ActionEvent event) {
 		MostrarPanel(getListaUsuario());
+	}
+
+	private void jMenuItem9ActionActionPerformed(ActionEvent event) {
+		MostrarPanel(getListaRubro());
 	}
 
 }

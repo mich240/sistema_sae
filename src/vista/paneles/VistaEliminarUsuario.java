@@ -19,7 +19,7 @@ import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 
 import controlador.AppController;
-import util.validation;
+import util.Validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class VistaEliminarUsuario extends JPanel {
@@ -33,10 +33,9 @@ public class VistaEliminarUsuario extends JPanel {
 	private JPanel jPanel1;
 	private AppController app;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-
 	public VistaEliminarUsuario() {
 		initComponents();
-		validation.isAll(getJTextField0(), 15);
+		Validation.isAll(getJTextField0(), 15);
 	}
 
 	private void initComponents() {
@@ -114,13 +113,13 @@ public class VistaEliminarUsuario extends JPanel {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
 			jLabel0.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
-			jLabel0.setText("Eliminar Usuarios");
+			jLabel0.setText("Eliminar usuarios");
 		}
 		return jLabel0;
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
-		if (validation.field(getJTextField0())) {
+		if (Validation.field(getJTextField0())) {
 			if (JOptionPane.showConfirmDialog(this, "¿Desea eliminar este usuario?", "Eliminar", JOptionPane.YES_OPTION,
 					JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
