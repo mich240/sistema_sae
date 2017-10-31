@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.sql.Time;
 import java.util.Date;
 
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
@@ -168,6 +169,26 @@ public class Sesion {
 			}
 		}
 		return false;
+	}
+
+	private static  boolean compruebaSiRestringe(){
+		if (getSesion().getTipoUsuario()!=1) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public static void restringeVisible(JComponent componente) {
+		if (compruebaSiRestringe()) {
+			componente.setVisible(false);
+		}
+	}
+
+	public static void restringeEnable(JComponent componente) {
+		if (compruebaSiRestringe()) {
+			componente.setEnabled(false);
+		}
 	}
 
 }

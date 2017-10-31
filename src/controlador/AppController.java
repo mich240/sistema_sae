@@ -2,6 +2,8 @@ package controlador;
 
 import javax.swing.JOptionPane;
 
+import modelo.rubro.RubroDao;
+import modelo.unidadeducativa.UnidadEducativaDao;
 import modelo.usuario.UsuarioDao;
 import modelo.usuario.UsuarioModel;
 import singleton.Conexion;
@@ -10,6 +12,7 @@ import vista.VistaMenuPrincipal;
 
 public class AppController {
 	private VistaMenuPrincipal mp;
+	private IniciarController inicio;
 	private UsuarioDao useD = new UsuarioDao();
 
 	public VistaMenuPrincipal getMp() {
@@ -19,8 +22,17 @@ public class AppController {
 	public void setMp(VistaMenuPrincipal mp) {
 		this.mp = mp;
 	}
+	
 
-	public boolean iniciarSesion(String Usuario, String clave) {	
+	public IniciarController getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(IniciarController inicio) {
+		this.inicio = inicio;
+	}
+
+	public boolean iniciarSesion(String Usuario, String clave) {
 		UsuarioModel us = useD.RecuperarUsuarioSesion(Usuario, clave);
 		if (us != null) {
 			Sesion.CrearSesion(us);
@@ -44,7 +56,8 @@ public class AppController {
 		getMp().pack();
 		getMp().setLocationRelativeTo(null);
 		getMp().setVisible(true);
-
+		///aplicar restrincciones de usuarios.
+		getInicio().inicializarRestricciones();
 	}
 
 	public boolean registrarUsuario(UsuarioModel newUser) {
@@ -126,6 +139,69 @@ public class AppController {
 			return false;
 		}
 
+	}
+
+	public void registrarRubro(String producto) {
+		RubroDao ru = new RubroDao();
+		if (!ru.comprobarExistencia(producto)) {
+			ru.registrarRubro(producto);
+		} else
+			JOptionPane.showMessageDialog(null, "Ya agregaste un producto con este nombre.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+
+	}
+
+	public void removerRubro(int valorCodigo) {
+		RubroDao ru = new RubroDao();
+		ru.removerRubro(valorCodigo);
+
+	}
+
+	public void modificaRubro(int valorCodigo, String producto) {
+		RubroDao ru = new RubroDao();
+		if (!ru.comprobarExistencia(producto)) {
+			ru.modificaRubro(valorCodigo, producto);
+		} else
+			JOptionPane.showMessageDialog(null, "Ya agregaste un producto con este nombre.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+
+	}
+
+	public void registrarUnidadEducativa(String codDea, String nombre) {
+		UnidadEducativaDao uEdu = new UnidadEducativaDao();
+		if (!uEdu.comprobarExistencia(nombre)) {
+			uEdu.registrarUnidadEducativa(codDea, nombre);
+		} else
+			JOptionPane.showMessageDialog(null, "Ya agregaste una unidad educativa con este nombre.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+
+	}
+
+	public void removerUnidadEducativa(int valorCodigo) {
+		UnidadEducativaDao uEdu = new UnidadEducativaDao();
+		uEdu.removerUnidadEducativa(valorCodigo);
+	}
+
+	public void modificarUnidadEducativa(boolean modificarTodo, int valorCodigo, String codDea, String nombre) {
+		UnidadEducativaDao uEdu = new UnidadEducativaDao();
+		if (modificarTodo) {
+			if (!uEdu.comprobarExistencia(nombre)) {
+				uEdu.modificarUnidadEducativa(valorCodigo, codDea, nombre);
+			} else
+				JOptionPane.showMessageDialog(null, "Ya agregaste una unidad educativa con este nombre.", "Error",
+						JOptionPane.ERROR_MESSAGE);
+		} else
+			uEdu.modificarUnidadEducativa(valorCodigo, codDea, nombre);
+
+	}
+
+	public void designarUnidadEducativa(int valorCodigo) {
+		UnidadEducativaDao uEdu = new UnidadEducativaDao();
+		if(uEdu.removerUnidadDesignada()) {
+			uEdu.designarUnidadEducativa(valorCodigo);
+		}
+		
+		
 	}
 
 }

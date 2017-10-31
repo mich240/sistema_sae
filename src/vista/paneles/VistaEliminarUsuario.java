@@ -32,6 +32,7 @@ public class VistaEliminarUsuario extends JPanel {
 	private JButton jButton0;
 	private JPanel jPanel1;
 	private AppController app;
+	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public VistaEliminarUsuario() {
 		initComponents();

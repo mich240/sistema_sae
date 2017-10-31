@@ -2,10 +2,13 @@ package vista.paneles;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -14,7 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.TableCellRenderer;
 
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
@@ -22,7 +24,8 @@ import org.dyno.visual.swing.layouts.Leading;
 
 import controlador.AppController;
 import modelo.rubro.RubroDao;
-import util.RestrucTable;
+import util.Metodos;
+import util.Validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class VistaListaRubros extends JPanel {
@@ -34,8 +37,6 @@ public class VistaListaRubros extends JPanel {
 	private AppController app;
 	private JTable jTable0;
 	private JScrollPane jScrollPane0;
-	private JTextField jTextField0;
-	private JLabel jLabel1;
 	private JLabel jLabel2;
 	private JButton jButton0;
 	private JButton jButton1;
@@ -45,10 +46,11 @@ public class VistaListaRubros extends JPanel {
 	private JSeparator jSeparator1;
 	private JLabel jLabel5;
 	private JButton jButton2;
+	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
+
 	public VistaListaRubros() {
 		initComponents();
-		cargarTablaRubro();
 	}
 
 	private void initComponents() {
@@ -63,6 +65,12 @@ public class VistaListaRubros extends JPanel {
 		if (jButton2 == null) {
 			jButton2 = new JButton();
 			jButton2.setText("Cambiar");
+			jButton2.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jButton2ActionActionPerformed(event);
+				}
+			});
 		}
 		return jButton2;
 	}
@@ -94,7 +102,7 @@ public class VistaListaRubros extends JPanel {
 		if (jLabel4 == null) {
 			jLabel4 = new JLabel();
 			jLabel4.setHorizontalAlignment(SwingConstants.CENTER);
-			jLabel4.setText("Quitar Rubro de la lista:");
+			jLabel4.setText("Remover rubro de la lista:");
 		}
 		return jLabel4;
 	}
@@ -111,7 +119,13 @@ public class VistaListaRubros extends JPanel {
 	private JButton getJButton1() {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
-			jButton1.setText("Quitar");
+			jButton1.setText("Remover");
+			jButton1.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jButton1ActionActionPerformed(event);
+				}
+			});
 		}
 		return jButton1;
 	}
@@ -120,6 +134,12 @@ public class VistaListaRubros extends JPanel {
 		if (jButton0 == null) {
 			jButton0 = new JButton();
 			jButton0.setText("Agregar");
+			jButton0.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jButton0ActionActionPerformed(event);
+				}
+			});
 		}
 		return jButton0;
 	}
@@ -134,24 +154,6 @@ public class VistaListaRubros extends JPanel {
 		return jLabel2;
 	}
 
-	private JLabel getJLabel1() {
-		if (jLabel1 == null) {
-			jLabel1 = new JLabel();
-			jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-			jLabel1.setText("Busqueda avanzada.");
-		}
-		return jLabel1;
-	}
-
-	private JTextField getJTextField0() {
-		if (jTextField0 == null) {
-			jTextField0 = new JTextField();
-			jTextField0.setToolTipText("Escriba el nombre del rubro para buscarlo.");
-			jTextField0.setAutoscrolls(true);
-		}
-		return jTextField0;
-	}
-
 	private JScrollPane getJScrollPane0() {
 		if (jScrollPane0 == null) {
 			jScrollPane0 = new JScrollPane();
@@ -163,11 +165,8 @@ public class VistaListaRubros extends JPanel {
 	private JTable getJTable0() {
 		if (jTable0 == null) {
 			jTable0 = new JTable();
-			TableCellRenderer tcr =  jTable0.getTableHeader().getDefaultRenderer();
-			new RestrucTable(tcr);
-			
 		}
-		
+
 		return jTable0;
 	}
 
@@ -193,12 +192,9 @@ public class VistaListaRubros extends JPanel {
 	private JPanel getJPanel0() {
 		if (jPanel0 == null) {
 			jPanel0 = new JPanel();
-			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Tabla de rubros.", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
-					new Font("SansSerif", Font.BOLD, 12), new Color(59, 59, 59)));
+			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Tabla de rubros.", TitledBorder.LEADING,
+					TitledBorder.DEFAULT_POSITION, new Font("SansSerif", Font.BOLD, 12), new Color(59, 59, 59)));
 			jPanel0.setLayout(new GroupLayout());
-			jPanel0.add(getJScrollPane0(), new Constraints(new Leading(-1, 302, 10, 10), new Leading(26, 343, 10, 10)));
-			jPanel0.add(getJTextField0(), new Constraints(new Leading(0, 151, 10, 10), new Leading(-5, 10, 10)));
-			jPanel0.add(getJLabel1(), new Constraints(new Leading(149, 152, 12, 12), new Leading(1, 12, 12)));
 			jPanel0.add(getJLabel2(), new Constraints(new Leading(298, 247, 10, 10), new Leading(5, 12, 12)));
 			jPanel0.add(getJLabel3(), new Constraints(new Leading(298, 246, 12, 12), new Leading(53, 10, 10)));
 			jPanel0.add(getJLabel4(), new Constraints(new Leading(298, 246, 12, 12), new Leading(114, 12, 12)));
@@ -208,6 +204,7 @@ public class VistaListaRubros extends JPanel {
 			jPanel0.add(getJLabel5(), new Constraints(new Leading(298, 246, 12, 12), new Leading(185, 12, 12)));
 			jPanel0.add(getJButton2(), new Constraints(new Leading(366, 110, 10, 56), new Leading(210, 10, 10)));
 			jPanel0.add(getJButton0(), new Constraints(new Leading(366, 110, 10, 56), new Leading(69, 12, 12)));
+			jPanel0.add(getJScrollPane0(), new Constraints(new Leading(-1, 302, 10, 10), new Leading(5, 364, 12, 12)));
 		}
 		return jPanel0;
 	}
@@ -221,14 +218,66 @@ public class VistaListaRubros extends JPanel {
 		return jLabel0;
 	}
 
-	
 	public void cargarTablaRubro() {
 		jTable0.setModel(new RubroDao().recuperaTodosRubroTabla());
 		jTable0.getColumnModel().getColumn(1).setPreferredWidth(350);
-		RestrucTable.estilizarTabla(jTable0);
-		
+		Metodos.estilizarTabla(jTable0);
 	}
 
-	
+	private void jButton0ActionActionPerformed(ActionEvent event) {
+		String producto = JOptionPane.showInputDialog(this, "Ingrese el nombre del producto.", "Ingrese nombre.",
+				JOptionPane.INFORMATION_MESSAGE);
 
+		if (Metodos.validaTextoMsj(producto)) {
+			getApp().registrarRubro(producto.toUpperCase());
+			cargarTablaRubro();
+		} else
+			JOptionPane.showMessageDialog(this, "No ha ingresado nada.", "Cuidado", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	private void jButton1ActionActionPerformed(ActionEvent event) {
+		if (jTable0.getSelectedRowCount() > 0) {
+			String valorEscogido = jTable0.getValueAt(jTable0.getSelectedRow(), 1).toString();
+			int valorCodigo = (int) jTable0.getValueAt(jTable0.getSelectedRow(), 0);
+
+			if (JOptionPane.showConfirmDialog(this,
+					"¿Seguro que desea remover este producto \"" + valorEscogido + "\" de la lista?", "Remover.",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+				getApp().removerRubro(valorCodigo);
+				cargarTablaRubro();
+			}
+		} else
+			JOptionPane.showMessageDialog(this, "Seleccione un rubro en la tabla.", "Seleccione.",
+					JOptionPane.WARNING_MESSAGE);
+
+	}
+
+	private void jButton2ActionActionPerformed(ActionEvent event) {
+		if (jTable0.getSelectedRowCount() > 0) {
+			String valorEscogido = jTable0.getValueAt(jTable0.getSelectedRow(), 1).toString();
+			int valorCodigo = (int) jTable0.getValueAt(jTable0.getSelectedRow(), 0);
+			JTextField miCampoEdit = new JTextField();
+			miCampoEdit.setText(valorEscogido);
+
+			Object[] modifica = { "Ingrese el nuevo nombre:", miCampoEdit };
+			if (JOptionPane.showConfirmDialog(this, modifica, "Cambiar.", JOptionPane.YES_NO_OPTION,
+					JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+
+				// String producto = JOptionPane.conf(this, "Ingrese el nuevo nombre del
+				// producto.", "Ingrese nombre.",
+				// JOptionPane.INFORMATION_MESSAGE);
+
+				// if (Metodos.validaTextoMsj(producto)) {
+				if (Validation.field(miCampoEdit)) {
+					getApp().modificaRubro(valorCodigo, miCampoEdit.getText().toUpperCase());
+					cargarTablaRubro();
+				}
+
+			}
+
+		} else
+			JOptionPane.showMessageDialog(this, "Seleccione un rubro en la tabla.", "Seleccione.",
+					JOptionPane.WARNING_MESSAGE);
+
+	}
 }

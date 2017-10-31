@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 import controlador.AppController;
 import controlador.IniciarController;
 import singleton.Sesion;
+import vista.paneles.VistaAgregarUnidadEdu;
 import vista.paneles.VistaDatosAccesoUsuario;
 import vista.paneles.VistaDatosUsuario;
 import vista.paneles.VistaEliminarUsuario;
@@ -60,7 +61,9 @@ public class VistaMenuPrincipal extends JFrame {
 	private VistaDatosAccesoUsuario datosAccesoUsuario;
 	private VistaListarUsuarios listaUsuario;
 	private VistaListaRubros listaRubro;
+	private VistaAgregarUnidadEdu unidadesEdu;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
+
 	public VistaMenuPrincipal() {
 		initComponents();
 	}
@@ -104,13 +107,20 @@ public class VistaMenuPrincipal extends JFrame {
 		this.listaUsuario = listaUsuario;
 	}
 
+	public VistaAgregarUnidadEdu getUnidadesEdu() {
+		unidadesEdu.cargarTablaUedu();
+		return unidadesEdu;
+	}
+
+	public void setUnidadesEdu(VistaAgregarUnidadEdu unidadesEdu) {
+		this.unidadesEdu = unidadesEdu;
+	}
+
 	public VistaDatosAccesoUsuario getDatosAccesoUsuario() {
 		datosAccesoUsuario.cargarDatosAccesoActivo();
 		return datosAccesoUsuario;
 	}
 
-	
-	
 	public VistaListaRubros getListaRubro() {
 		listaRubro.cargarTablaRubro();
 		return listaRubro;
@@ -226,6 +236,12 @@ public class VistaMenuPrincipal extends JFrame {
 		if (jMenuItem10 == null) {
 			jMenuItem10 = new JMenuItem();
 			jMenuItem10.setText("Unidad Educativa");
+			jMenuItem10.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jMenuItem10ActionActionPerformed(event);
+				}
+			});
 		}
 		return jMenuItem10;
 	}
@@ -245,7 +261,7 @@ public class VistaMenuPrincipal extends JFrame {
 			jMenuItem9 = new JMenuItem();
 			jMenuItem9.setText("Rubros");
 			jMenuItem9.addActionListener(new ActionListener() {
-	
+
 				public void actionPerformed(ActionEvent event) {
 					jMenuItem9ActionActionPerformed(event);
 				}
@@ -458,6 +474,10 @@ public class VistaMenuPrincipal extends JFrame {
 		}
 	}
 
+	public void aplicarRestriccion() {
+		Sesion.restringeEnable(getJMenu2());
+	}
+
 	private void jMenuItem2ActionActionPerformed(ActionEvent event) {
 		MostrarPanel(getRegistrarUser());
 	}
@@ -489,6 +509,10 @@ public class VistaMenuPrincipal extends JFrame {
 
 	private void jMenuItem9ActionActionPerformed(ActionEvent event) {
 		MostrarPanel(getListaRubro());
+	}
+
+	private void jMenuItem10ActionActionPerformed(ActionEvent event) {
+		MostrarPanel(getUnidadesEdu());
 	}
 
 }

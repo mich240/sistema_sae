@@ -30,7 +30,7 @@ import modelo.tipousuario.TipoUsuarioDao;
 import modelo.tipousuario.TipoUsuarioModel;
 import modelo.usuario.UsuarioDao;
 import singleton.Sesion;
-import util.RestrucTable;
+import util.Metodos;
 import util.Validation;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
@@ -57,7 +57,7 @@ public class VistaListarUsuarios extends JPanel {
 	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public VistaListarUsuarios() {
-		initComponents();
+		initComponents();		
 	}
 
 	private void initComponents() {
@@ -241,9 +241,9 @@ public class VistaListarUsuarios extends JPanel {
 			jPanel0.add(getJScrollPane0(), new Constraints(new Leading(7, 478, 12, 12), new Leading(25, 277, 12, 12)));
 			jPanel0.add(getJLabel1(), new Constraints(new Leading(586, 10, 10), new Leading(-3, 12, 12)));
 			jPanel0.add(getJSeparator0(), new Constraints(new Leading(632, 17, 12, 12), new Leading(25, 236, 12, 12)));
-			jPanel0.add(getJButton1(), new Constraints(new Leading(503, 120, 12, 12), new Leading(200, 28, 10, 10)));
-			jPanel0.add(getJButton0(), new Constraints(new Leading(503, 12, 12), new Leading(229, 10, 10)));
+			jPanel0.add(getJButton1(), new Constraints(new Leading(503, 120, 12, 12), new Leading(200, 10, 10)));
 			jPanel0.add(getJLabel4(), new Constraints(new Leading(632, 208, 12, 12), new Leading(44, 12, 12)));
+			jPanel0.add(getJButton0(), new Constraints(new Leading(503, 120, 10, 206), new Leading(229, 10, 10)));
 		}
 		return jPanel0;
 	}
@@ -260,7 +260,7 @@ public class VistaListarUsuarios extends JPanel {
 	public void cargarTablaUsuarios() {
 		getJTable0().setModel(new UsuarioDao().recuperarTodosUsuariosTable());
 		getJTable0().getColumnModel().getColumn(4).setPreferredWidth(130);
-		RestrucTable.estilizarTabla(getJTable0());
+		Metodos.estilizarTabla(getJTable0());
 		restablecerTodo();
 	}
 

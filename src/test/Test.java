@@ -2,14 +2,10 @@ package test;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -72,9 +68,9 @@ public class Test extends JFrame {
 //		  System.out.println("sql.Timestamp: "+sqlTimestamp);
 //		  SimpleDateFormat s=new SimpleDateFormat("HH:mm:ss");
 		  
-		java.sql.Date dateSql = null;
-		java.util.Date dateUtil = null;
-		Time timeSql = null;
+//		java.sql.Date dateSql = null;
+//		java.util.Date dateUtil = null;
+//		Time timeSql = null;
 		Timestamp timeS = null;
 		
 		

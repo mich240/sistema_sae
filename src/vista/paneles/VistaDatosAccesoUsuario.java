@@ -47,6 +47,7 @@ public class VistaDatosAccesoUsuario extends JPanel {
 	private JPasswordField jPasswordField1;
 	private JPasswordField jPasswordField2;
 	private JSeparator jSeparator0;
+	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public VistaDatosAccesoUsuario() {
 		initComponents();
@@ -190,14 +191,14 @@ public class VistaDatosAccesoUsuario extends JPanel {
 					new Font("SansSerif", Font.BOLD, 12), new Color(59, 59, 59)));
 			jPanel0.setLayout(new GroupLayout());
 			jPanel0.add(getJComboBox0(), new Constraints(new Leading(152, 272, 12, 12), new Leading(35, 36, 10, 170)));
-			jPanel0.add(getJPasswordField0(), new Constraints(new Leading(152, 272, 12, 12), new Leading(88, 28, 10, 125)));
-			jPanel0.add(getJPasswordField2(), new Constraints(new Leading(152, 272, 10, 10), new Leading(180, 28, 10, 33)));
-			jPanel0.add(getJPasswordField1(), new Constraints(new Leading(152, 272, 12, 12), new Leading(140, 28, 10, 73)));
-			jPanel0.add(getJSeparator0(), new Constraints(new Leading(21, 489, 10, 10), new Leading(132, 10, 10, 10)));
+			jPanel0.add(getJPasswordField0(), new Constraints(new Leading(152, 272, 12, 12), new Leading(88, 10, 125)));
+			jPanel0.add(getJPasswordField2(), new Constraints(new Leading(152, 272, 10, 10), new Leading(180, 10, 33)));
+			jPanel0.add(getJPasswordField1(), new Constraints(new Leading(152, 272, 12, 12), new Leading(140, 10, 73)));
 			jPanel0.add(getJLabel1(), new Constraints(new Leading(12, 12, 12), new Leading(46, 15, 10, 182)));
 			jPanel0.add(getJLabel3(), new Constraints(new Leading(12, 100, 12, 12), new Leading(147, 15, 10, 81)));
 			jPanel0.add(getJLabel2(), new Constraints(new Leading(12, 134, 12, 12), new Leading(95, 15, 10, 133)));
 			jPanel0.add(getJLabel4(), new Constraints(new Leading(12, 152, 12, 12), new Leading(187, 15, 10, 41)));
+			jPanel0.add(getJSeparator0(), new Constraints(new Leading(-9, 551, 10, 10), new Leading(132, 10, 10, 10)));
 		}
 		return jPanel0;
 	}

@@ -41,6 +41,7 @@ public class VistaDatosUsuario extends JPanel {
 	private JTextField jTextField2;
 	private JTextField jTextField3;
 	private JButton jButton1;
+	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public VistaDatosUsuario() {
 		initComponents();

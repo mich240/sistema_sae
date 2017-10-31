@@ -234,7 +234,7 @@ public class VistaInicioSesion extends JFrame {
 	public void IniciarSesion() {
 		if (getApp().iniciarSesion(getJTextField0().getText(),StringMD.Encriptar(new String(getJPasswordField0().getPassword())))) {
 			this.dispose();
-			getApp().iniciarPrincipal();
+			getApp().iniciarPrincipal();			
 		}
 	}
 	private void jButton1ActionActionPerformed(ActionEvent event) {
