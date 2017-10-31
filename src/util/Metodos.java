@@ -8,18 +8,18 @@ import javax.swing.table.TableCellRenderer;
 
 public class Metodos {
 
-	public static void estilizarTabla(JTable tabla) {
+	public static void formatearTabla(JTable tabla) {
 		tabla.getTableHeader().setReorderingAllowed(false);
 		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		if (tabla.getRowCount() != 0) {
 			// tabla.setRowSelectionInterval(0, 0);
 			tabla.setRowHeight(25);
 		}
-		centarTextoTabla(tabla);
+		centrarTextoTabla(tabla);
 
 	}
 
-	public static void centarTextoTabla(JTable tabla) {
+	public static void centrarTextoTabla(JTable tabla) {
 		DefaultTableCellRenderer alinear = new DefaultTableCellRenderer();
 		alinear.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < tabla.getColumnCount(); i++) {

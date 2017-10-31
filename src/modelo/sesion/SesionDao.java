@@ -3,7 +3,13 @@ package modelo.sesion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import modelo.tableModel.MiDefaultTableModel;
+import modelo.tipousuario.TipoUsuarioModel;
 import singleton.Conexion;
 import singleton.Sesion;
 
@@ -17,10 +23,14 @@ public class SesionDao {
 		if (!Sesion.isSesion()) {/// sesion es false
 			PreparedStatement pst = null; // declarando el statem
 			ResultSet rs = null;
-			String sql = "INSERT INTO sesion VALUES(null, ?, ?, ?, ?, ?)";// mi sql
+			String sql = "INSERT INTO sesion VALUES(null, ?, ?, ?, ?, ?)";// mi
+																			// sql
 			try {
 				pst = Conexion.getInstancia().getConnection().prepareStatement(sql,
-						PreparedStatement.RETURN_GENERATED_KEYS);// y creo el statem con el RETURN_GENERATED_KEYS
+						PreparedStatement.RETURN_GENERATED_KEYS);// y creo el
+																	// statem
+																	// con el
+																	// RETURN_GENERATED_KEYS
 				/** seteo todos los values necesarios */
 				pst.setDate(1, ses.getFechaInicio());
 				pst.setTime(2, ses.getHoraInicio());
@@ -29,7 +39,8 @@ public class SesionDao {
 				pst.setInt(5, ses.getUsuario_id());
 				/// ejecuto el insert
 				pst.executeUpdate();
-				rs = pst.getGeneratedKeys();// obtengo la clave primaria generada.
+				rs = pst.getGeneratedKeys();// obtengo la clave primaria
+											// generada.
 				if (rs.next()) {
 					System.out.println("Se registro el inicio de sesión.");
 					return rs.getInt(1);// retorno esa clave
@@ -81,5 +92,126 @@ public class SesionDao {
 			}
 		} else
 			System.out.println("No se ha registrado una sesión");
+	}
+
+	public TableModel recuperarTodaSesionesTable() {
+		Statement st = null;
+		ResultSet rs = null;
+
+		DefaultTableModel modelTabla = new MiDefaultTableModel();
+
+		String sql = "SELECT sesion.id,usuario.usuario as user, inicio_fecha,inicio_hora,finalizo_fecha,finalizo_hora FROM usuario,sesion WHERE usuario.id=sesion.usuario_id";
+		modelTabla.setColumnIdentifiers(new String[] { "ID","Username", "Inicio de sesión", "Finalizo sesión" });
+
+		try {
+			st = Conexion.getInstancia().getConnection().createStatement();
+
+			rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+
+				modelTabla.addRow(new Object[] { rs.getInt(1), rs.getString(2), rs.getString(3) + " Hora:" + rs.getString(4),
+						rs.getString(5) + " Hora:" + rs.getString(6) });
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if (st != null)
+					st.close();
+
+				if (rs != null)
+					rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return modelTabla;
+	}
+
+	public TableModel busquedaAvanzadaSesionTabla(String username) {
+		Statement st = null;
+		ResultSet rs = null;
+
+		DefaultTableModel modelTabla = new MiDefaultTableModel();
+
+		String sql = "SELECT sesion.id,usuario.usuario as user, inicio_fecha,inicio_hora,finalizo_fecha,finalizo_hora FROM usuario,sesion WHERE usuario.id=sesion.usuario_id and usuario.usuario LIKE '%"+username+"%'";
+		modelTabla.setColumnIdentifiers(new String[] { "ID","Username", "Inicio de sesión", "Finalizo sesión" });
+
+		try {
+			st = Conexion.getInstancia().getConnection().createStatement();
+
+			rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+
+				modelTabla.addRow(new Object[] { rs.getInt(1),rs.getString(2), rs.getString(3) + " Hora:" + rs.getString(4),
+						rs.getString(5) + " Hora:" + rs.getString(6) });
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if (st != null)
+					st.close();
+
+				if (rs != null)
+					rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return modelTabla;
+	}
+
+	public TableModel busquedaAvanzadaSesionTabla(String username, java.sql.Date fechaInicio,
+			java.sql.Date fechaCierre) {
+		Statement st = null;
+		ResultSet rs = null;
+
+		DefaultTableModel modelTabla = new MiDefaultTableModel();
+
+		String sql = "SELECT sesion.id,usuario.usuario as user, inicio_fecha,inicio_hora,finalizo_fecha,finalizo_hora FROM usuario,sesion WHERE usuario.id=sesion.usuario_id and usuario.usuario LIKE '%"+username+"%' and inicio_fecha BETWEEN '"+fechaInicio+"' and  '"+fechaCierre+"'";
+		modelTabla.setColumnIdentifiers(new String[] { "ID","Username", "Inicio de sesión", "Finalizo sesión" });
+
+		try {
+			st = Conexion.getInstancia().getConnection().createStatement();
+
+			rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+
+				modelTabla.addRow(new Object[] { rs.getInt(1), rs.getString(2), rs.getString(3) + " Hora:" + rs.getString(4),
+						rs.getString(5) + " Hora:" + rs.getString(6) });
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if (st != null)
+					st.close();
+
+				if (rs != null)
+					rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return modelTabla;
 	}
 }

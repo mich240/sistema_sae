@@ -10,37 +10,51 @@ public class AuditoriaModel {
 	private Date fechaEvento;
 	private Time horaEvento;
 	private int sesionId;
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getEvento() {
 		return evento;
 	}
+
 	public void setEvento(String evento) {
 		this.evento = evento;
 	}
+
 	public int getSesionId() {
 		return sesionId;
 	}
+
 	public void setSesionId(int sesionId) {
 		this.sesionId = sesionId;
 	}
+
 	public Date getFechaEvento() {
 		return fechaEvento;
 	}
+
 	public void setFechaEvento(Date fechaEvento) {
 		this.fechaEvento = fechaEvento;
 	}
+
 	public Time getHoraEvento() {
 		return horaEvento;
 	}
+
 	public void setHoraEvento(Time horaEvento) {
 		this.horaEvento = horaEvento;
-	}		
-	
-	
+	}
+
+	@Override
+	public String toString() {
+		return "AuditoriaModel [id=" + id + ", evento=" + evento + ", fechaEvento=" + fechaEvento + ", horaEvento="
+				+ horaEvento + ", sesionId=" + sesionId + "]";
+	}
+
 }

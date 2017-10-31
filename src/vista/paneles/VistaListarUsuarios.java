@@ -260,7 +260,7 @@ public class VistaListarUsuarios extends JPanel {
 	public void cargarTablaUsuarios() {
 		getJTable0().setModel(new UsuarioDao().recuperarTodosUsuariosTable());
 		getJTable0().getColumnModel().getColumn(4).setPreferredWidth(130);
-		Metodos.estilizarTabla(getJTable0());
+		Metodos.formatearTabla(getJTable0());
 		restablecerTodo();
 	}
 
@@ -389,6 +389,12 @@ public class VistaListarUsuarios extends JPanel {
 			}
 		}
 
+	}
+	public void aplicarRestriccion(){
+		Sesion.restringeVisible(jButton0);
+		Sesion.restringeVisible(jButton1);
+		Sesion.restringeVisible(jButton2);
+		Sesion.restringeEnable(jComboBox0);
 	}
 
 }

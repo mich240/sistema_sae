@@ -3,11 +3,11 @@ package controlador;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
 import singleton.Conexion;
 import vista.VistaInicioSesion;
 import vista.VistaMenuPrincipal;
 import vista.paneles.VistaAgregarUnidadEdu;
+import vista.paneles.VistaAuditoria;
 import vista.paneles.VistaDatosAccesoUsuario;
 import vista.paneles.VistaDatosUsuario;
 import vista.paneles.VistaEliminarUsuario;
@@ -28,20 +28,22 @@ public class IniciarController {
 	private VistaListarUsuarios listaUsuarios;
 	private VistaListaRubros listaRubro;
 	private VistaAgregarUnidadEdu unidadesEdu;
+	private VistaAuditoria auditoria;
 
 	/// constructor
-	public IniciarController() {	
+	public IniciarController() {
 		/*
-		 * iniciar instancia de la conexion, tambien puede ser que se haga un metodo
-		 * para inicializar varias cosas que necesiten conexion a base de datos
+		 * iniciar instancia de la conexion, tambien puede ser que se haga un
+		 * metodo para inicializar varias cosas que necesiten conexion a base de
+		 * datos
 		 */
 		Conexion.getInstancia();
 		// iniciarlisar controladores y vistas
 		inicializarController();
 		inicializarVistas();
-		app.setInicio(this);//iniciar instancia mutua
+		app.setInicio(this);// iniciar instancia mutua
 		// enlazar controller con vistas
-		app.setMp(menuPrincipal);		
+		app.setMp(menuPrincipal);
 		// enlazar vistas con controller
 		InicioSesion.setApp(app);
 		menuPrincipal.setApp(app);
@@ -52,6 +54,8 @@ public class IniciarController {
 		listaUsuarios.setApp(app);
 		listaRubro.setApp(app);
 		unidadesEdu.setApp(app);
+		auditoria.setApp(app);
+		
 
 		// agrego los paneles al menuprincipal
 		menuPrincipal.setVistaIndex(index);
@@ -65,7 +69,7 @@ public class IniciarController {
 		menuPrincipal.add(eliminarUser);
 		menuPrincipal.setDatosUser(datosUser);
 		menuPrincipal.add(datosUser);
-		menuPrincipal.setDatosAccesoUsuario(datosAccesoUsuario); /// de inicio actual
+		menuPrincipal.setDatosAccesoUsuario(datosAccesoUsuario);																
 		menuPrincipal.add(datosAccesoUsuario);
 		menuPrincipal.setListaUsuario(listaUsuarios);
 		menuPrincipal.add(listaUsuarios);
@@ -73,9 +77,9 @@ public class IniciarController {
 		menuPrincipal.add(listaRubro);
 		menuPrincipal.setUnidadesEdu(unidadesEdu);
 		menuPrincipal.add(unidadesEdu);
-		
-		
-		
+		menuPrincipal.setAuditoria(auditoria);
+		menuPrincipal.add(auditoria);
+
 		// iniciar sistema por el inicio de sesion
 		InicioSesion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		InicioSesion.setTitle("Inicio de Sesión");
@@ -83,7 +87,7 @@ public class IniciarController {
 		InicioSesion.pack();
 		InicioSesion.setLocationRelativeTo(null);
 		InicioSesion.setVisible(true);
-				
+
 	}
 
 	public static void main(String[] args) {
@@ -115,6 +119,8 @@ public class IniciarController {
 		listaRubro.setVisible(false);
 		unidadesEdu = new VistaAgregarUnidadEdu();
 		unidadesEdu.setVisible(false);
+		auditoria=new VistaAuditoria();
+		auditoria.setVisible(false);
 	}
 
 	private static void installLnF(String LnF) {
@@ -128,6 +134,8 @@ public class IniciarController {
 
 	public void inicializarRestricciones() {
 		menuPrincipal.aplicarRestriccion();
+		listaUsuarios.aplicarRestriccion();
 		unidadesEdu.aplicarRestriccion();
+		
 	}
 }

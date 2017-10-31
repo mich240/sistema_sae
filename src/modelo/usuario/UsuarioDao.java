@@ -267,7 +267,7 @@ public class UsuarioDao {
 		TipoUsuarioModel tusm = null;
 
 		DefaultTableModel modelTabla = new MiDefaultTableModel();
-		
+
 		String sql = "SELECT usuario,cedula,nombre,apellido,rol,estatus,tipo_usuario.id FROM usuario,tipo_usuario WHERE usuario.tipo_usuario_id=tipo_usuario.id";
 		modelTabla.setColumnIdentifiers(
 				new String[] { "Username", "Cedula", "Nombre", "Apellido", "Privilegio", "Status" });
@@ -289,6 +289,18 @@ public class UsuarioDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+
+			try {
+				if (st != null)
+					st.close();
+				
+				if (rs != null)
+					rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return modelTabla;
@@ -462,10 +474,10 @@ public class UsuarioDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
-		}finally {
+		} finally {
 			try {
-				if(st!=null)
-				st.close();
+				if (st != null)
+					st.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

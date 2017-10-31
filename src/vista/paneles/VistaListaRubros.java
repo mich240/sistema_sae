@@ -221,7 +221,7 @@ public class VistaListaRubros extends JPanel {
 	public void cargarTablaRubro() {
 		jTable0.setModel(new RubroDao().recuperaTodosRubroTabla());
 		jTable0.getColumnModel().getColumn(1).setPreferredWidth(350);
-		Metodos.estilizarTabla(jTable0);
+		Metodos.formatearTabla(jTable0);
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {

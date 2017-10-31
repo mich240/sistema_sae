@@ -54,12 +54,9 @@ public class VistaAgregarUnidadEdu extends JPanel {
 	private JLabel jLabel6;
 	private JLabel jLabel7;
 	private JLabel jLabel8;
-	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-
 	public VistaAgregarUnidadEdu() {
 		initComponents();
-		cargarTablaUedu();
 	}
 
 	private void initComponents() {
@@ -260,9 +257,8 @@ public class VistaAgregarUnidadEdu extends JPanel {
 	private JPanel getJPanel0() {
 		if (jPanel0 == null) {
 			jPanel0 = new JPanel();
-			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Tabla de todas las UE registradas.",
-					TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION, new Font("SansSerif", Font.BOLD, 12),
-					new Color(59, 59, 59)));
+			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Tabla de todas las UE registradas.", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
+					new Font("SansSerif", Font.BOLD, 12), new Color(59, 59, 59)));
 			jPanel0.setLayout(new GroupLayout());
 			jPanel0.add(getJLabel2(), new Constraints(new Leading(298, 247, 10, 10), new Leading(5, 12, 12)));
 			jPanel0.add(getJLabel3(), new Constraints(new Leading(298, 246, 12, 12), new Leading(53, 10, 10)));
@@ -274,11 +270,11 @@ public class VistaAgregarUnidadEdu extends JPanel {
 			jPanel0.add(getJButton2(), new Constraints(new Leading(366, 110, 10, 56), new Leading(210, 10, 10)));
 			jPanel0.add(getJButton0(), new Constraints(new Leading(366, 110, 10, 56), new Leading(69, 12, 12)));
 			jPanel0.add(getJScrollPane0(), new Constraints(new Leading(0, 302, 10, 10), new Leading(103, 266, 12, 12)));
-			jPanel0.add(getJButton3(), new Constraints(new Leading(217, 81, 12, 12), new Leading(74, 12, 12)));
 			jPanel0.add(getJLabel7(), new Constraints(new Leading(88, 214, 12, 12), new Leading(21, 10, 10)));
 			jPanel0.add(getJLabel8(), new Constraints(new Leading(88, 214, 12, 12), new Leading(52, 12, 12)));
 			jPanel0.add(getJLabel1(), new Constraints(new Leading(0, 88, 10, 10), new Leading(21, 10, 10)));
 			jPanel0.add(getJLabel6(), new Constraints(new Leading(0, 88, 12, 12), new Leading(52, 12, 12)));
+			jPanel0.add(getJButton3(), new Constraints(new Leading(206, 92, 10, 10), new Leading(74, 12, 12)));
 		}
 		return jPanel0;
 	}
@@ -373,7 +369,7 @@ public class VistaAgregarUnidadEdu extends JPanel {
 	public void cargarTablaUedu() {
 		jTable0.setModel(new UnidadEducativaDao().recuperarTodoUnidadEduTabla());
 		jTable0.getColumnModel().getColumn(0).setPreferredWidth(45);
-		Metodos.estilizarTabla(jTable0);
+		Metodos.formatearTabla(jTable0);
 		jButton3.setEnabled(false);
 	}
 

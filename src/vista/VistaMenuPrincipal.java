@@ -18,6 +18,7 @@ import controlador.AppController;
 import controlador.IniciarController;
 import singleton.Sesion;
 import vista.paneles.VistaAgregarUnidadEdu;
+import vista.paneles.VistaAuditoria;
 import vista.paneles.VistaDatosAccesoUsuario;
 import vista.paneles.VistaDatosUsuario;
 import vista.paneles.VistaEliminarUsuario;
@@ -62,8 +63,9 @@ public class VistaMenuPrincipal extends JFrame {
 	private VistaListarUsuarios listaUsuario;
 	private VistaListaRubros listaRubro;
 	private VistaAgregarUnidadEdu unidadesEdu;
+	private JMenuItem jMenuItem6;
+	private VistaAuditoria auditoria;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-
 	public VistaMenuPrincipal() {
 		initComponents();
 	}
@@ -78,6 +80,14 @@ public class VistaMenuPrincipal extends JFrame {
 		});
 		setJMenuBar(getJMenuBar0());
 		setSize(1020, 570);
+	}
+
+	private JMenuItem getJMenuItem6() {
+		if (jMenuItem6 == null) {
+			jMenuItem6 = new JMenuItem();
+			jMenuItem6.setText("Restaurar");
+		}
+		return jMenuItem6;
 	}
 
 	private JMenuItem getJMenuItem7() {
@@ -96,6 +106,17 @@ public class VistaMenuPrincipal extends JFrame {
 
 	public AppController getApp() {
 		return app;
+	}
+	
+	
+
+	public VistaAuditoria getAuditoria() {
+		auditoria.cargarTablaBitacora();
+		return auditoria;
+	}
+
+	public void setAuditoria(VistaAuditoria auditoria) {
+		this.auditoria = auditoria;
 	}
 
 	public VistaListarUsuarios getListaUsuario() {
@@ -228,6 +249,12 @@ public class VistaMenuPrincipal extends JFrame {
 		if (jMenuItem11 == null) {
 			jMenuItem11 = new JMenuItem();
 			jMenuItem11.setText("Mostrar auditoria");
+			jMenuItem11.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
+					jMenuItem11ActionActionPerformed(event);
+				}
+			});
 		}
 		return jMenuItem11;
 	}
@@ -307,20 +334,22 @@ public class VistaMenuPrincipal extends JFrame {
 		}
 		return jMenuItem5;
 	}
-
+	
 	private JMenu getJMenu2() {
 		if (jMenu2 == null) {
 			jMenu2 = new JMenu();
-			jMenu2.setText("Respaldo");
+			jMenu2.setText("Base de Datos");
 			jMenu2.add(getJMenuItem4());
+			jMenu2.add(getJMenuItem6());
 		}
 		return jMenu2;
 	}
 
+	
 	private JMenuItem getJMenuItem4() {
 		if (jMenuItem4 == null) {
 			jMenuItem4 = new JMenuItem();
-			jMenuItem4.setText("Base de datos");
+			jMenuItem4.setText("Respaldar");
 		}
 		return jMenuItem4;
 	}
@@ -476,6 +505,8 @@ public class VistaMenuPrincipal extends JFrame {
 
 	public void aplicarRestriccion() {
 		Sesion.restringeEnable(getJMenu2());
+		Sesion.restringeEnable(getJMenuItem2());
+		Sesion.restringeEnable(getJMenuItem8());
 	}
 
 	private void jMenuItem2ActionActionPerformed(ActionEvent event) {
@@ -513,6 +544,10 @@ public class VistaMenuPrincipal extends JFrame {
 
 	private void jMenuItem10ActionActionPerformed(ActionEvent event) {
 		MostrarPanel(getUnidadesEdu());
+	}
+
+	private void jMenuItem11ActionActionPerformed(ActionEvent event) {
+		MostrarPanel(getAuditoria());
 	}
 
 }
