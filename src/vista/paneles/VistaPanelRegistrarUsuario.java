@@ -13,9 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import org.dyno.visual.swing.layouts.Bilateral;
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
@@ -96,7 +98,8 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 	private JLabel getJLabel0() {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
-			jLabel0.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
+			jLabel0.setFont(new Font("Dialog", Font.BOLD, 15));
+			jLabel0.setHorizontalAlignment(SwingConstants.CENTER);
 			jLabel0.setText("Creación de nuevos usuarios");
 		}
 		return jLabel0;
@@ -111,7 +114,7 @@ public class VistaPanelRegistrarUsuario extends JPanel {
 			jPanel2.add(getJPanel0(), new Constraints(new Leading(210, 560, 12, 12), new Leading(41, 171, 12, 12)));
 			jPanel2.add(getJButton0(), new Constraints(new Leading(210, 10, 10), new Leading(480, 33, 10, 10)));
 			jPanel2.add(getJButton1(), new Constraints(new Leading(653, 117, 12, 12), new Leading(480, 33, 12, 12)));
-			jPanel2.add(getJLabel0(), new Constraints(new Leading(400, 10, 10), new Leading(5, 10, 10)));
+			jPanel2.add(getJLabel0(), new Constraints(new Bilateral(0, 0, 208), new Leading(5, 10, 10)));
 		}
 		return jPanel2;
 	}

@@ -45,7 +45,6 @@ public class VistaRecuperarClave extends JDialog {
 	private JButton jButton2;
 	private JLabel jLabel4;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-
 	public VistaRecuperarClave(Window parent) {
 		super(parent);
 		initComponents();
@@ -129,7 +128,6 @@ public class VistaRecuperarClave extends JDialog {
 		setForeground(Color.black);
 		setFont(new Font("Dialog", Font.PLAIN, 12));
 		setLayout(new GroupLayout());
-		add(getJLabel0(), new Constraints(new Leading(120, 10, 10), new Leading(20, 10, 10)));
 		add(getJLabel1(), new Constraints(new Leading(47, 10, 10), new Leading(68, 10, 10)));
 		add(getJTextField0(), new Constraints(new Leading(51, 186, 12, 12), new Leading(92, 10, 10)));
 		add(getJButton0(), new Constraints(new Leading(250, 92, 10, 10), new Leading(92, 10, 10)));
@@ -141,6 +139,7 @@ public class VistaRecuperarClave extends JDialog {
 		add(getJLabel4(), new Constraints(new Leading(0, 388, 12, 12), new Leading(282, 24, 12, 12)));
 		add(getJPasswordField2(), new Constraints(new Leading(51, 286, 10, 63), new Leading(312, 10, 10)));
 		add(getJButton2(), new Constraints(new Leading(158, 12, 12), new Leading(356, 10, 10)));
+		add(getJLabel0(), new Constraints(new Bilateral(0, 0, 158), new Leading(20, 10, 10)));
 		setSize(400, 443);
 	}
 
@@ -289,6 +288,7 @@ public class VistaRecuperarClave extends JDialog {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
 			jLabel0.setFont(new Font("Dialog", Font.BOLD, 15));
+			jLabel0.setHorizontalAlignment(SwingConstants.CENTER);
 			jLabel0.setText("Recuperar contraseña");
 		}
 		return jLabel0;

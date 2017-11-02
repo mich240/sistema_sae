@@ -11,9 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import org.dyno.visual.swing.layouts.Bilateral;
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
@@ -61,7 +63,7 @@ public class VistaEliminarUsuario extends JPanel {
 			jPanel1.setBorder(new LineBorder(new Color(196, 196, 255), 1, false));
 			jPanel1.setLayout(new GroupLayout());
 			jPanel1.add(getJPanel0(), new Constraints(new Leading(210, 560, 10, 10), new Leading(100, 173, 10, 10)));
-			jPanel1.add(getJLabel0(), new Constraints(new Leading(424, 10, 10), new Leading(15, 10, 10)));
+			jPanel1.add(getJLabel0(), new Constraints(new Bilateral(0, 0, 122), new Leading(15, 10, 10)));
 		}
 		return jPanel1;
 	}
@@ -113,7 +115,8 @@ public class VistaEliminarUsuario extends JPanel {
 	private JLabel getJLabel0() {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
-			jLabel0.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
+			jLabel0.setFont(new Font("Dialog", Font.BOLD, 15));
+			jLabel0.setHorizontalAlignment(SwingConstants.CENTER);
 			jLabel0.setText("Eliminar usuarios");
 		}
 		return jLabel0;

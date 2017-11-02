@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import org.dyno.visual.swing.layouts.Bilateral;
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
@@ -48,7 +49,6 @@ public class VistaListaRubros extends JPanel {
 	private JButton jButton2;
 	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-
 	public VistaListaRubros() {
 		initComponents();
 	}
@@ -183,8 +183,8 @@ public class VistaListaRubros extends JPanel {
 			jPanel1 = new JPanel();
 			jPanel1.setBorder(new LineBorder(new Color(196, 196, 255), 1, false));
 			jPanel1.setLayout(new GroupLayout());
-			jPanel1.add(getJLabel0(), new Constraints(new Leading(388, 10, 10), new Leading(20, 10, 10)));
 			jPanel1.add(getJPanel0(), new Constraints(new Leading(210, 560, 10, 10), new Leading(65, 416, 10, 10)));
+			jPanel1.add(getJLabel0(), new Constraints(new Bilateral(0, 0, 191), new Leading(20, 10, 10)));
 		}
 		return jPanel1;
 	}
@@ -212,7 +212,8 @@ public class VistaListaRubros extends JPanel {
 	private JLabel getJLabel0() {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
-			jLabel0.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
+			jLabel0.setFont(new Font("Dialog", Font.BOLD, 15));
+			jLabel0.setHorizontalAlignment(SwingConstants.CENTER);
 			jLabel0.setText("Lista de rubros del sistema");
 		}
 		return jLabel0;

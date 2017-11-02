@@ -65,7 +65,12 @@ public class VistaMenuPrincipal extends JFrame {
 	private VistaAgregarUnidadEdu unidadesEdu;
 	private JMenuItem jMenuItem6;
 	private VistaAuditoria auditoria;
+	private JMenuItem jMenuItem14;
+	private JMenuItem jMenuItem15;
+	private JMenu jMenu8;
+	private JMenuItem jMenuItem16;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
+
 	public VistaMenuPrincipal() {
 		initComponents();
 	}
@@ -80,6 +85,52 @@ public class VistaMenuPrincipal extends JFrame {
 		});
 		setJMenuBar(getJMenuBar0());
 		setSize(1020, 570);
+	}
+
+	private JMenuItem getJMenuItem16() {
+		if (jMenuItem16 == null) {
+			jMenuItem16 = new JMenuItem();
+			jMenuItem16.setText("Terminar");
+			jMenuItem16.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jMenuItem16ActionActionPerformed(event);
+				}
+			});
+		}
+		return jMenuItem16;
+	}
+
+	private JMenu getJMenu8() {
+		if (jMenu8 == null) {
+			jMenu8 = new JMenu();
+			jMenu8.setText("Transacción");
+			jMenu8.add(getJMenuItem15());
+			jMenu8.add(getJMenuItem16());
+		}
+		return jMenu8;
+	}
+
+	private JMenuItem getJMenuItem15() {
+		if (jMenuItem15 == null) {
+			jMenuItem15 = new JMenuItem();
+			jMenuItem15.setText("Iniciar");
+			jMenuItem15.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jMenuItem15ActionActionPerformed(event);
+				}
+			});
+		}
+		return jMenuItem15;
+	}
+
+	private JMenuItem getJMenuItem14() {
+		if (jMenuItem14 == null) {
+			jMenuItem14 = new JMenuItem();
+			jMenuItem14.setText("Division de rubros");
+		}
+		return jMenuItem14;
 	}
 
 	private JMenuItem getJMenuItem6() {
@@ -107,8 +158,6 @@ public class VistaMenuPrincipal extends JFrame {
 	public AppController getApp() {
 		return app;
 	}
-	
-	
 
 	public VistaAuditoria getAuditoria() {
 		auditoria.cargarTablaBitacora();
@@ -222,7 +271,10 @@ public class VistaMenuPrincipal extends JFrame {
 			jMenu6 = new JMenu();
 			jMenu6.setText("Procesar");
 			jMenu6.setOpaque(false);
+			jMenu6.add(getJMenu8());
 			jMenu6.add(getJMenuItem12());
+			jMenu6.add(getJMenuItem14());
+
 		}
 		return jMenu6;
 	}
@@ -230,7 +282,7 @@ public class VistaMenuPrincipal extends JFrame {
 	private JMenuItem getJMenuItem12() {
 		if (jMenuItem12 == null) {
 			jMenuItem12 = new JMenuItem();
-			jMenuItem12.setText("Dividir Rubros");
+			jMenuItem12.setText("Entrada de rubros");
 		}
 		return jMenuItem12;
 	}
@@ -250,7 +302,7 @@ public class VistaMenuPrincipal extends JFrame {
 			jMenuItem11 = new JMenuItem();
 			jMenuItem11.setText("Mostrar auditoria");
 			jMenuItem11.addActionListener(new ActionListener() {
-	
+
 				public void actionPerformed(ActionEvent event) {
 					jMenuItem11ActionActionPerformed(event);
 				}
@@ -334,7 +386,7 @@ public class VistaMenuPrincipal extends JFrame {
 		}
 		return jMenuItem5;
 	}
-	
+
 	private JMenu getJMenu2() {
 		if (jMenu2 == null) {
 			jMenu2 = new JMenu();
@@ -345,7 +397,6 @@ public class VistaMenuPrincipal extends JFrame {
 		return jMenu2;
 	}
 
-	
 	private JMenuItem getJMenuItem4() {
 		if (jMenuItem4 == null) {
 			jMenuItem4 = new JMenuItem();
@@ -548,6 +599,29 @@ public class VistaMenuPrincipal extends JFrame {
 
 	private void jMenuItem11ActionActionPerformed(ActionEvent event) {
 		MostrarPanel(getAuditoria());
+	}
+
+	private void jMenuItem15ActionActionPerformed(ActionEvent event) {
+		if (JOptionPane.showConfirmDialog(this, "¿Seguro que desea iniciar la transacción.?", "Iniciar",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+
+			if (getApp().iniciarTransaccion()) {
+				JOptionPane.showMessageDialog(this, "Transacción creada, ya puede hacer la carga de los rubros.",
+						"Correcto.", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
+
+	private void jMenuItem16ActionActionPerformed(ActionEvent event) {
+		if (JOptionPane.showConfirmDialog(this, "¿Desea cerrar la transacción en curso?", "Cerrar",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+			if (getApp().terminarTransaccion()) {
+				// registra todo lo del almacen en registro rubro. y vacia esa tabla almacen.
+				JOptionPane.showMessageDialog(this, "Transacción terminada, registros grabados.", "Correcto.",
+						JOptionPane.INFORMATION_MESSAGE);
+
+			}
+		}
 	}
 
 }

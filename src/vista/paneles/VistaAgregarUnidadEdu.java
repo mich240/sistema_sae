@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import org.dyno.visual.swing.layouts.Bilateral;
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
@@ -27,6 +28,7 @@ import org.dyno.visual.swing.layouts.Leading;
 import controlador.AppController;
 import modelo.unidadeducativa.UnidadEducativaDao;
 import singleton.Sesion;
+import singleton.Transaccion;
 import util.Metodos;
 import util.Validation;
 
@@ -54,7 +56,9 @@ public class VistaAgregarUnidadEdu extends JPanel {
 	private JLabel jLabel6;
 	private JLabel jLabel7;
 	private JLabel jLabel8;
+	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
+
 	public VistaAgregarUnidadEdu() {
 		initComponents();
 	}
@@ -106,6 +110,7 @@ public class VistaAgregarUnidadEdu extends JPanel {
 	}
 
 	private JButton getJButton3() {
+
 		if (jButton3 == null) {
 			jButton3 = new JButton();
 			jButton3.setText("Designar");
@@ -249,7 +254,7 @@ public class VistaAgregarUnidadEdu extends JPanel {
 			jPanel1.setBorder(new LineBorder(new Color(196, 196, 255), 1, false));
 			jPanel1.setLayout(new GroupLayout());
 			jPanel1.add(getJPanel0(), new Constraints(new Leading(210, 560, 10, 10), new Leading(65, 416, 10, 10)));
-			jPanel1.add(getJLabel0(), new Constraints(new Leading(377, 10, 10), new Leading(20, 10, 10)));
+			jPanel1.add(getJLabel0(), new Constraints(new Bilateral(0, 0, 232), new Leading(20, 10, 10)));
 		}
 		return jPanel1;
 	}
@@ -257,8 +262,9 @@ public class VistaAgregarUnidadEdu extends JPanel {
 	private JPanel getJPanel0() {
 		if (jPanel0 == null) {
 			jPanel0 = new JPanel();
-			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Tabla de todas las UE registradas.", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
-					new Font("SansSerif", Font.BOLD, 12), new Color(59, 59, 59)));
+			jPanel0.setBorder(BorderFactory.createTitledBorder(null, "Tabla de todas las UE registradas.",
+					TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION, new Font("SansSerif", Font.BOLD, 12),
+					new Color(59, 59, 59)));
 			jPanel0.setLayout(new GroupLayout());
 			jPanel0.add(getJLabel2(), new Constraints(new Leading(298, 247, 10, 10), new Leading(5, 12, 12)));
 			jPanel0.add(getJLabel3(), new Constraints(new Leading(298, 246, 12, 12), new Leading(53, 10, 10)));
@@ -283,6 +289,7 @@ public class VistaAgregarUnidadEdu extends JPanel {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
 			jLabel0.setFont(new Font("Dialog", Font.BOLD, 15));
+			jLabel0.setHorizontalAlignment(SwingConstants.CENTER);
 			jLabel0.setText("Unidades educativas del sistema");
 		}
 		return jLabel0;
@@ -388,22 +395,29 @@ public class VistaAgregarUnidadEdu extends JPanel {
 	}
 
 	private void jButton3ActionActionPerformed(ActionEvent event) {
-		if (jTable0.getSelectedRowCount() > 0) {
-			String valorEscogido = jTable0.getValueAt(jTable0.getSelectedRow(), 2).toString();
-			int valorCodigo = (int) jTable0.getValueAt(jTable0.getSelectedRow(), 0);
+		if (Transaccion.getTransaccionActiva() == null) {
+			if (jTable0.getSelectedRowCount() > 0) {
+				String valorEscogido = jTable0.getValueAt(jTable0.getSelectedRow(), 2).toString();
+				int valorCodigo = (int) jTable0.getValueAt(jTable0.getSelectedRow(), 0);
 
-			if (JOptionPane.showConfirmDialog(this,
-					"¿Seguro que desea designar la unidad educativa \"" + valorEscogido + "\" como predeterminada?",
-					"Designar.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-				if (Sesion.confirmarClave(this)) {
-					getApp().designarUnidadEducativa(valorCodigo);
-					cargarTablaUedu();
+				if (JOptionPane.showConfirmDialog(this,
+						"¿Seguro que desea designar la unidad educativa \"" + valorEscogido + "\" como predeterminada?",
+						"Designar.", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					if (Sesion.confirmarClave(this)) {
+						getApp().designarUnidadEducativa(valorCodigo);
+						cargarTablaUedu();
+					}
+
 				}
+			} else
+				JOptionPane.showMessageDialog(this, "Seleccione una unidad educativa de la lista.", "Seleccione.",
+						JOptionPane.WARNING_MESSAGE);
 
-			}
 		} else
-			JOptionPane.showMessageDialog(this, "Seleccione una unidad educativa de la lista.", "Seleccione.",
-					JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this,
+					"No puedes cambiar la unidad educativa designada si hay una transacción activa.", "Error",
+					JOptionPane.ERROR_MESSAGE);
 
 	}
 }

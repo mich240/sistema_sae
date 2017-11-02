@@ -62,10 +62,11 @@ public class VistaAuditoria extends JPanel {
 	private JSeparator jSeparator0;
 	private JButton jButton0;
 	private JButton jButton1;
+	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public VistaAuditoria() {
 		initComponents();
-		cargarTablaBitacora();
+	//	cargarTablaBitacora();
 	}
 
 	private void initComponents() {
@@ -249,8 +250,8 @@ public class VistaAuditoria extends JPanel {
 			jPanel1 = new JPanel();
 			jPanel1.setBorder(new LineBorder(new Color(196, 196, 255), 1, false));
 			jPanel1.setLayout(new GroupLayout());
-			jPanel1.add(getJLabel0(), new Constraints(new Leading(406, 10, 10), new Leading(17, 10, 10)));
 			jPanel1.add(getJPanel0(), new Constraints(new Leading(62, 857, 10, 10), new Leading(63, 401, 10, 10)));
+			jPanel1.add(getJLabel0(), new Constraints(new Bilateral(0, 0, 151), new Leading(17, 10, 10)));
 		}
 		return jPanel1;
 	}
@@ -273,6 +274,7 @@ public class VistaAuditoria extends JPanel {
 			jPanel0.add(getJSeparator0(), new Constraints(new Leading(567, 272, 12, 12), new Trailing(135, 10, 147, 147)));
 			jPanel0.add(getJButton0(), new Constraints(new Leading(377, 93, 10, 10), new Leading(-6, 53, 331)));
 			jPanel0.add(getJButton1(), new Constraints(new Leading(675, 148, 10, 10), new Bilateral(305, 12, 40)));
+			jPanel0.add(getJScrollPane0(), new Constraints(new Leading(7, 562, 10, 10), new Leading(25, 277, 12, 12)));
 		}
 		return jPanel0;
 	}
@@ -281,6 +283,7 @@ public class VistaAuditoria extends JPanel {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
 			jLabel0.setFont(new Font("Dialog", Font.BOLD, 15));
+			jLabel0.setHorizontalAlignment(SwingConstants.CENTER);
 			jLabel0.setText("Bitácora de procesos");
 		}
 		return jLabel0;

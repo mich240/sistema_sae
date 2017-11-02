@@ -3,11 +3,14 @@ package controlador;
 import javax.swing.JOptionPane;
 
 import modelo.rubro.RubroDao;
+import modelo.transaccion.TransaccionDao;
 import modelo.unidadeducativa.UnidadEducativaDao;
 import modelo.usuario.UsuarioDao;
 import modelo.usuario.UsuarioModel;
+import singleton.Auditoria;
 import singleton.Conexion;
 import singleton.Sesion;
+import singleton.Transaccion;
 import vista.VistaMenuPrincipal;
 
 public class AppController {
@@ -22,7 +25,6 @@ public class AppController {
 	public void setMp(VistaMenuPrincipal mp) {
 		this.mp = mp;
 	}
-	
 
 	public IniciarController getInicio() {
 		return inicio;
@@ -56,7 +58,7 @@ public class AppController {
 		getMp().pack();
 		getMp().setLocationRelativeTo(null);
 		getMp().setVisible(true);
-		///aplicar restrincciones de usuarios.
+		/// aplicar restrincciones de usuarios.
 		getInicio().inicializarRestricciones();
 	}
 
@@ -145,6 +147,7 @@ public class AppController {
 		RubroDao ru = new RubroDao();
 		if (!ru.comprobarExistencia(producto)) {
 			ru.registrarRubro(producto);
+			Auditoria.evento("registro del rubro " + producto + " en el sistema.");
 		} else
 			JOptionPane.showMessageDialog(null, "Ya agregaste un producto con este nombre.", "Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -197,11 +200,38 @@ public class AppController {
 
 	public void designarUnidadEducativa(int valorCodigo) {
 		UnidadEducativaDao uEdu = new UnidadEducativaDao();
-		if(uEdu.removerUnidadDesignada()) {
+		if (uEdu.removerUnidadDesignada()) {
 			uEdu.designarUnidadEducativa(valorCodigo);
 		}
+
+	}
+
+	public boolean iniciarTransaccion() {
+		if (Transaccion.getTransaccionActiva() == null) {
+			TransaccionDao trs = new TransaccionDao();
+			if (trs.crearTransaccion()) {
+				Transaccion.recuperaTransaccion();
+				return true;
+			} else
+				return false;
+
+		}else 
+		JOptionPane.showMessageDialog(null, "Ya hay una transacción activa.", "Error", JOptionPane.ERROR_MESSAGE);
+
+		return false;
+	}
+
+	public boolean terminarTransaccion() {
+		if (Transaccion.getTransaccionActiva()!=null) {
+			TransaccionDao trs = new TransaccionDao();
+		if (trs.terminarTransaccion(Transaccion.getTransaccionActiva().getId())) {
+			Transaccion.setTransaccionActiva(null);
+			return true;
+		}
+	}else
+		JOptionPane.showMessageDialog(null, "No ha iniciado una transacción.", "Error", JOptionPane.ERROR_MESSAGE);
 		
-		
+		return false;
 	}
 
 }

@@ -220,8 +220,8 @@ public class VistaListarUsuarios extends JPanel {
 			jPanel1 = new JPanel();
 			jPanel1.setBorder(new LineBorder(new Color(196, 196, 255), 1, false));
 			jPanel1.setLayout(new GroupLayout());
-			jPanel1.add(getJLabel0(), new Constraints(new Leading(428, 10, 10), new Leading(18, 10, 10)));
-			jPanel1.add(getJPanel0(), new Constraints(new Leading(62, 857, 10, 10), new Leading(100, 364, 10, 10)));
+			jPanel1.add(getJPanel0(), new Constraints(new Leading(62, 857, 10, 10), new Leading(100, 10, 10)));
+			jPanel1.add(getJLabel0(), new Constraints(new Leading(0, 980, 12, 12), new Leading(18, 10, 10)));
 		}
 		return jPanel1;
 	}
@@ -252,6 +252,7 @@ public class VistaListarUsuarios extends JPanel {
 		if (jLabel0 == null) {
 			jLabel0 = new JLabel();
 			jLabel0.setFont(new Font("Dialog", Font.BOLD, 15));
+			jLabel0.setHorizontalAlignment(SwingConstants.CENTER);
 			jLabel0.setText("Lista de usuarios");
 		}
 		return jLabel0;

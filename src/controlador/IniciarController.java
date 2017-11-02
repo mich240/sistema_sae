@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import singleton.Conexion;
+import singleton.Transaccion;
 import vista.VistaInicioSesion;
 import vista.VistaMenuPrincipal;
 import vista.paneles.VistaAgregarUnidadEdu;
@@ -38,6 +39,7 @@ public class IniciarController {
 		 * datos
 		 */
 		Conexion.getInstancia();
+		Transaccion.recuperaTransaccion();	
 		// iniciarlisar controladores y vistas
 		inicializarController();
 		inicializarVistas();

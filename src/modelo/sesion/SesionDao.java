@@ -9,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import modelo.tableModel.MiDefaultTableModel;
-import modelo.tipousuario.TipoUsuarioModel;
 import singleton.Conexion;
 import singleton.Sesion;
 

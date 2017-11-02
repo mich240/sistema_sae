@@ -59,14 +59,14 @@ public class VistaInicioSesion extends JFrame {
 		add(getJButton1(), new Constraints(new Leading(197, 95, 10, 10), new Leading(150, 38, 12, 12)));
 		add(getJLabel3(), new Constraints(new Bilateral(0, 0, 143), new Leading(203, 10, 10)));
 		add(getJLabel0(), new Constraints(new Bilateral(-1, 0, 96), new Leading(21, 10, 10)));
-		add(getJPanel0(), new Constraints(new Bilateral(37, 38, 0), new Leading(11, 186, 12, 12)));
+		add(getJPanel0(), new Constraints(new Bilateral(37, 38, 0), new Leading(11, 222, 10, 10)));
 		addWindowListener(new WindowAdapter() {
 	
 			public void windowClosing(WindowEvent event) {
 				windowWindowClosing(event);
 			}
 		});
-		setSize(353, 237);
+		setSize(353, 250);
 	}
 
 	private JPanel getJPanel0() {
