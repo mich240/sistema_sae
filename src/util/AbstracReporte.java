@@ -4,15 +4,22 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import interfaces.ReportModel;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfReportConfiguration;
+import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 import net.sf.jasperreports.view.JasperViewer;
 import singleton.Conexion;
 
@@ -90,14 +97,22 @@ public abstract class AbstracReporte implements ReportModel {
 
 	@Override
 	public void guardarComoPdf() {
-		FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.pdf", "pdf");
+		String extensionDocument="pdf";
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("*."+extensionDocument+"", extensionDocument);
 		String ruta = obtenerRuta(filtro);
 
 		boolean compruebaExtension = ruta.trim().toLowerCase().substring(ruta.length() - 3, ruta.length())
-				.equals("pdf");
-		String rutaFinal = compruebaExtension ? ruta : ruta + ".pdf";
+				.equals(extensionDocument);
+		String rutaFinal = compruebaExtension ? ruta : ruta + "." +extensionDocument;
 		try {
-			JasperExportManager.exportReportToPdfFile(print, rutaFinal);
+			// JasperExportManager.exportReportToPdfFile(print, rutaFinal);
+			JRPdfExporter exp = new JRPdfExporter();
+			exp.setExporterInput(new SimpleExporterInput(print));
+			exp.setExporterOutput(new SimpleOutputStreamExporterOutput(rutaFinal));
+			SimplePdfReportConfiguration conf = new SimplePdfReportConfiguration();
+			exp.setConfiguration(conf);
+			exp.exportReport();
+
 			abrirArchivo(rutaFinal);
 
 		} catch (JRException e) {
@@ -107,7 +122,27 @@ public abstract class AbstracReporte implements ReportModel {
 
 	@Override
 	public void guardarComoXls() {
-		// buscar como generar un xls
+		String extensionDocument="xlsx";
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("*."+extensionDocument+"", extensionDocument);
+		String ruta = obtenerRuta(filtro);
+
+		boolean compruebaExtension = ruta.trim().toLowerCase().substring(ruta.length() - 3, ruta.length()-1)
+				.equals(extensionDocument);
+		String rutaFinal = compruebaExtension ? ruta : ruta + "." +extensionDocument;
+		try {
+			JRXlsxExporter exp = new JRXlsxExporter();
+			exp.setExporterInput(new SimpleExporterInput(print));
+			exp.setExporterOutput(new SimpleOutputStreamExporterOutput(rutaFinal));
+			SimpleXlsxReportConfiguration conf = new SimpleXlsxReportConfiguration();
+			conf.setOnePagePerSheet(true);
+			exp.setConfiguration(conf);
+			exp.exportReport();
+
+			abrirArchivo(rutaFinal);
+
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

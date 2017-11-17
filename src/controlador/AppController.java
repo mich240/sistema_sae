@@ -256,8 +256,12 @@ public class AppController {
 		getMp().MostrarPanel(getMp().getVisorReportes(useD.generarReporteVisor(nombreReporteFuente)));
 	}
 
-	public void generarReporteGuardarComoPdf() {
+	public void generarExporteComoPdf() {
 		useD.guardarComoPdf();		
+	}
+
+	public void generarExporteComoXls() {
+		useD.guardarComoXls();
 	}
 
 }

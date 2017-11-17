@@ -65,7 +65,13 @@ public class VistaReporte extends JPanel {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
 			jButton1.setIcon(new ImageIcon(getClass().getResource("/img/xls.png")));
-			jButton1.setText("Guardar");
+			jButton1.setText("export");
+			jButton1.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
+					jButton1ActionActionPerformed(event);
+				}
+			});
 		}
 		return jButton1;
 	}
@@ -74,7 +80,7 @@ public class VistaReporte extends JPanel {
 		if (jButton0 == null) {
 			jButton0 = new JButton();
 			jButton0.setIcon(new ImageIcon(getClass().getResource("/img/pdf.png")));
-			jButton0.setText("Guardar");
+			jButton0.setText("Export");
 			jButton0.addActionListener(new ActionListener() {
 	
 				public void actionPerformed(ActionEvent event) {
@@ -152,7 +158,12 @@ public class VistaReporte extends JPanel {
 	}
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
-		getApp().generarReporteGuardarComoPdf();
+		getApp().generarExporteComoPdf();
+	}
+
+	private void jButton1ActionActionPerformed(ActionEvent event) {
+		getApp().generarExporteComoXls();
+	
 	}
 
 	
