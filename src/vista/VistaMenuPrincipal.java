@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 import controlador.AppController;
 import controlador.IniciarController;
 import singleton.Sesion;
+import util.vistaReportePersonalizado;
 import vista.paneles.VistaAgregarUnidadEdu;
 import vista.paneles.VistaAuditoria;
 import vista.paneles.VistaDatosAccesoUsuario;
@@ -26,6 +27,7 @@ import vista.paneles.VistaListaRubros;
 import vista.paneles.VistaListarUsuarios;
 import vista.paneles.VistaPanelIndex;
 import vista.paneles.VistaPanelRegistrarUsuario;
+import vista.paneles.VistaReporte;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class VistaMenuPrincipal extends JFrame {
@@ -69,6 +71,7 @@ public class VistaMenuPrincipal extends JFrame {
 	private JMenuItem jMenuItem15;
 	private JMenu jMenu8;
 	private JMenuItem jMenuItem16;
+	private VistaReporte visorReportes;
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 
 	public VistaMenuPrincipal() {
@@ -85,6 +88,17 @@ public class VistaMenuPrincipal extends JFrame {
 		});
 		setJMenuBar(getJMenuBar0());
 		setSize(1020, 570);
+	}
+
+	
+	
+	public VistaReporte getVisorReportes(vistaReportePersonalizado vistaReportePersonalizado) {
+			visorReportes.addVistareport(vistaReportePersonalizado);
+		return visorReportes;
+	}
+
+	public void setVisorReportes(VistaReporte visorReportes) {
+		this.visorReportes = visorReportes;
 	}
 
 	private JMenuItem getJMenuItem16() {
@@ -528,7 +542,7 @@ public class VistaMenuPrincipal extends JFrame {
 		});
 	}
 
-	private void MostrarPanel(JPanel NuevaVista) {
+	public void MostrarPanel(JPanel NuevaVista) {
 		if (getVista_panel_actual() != null) {
 			getVista_panel_actual().setVisible(false);
 			setVista_panel_actual(NuevaVista);

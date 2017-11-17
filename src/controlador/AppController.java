@@ -1,5 +1,7 @@
 package controlador;
 
+import java.util.Map;
+
 import javax.swing.JOptionPane;
 
 import modelo.rubro.RubroDao;
@@ -215,23 +217,47 @@ public class AppController {
 			} else
 				return false;
 
-		}else 
-		JOptionPane.showMessageDialog(null, "Ya hay una transacción activa.", "Error", JOptionPane.ERROR_MESSAGE);
+		} else
+			JOptionPane.showMessageDialog(null, "Ya hay una transacción activa.", "Error", JOptionPane.ERROR_MESSAGE);
 
 		return false;
 	}
 
 	public boolean terminarTransaccion() {
-		if (Transaccion.getTransaccionActiva()!=null) {
+		if (Transaccion.getTransaccionActiva() != null) {
 			TransaccionDao trs = new TransaccionDao();
-		if (trs.terminarTransaccion(Transaccion.getTransaccionActiva().getId())) {
-			Transaccion.setTransaccionActiva(null);
-			return true;
-		}
-	}else
-		JOptionPane.showMessageDialog(null, "No ha iniciado una transacción.", "Error", JOptionPane.ERROR_MESSAGE);
-		
+			if (trs.terminarTransaccion(Transaccion.getTransaccionActiva().getId())) {
+				Transaccion.setTransaccionActiva(null);
+				return true;
+			}
+		} else
+			JOptionPane.showMessageDialog(null, "No ha iniciado una transacción.", "Error", JOptionPane.ERROR_MESSAGE);
+
 		return false;
+	}
+
+	public void generarReporte(String nombreReporteFuente) {
+		useD.generarReporte(nombreReporteFuente);
+	}
+
+	public void generarReporte(String nombreReporteFuente, Map<String, Object> parametros) {
+		useD.generarReporte(nombreReporteFuente, parametros);
+
+	}
+
+	public void generarReporteVisor(String nombreReporteFuente, Map<String, Object> parametros) {
+
+		getMp().MostrarPanel(getMp().getVisorReportes(useD.generarReporteVisor(nombreReporteFuente, parametros)));
+
+	}
+
+	public void generarReporteVisor(String nombreReporteFuente) {
+
+		getMp().MostrarPanel(getMp().getVisorReportes(useD.generarReporteVisor(nombreReporteFuente)));
+	}
+
+	public void generarReporteGuardarComoPdf() {
+		useD.guardarComoPdf();		
 	}
 
 }

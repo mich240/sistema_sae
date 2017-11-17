@@ -6,7 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -54,18 +60,46 @@ public class VistaListarUsuarios extends JPanel {
 	private JLabel jLabel6;
 	private JButton jButton2;
 	private JSeparator jSeparator0;
+	private JButton jButton3;
+	private JButton jButton4;
 	@SuppressWarnings("unused")
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	public VistaListarUsuarios() {
-		initComponents();		
+		initComponents();
 	}
 
 	private void initComponents() {
 		setLayout(new GroupLayout());
-		add(getJLabel0(), new Constraints(new Leading(414, 10, 10), new Leading(52, 10, 10)));
-		add(getJPanel0(), new Constraints(new Leading(237, 527, 10, 10), new Leading(111, 236, 10, 10)));
-		add(getJPanel1(), new Constraints(new Leading(20, 980, 10, 10), new Leading(20, 530, 10, 10)));
+		add(getJPanel1(), new Constraints(new Leading(21, 980, 10, 10), new Leading(33, 530, 10, 10)));
 		setSize(1020, 570);
+	}
+
+	private JButton getJButton4() {
+		if (jButton4 == null) {
+			jButton4 = new JButton();
+			jButton4.setText("Reporte de listado");
+			jButton4.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jButton4ActionActionPerformed(event);
+				}
+			});
+		}
+		return jButton4;
+	}
+
+	private JButton getJButton3() {
+		if (jButton3 == null) {
+			jButton3 = new JButton();
+			jButton3.setText("Reporte del usuario");
+			jButton3.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent event) {
+					jButton3ActionActionPerformed(event);
+				}
+			});
+		}
+		return jButton3;
 	}
 
 	private JSeparator getJSeparator0() {
@@ -238,12 +272,14 @@ public class VistaListarUsuarios extends JPanel {
 			jPanel0.add(getJLabel6(), new Constraints(new Leading(501, 127, 12, 12), new Leading(154, 10, 10)));
 			jPanel0.add(getJButton2(), new Constraints(new Leading(751, 81, 12, 12), new Leading(108, 12, 12)));
 			jPanel0.add(getJComboBox0(), new Constraints(new Leading(640, 192, 12, 12), new Leading(61, 30, 10, 10)));
-			jPanel0.add(getJScrollPane0(), new Constraints(new Leading(7, 478, 12, 12), new Leading(25, 277, 12, 12)));
 			jPanel0.add(getJLabel1(), new Constraints(new Leading(586, 10, 10), new Leading(-3, 12, 12)));
 			jPanel0.add(getJSeparator0(), new Constraints(new Leading(632, 17, 12, 12), new Leading(25, 236, 12, 12)));
 			jPanel0.add(getJButton1(), new Constraints(new Leading(503, 120, 12, 12), new Leading(200, 10, 10)));
 			jPanel0.add(getJLabel4(), new Constraints(new Leading(632, 208, 12, 12), new Leading(44, 12, 12)));
 			jPanel0.add(getJButton0(), new Constraints(new Leading(503, 120, 10, 206), new Leading(229, 10, 10)));
+			jPanel0.add(getJButton3(), new Constraints(new Leading(659, 167, 10, 10), new Leading(229, 12, 12)));
+			jPanel0.add(getJScrollPane0(), new Constraints(new Leading(5, 493, 10, 10), new Leading(25, 277, 12, 12)));
+			jPanel0.add(getJButton4(), new Constraints(new Leading(659, 167, 10, 10), new Leading(265, 10, 10)));
 		}
 		return jPanel0;
 	}
@@ -306,7 +342,7 @@ public class VistaListarUsuarios extends JPanel {
 					"Desincorporar un usuario implica que no podra ser usado en el sistema, ¿desea realizar esta acción?",
 					"Verifique", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 				String usuarioSeleccionado = jTable0.getValueAt(jTable0.getSelectedRow(), 0).toString().trim();
-				if (Sesion.confirmarClaveOtroUsuario(this, usuarioSeleccionado)) {				
+				if (Sesion.confirmarClaveOtroUsuario(this, usuarioSeleccionado)) {
 
 					if (getApp().desincorporarUsuario(usuarioSeleccionado)) {
 						if (Sesion.getSesion().getUsuario().trim().equals(usuarioSeleccionado)) {
@@ -333,7 +369,7 @@ public class VistaListarUsuarios extends JPanel {
 					"Este usuario fue desincorporado por alguna razón, ¿en verdad desea realizar esta acción?",
 					"Verifique", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 				String usuarioSeleccionado = jTable0.getValueAt(jTable0.getSelectedRow(), 0).toString().trim();
-				if (Sesion.confirmarClaveOtroUsuario(this, usuarioSeleccionado)) {	
+				if (Sesion.confirmarClaveOtroUsuario(this, usuarioSeleccionado)) {
 					if (getApp().reIncorporarUsuario(usuarioSeleccionado)) {
 						JOptionPane.showMessageDialog(this, "El usuario ha sido reincorporado al sistema.", "Correcto",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -359,9 +395,8 @@ public class VistaListarUsuarios extends JPanel {
 								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 							String usuarioSeleccionado = jTable0.getValueAt(jTable0.getSelectedRow(), 0).toString()
 									.trim();
-							
-								
-									if(Sesion.confirmarClaveOtroUsuario(this, usuarioSeleccionado)) {							
+
+							if (Sesion.confirmarClaveOtroUsuario(this, usuarioSeleccionado)) {
 								if (getApp().actualizaTipoUsuario(usuarioSeleccionado,
 										((TipoUsuarioModel) jComboBox0.getSelectedItem()).getId())) {
 
@@ -379,7 +414,7 @@ public class VistaListarUsuarios extends JPanel {
 									cargarTablaUsuarios();
 								}
 							}
-							
+
 						}
 
 					}
@@ -391,11 +426,39 @@ public class VistaListarUsuarios extends JPanel {
 		}
 
 	}
-	public void aplicarRestriccion(){
+
+	public void aplicarRestriccion() {
 		Sesion.restringeVisible(jButton0);
 		Sesion.restringeVisible(jButton1);
 		Sesion.restringeVisible(jButton2);
 		Sesion.restringeEnable(jComboBox0);
 	}
+
+	private void jButton3ActionActionPerformed(ActionEvent event) {
+		String ruta = System.getProperty("user.dir") + "/img/fondo.jpg";
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		BufferedImage bufferedImage = null;
+		try {
+			if (jTable0.getSelectedRowCount()>0) {
+
+				bufferedImage = ImageIO.read(new File(ruta));
+				parameters.put("usuario_param", jTable0.getValueAt(jTable0.getSelectedRow(), 0));
+				parameters.put("fondo", bufferedImage);
+				getApp().generarReporte("sae_filtrado", parameters);
+				getApp().generarReporteVisor("sae_filtrado", parameters);
+
+			}else JOptionPane.showMessageDialog(this, "Seleccione un usuario de la tabla.", "Seleccione", JOptionPane.WARNING_MESSAGE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void jButton4ActionActionPerformed(ActionEvent event) {
+		getApp().generarReporte("general");
+		getApp().generarReporteVisor("general");
+		
+	}
+
+	
 
 }

@@ -16,6 +16,7 @@ import vista.paneles.VistaListaRubros;
 import vista.paneles.VistaListarUsuarios;
 import vista.paneles.VistaPanelIndex;
 import vista.paneles.VistaPanelRegistrarUsuario;
+import vista.paneles.VistaReporte;
 
 public class IniciarController {
 	private AppController app;
@@ -30,6 +31,7 @@ public class IniciarController {
 	private VistaListaRubros listaRubro;
 	private VistaAgregarUnidadEdu unidadesEdu;
 	private VistaAuditoria auditoria;
+	private VistaReporte visorReporte;
 
 	/// constructor
 	public IniciarController() {
@@ -57,6 +59,7 @@ public class IniciarController {
 		listaRubro.setApp(app);
 		unidadesEdu.setApp(app);
 		auditoria.setApp(app);
+		visorReporte.setApp(app);
 		
 
 		// agrego los paneles al menuprincipal
@@ -81,6 +84,8 @@ public class IniciarController {
 		menuPrincipal.add(unidadesEdu);
 		menuPrincipal.setAuditoria(auditoria);
 		menuPrincipal.add(auditoria);
+		menuPrincipal.setVisorReportes(visorReporte);
+		menuPrincipal.add(visorReporte);
 
 		// iniciar sistema por el inicio de sesion
 		InicioSesion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,6 +128,8 @@ public class IniciarController {
 		unidadesEdu.setVisible(false);
 		auditoria=new VistaAuditoria();
 		auditoria.setVisible(false);
+		visorReporte=new VistaReporte();
+		visorReporte.setVisible(false);
 	}
 
 	private static void installLnF(String LnF) {

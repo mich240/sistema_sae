@@ -4,6 +4,19 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.44-bin.jar"/>
 	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="libReportes/jasperreports-6.4.3.jar"/>
+	<classpathentry kind="lib" path="libReportes/jasperreports-fonts-6.4.3.jar"/>
+	<classpathentry kind="lib" path="libReportes/jasperreports-functions-6.4.3.jar"/>
+	<classpathentry kind="lib" path="libReportes/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="libReportes/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="libReportes/spring-core-3.2.18.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libReportes/spring-beans-3.2.18.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libReportes/joda-time_2.1.0.jar"/>
+	<classpathentry kind="lib" path="libReportes/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="libReportes/jasperreports-chart-customizers-6.4.3.jar"/>
+	<classpathentry kind="lib" path="libReportes/com.lowagie.text-2.1.7.jar"/>
+	<classpathentry kind="lib" path="libReportes/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="libReportes/commons-codec-1.11.jar"/>
 	<classpathentry kind="con" path="org.dyno.visual.swing.VS_LIBRARY/layoutext"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

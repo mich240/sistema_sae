@@ -12,8 +12,9 @@ import javax.swing.table.TableModel;
 import modelo.tableModel.MiDefaultTableModel;
 import modelo.tipousuario.TipoUsuarioModel;
 import singleton.Conexion;
+import util.AbstracReporte;
 
-public class UsuarioDao {
+public class UsuarioDao extends AbstracReporte {
 
 	public UsuarioModel RecuperarUsuarioSesion(String Usuario, String Clave) {
 		PreparedStatement pst = null;
@@ -485,4 +486,6 @@ public class UsuarioDao {
 
 		return false;
 	}
+
+	
 }
