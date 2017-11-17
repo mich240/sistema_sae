@@ -1,6 +1,8 @@
 package util;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -78,6 +80,14 @@ public abstract class AbstracReporte implements ReportModel {
 
 	}
 
+	private void abrirArchivo(String ruta) {
+		try {
+			Desktop.getDesktop().open(new File(ruta));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void guardarComoPdf() {
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.pdf", "pdf");
@@ -85,8 +95,11 @@ public abstract class AbstracReporte implements ReportModel {
 
 		boolean compruebaExtension = ruta.trim().toLowerCase().substring(ruta.length() - 3, ruta.length())
 				.equals("pdf");
+		String rutaFinal = compruebaExtension ? ruta : ruta + ".pdf";
 		try {
-			JasperExportManager.exportReportToPdfFile(print, compruebaExtension ? ruta : ruta + ".pdf");
+			JasperExportManager.exportReportToPdfFile(print, rutaFinal);
+			abrirArchivo(rutaFinal);
+
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
