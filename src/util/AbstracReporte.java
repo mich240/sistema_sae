@@ -105,7 +105,6 @@ public abstract class AbstracReporte implements ReportModel {
 				.equals(extensionDocument);
 		String rutaFinal = compruebaExtension ? ruta : ruta + "." +extensionDocument;
 		try {
-			// JasperExportManager.exportReportToPdfFile(print, rutaFinal);
 			JRPdfExporter exp = new JRPdfExporter();
 			exp.setExporterInput(new SimpleExporterInput(print));
 			exp.setExporterOutput(new SimpleOutputStreamExporterOutput(rutaFinal));
@@ -126,7 +125,7 @@ public abstract class AbstracReporte implements ReportModel {
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter("*."+extensionDocument+"", extensionDocument);
 		String ruta = obtenerRuta(filtro);
 
-		boolean compruebaExtension = ruta.trim().toLowerCase().substring(ruta.length() - 3, ruta.length()-1)
+		boolean compruebaExtension = ruta.trim().toLowerCase().substring(ruta.length() - 4, ruta.length())
 				.equals(extensionDocument);
 		String rutaFinal = compruebaExtension ? ruta : ruta + "." +extensionDocument;
 		try {
